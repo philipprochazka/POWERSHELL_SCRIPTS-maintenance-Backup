@@ -1,0 +1,884 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems xmlns="http://msh" schema="maml">
+
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Import-ShieldingDataFile</command:name>
+<command:verb>Import</command:verb>
+<command:noun>ShieldingDataFile</command:noun>
+<maml:description><maml:para>Imports shielding data.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Import-ShieldingDataFile cmdlet imports a ShieldingDataFile object from a shielding data file.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Import-ShieldingDataFile</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>ShieldingDataFilePath</maml:name>
+<maml:Description><maml:para>Specifies the path of a shielding data file. The file has the .pdk file name extension.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>ShieldingDataFilePath</maml:name>
+<maml:Description><maml:para>Specifies the path of a shielding data file. The file has the .pdk file name extension.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes></command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>ShieldingDataFile, ExistingVMShieldingDataFile</maml:name>
+</dev:type>
+<maml:description><maml:para>This cmdlet returns a ShieldingDataFile object. This object represents a .pdk file used to provision a shielded virtual machine.
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1: Provision a virtual machine by using an imported data file</maml:title>
+<dev:code>PS C:\&gt;Import-ShieldingDataFile -ShieldingDataFilePath "ShieldingFile02.pdk" | Protect-ShieldingDataFile -ShieldingDataFilePath "ShieldingDataFile07.pdk"</dev:code>
+<dev:remarks><maml:para>This command creates a ShieldingDataFile object. The command passes it to the Protect-ShieldingDataFile cmdlet. That cmdlet specifies the output file name.
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks></command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>New-ShieldingDataFile</command:name>
+<command:verb>New</command:verb>
+<command:noun>ShieldingDataFile</command:noun>
+<maml:description><maml:para>Creates a shielding data file.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The New-ShieldingDataFile cmdlet creates a shielding data file for use in provisioning a shielded virtual machine. The shielding data file contains information about which fabrics the VM can run on, which template disks can be used, the security policy, and files such as the specialization answer file.
+</maml:para>
+<maml:para>The specialization answer file and any additional files you add to the shielding data file will be encrypted until a shielded VM is provisioned.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>New-ShieldingDataFile</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>ShieldingDataFilePath</maml:name>
+<maml:Description><maml:para>Specifies the path where the newly created shielding data file should be saved.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none"><maml:name>Owner</maml:name>
+<maml:Description><maml:para>The guardian object containing the certificates of the VM owner. Only the VM owner can modify the shielding data file in the future.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Guardian</command:parameterValue>
+<dev:type><maml:name>Guardian</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none"><maml:name>VolumeIDQualifier</maml:name>
+<maml:Description><maml:para>One or more VolumeIDQualifier objects representing template disks trusted for shielded VM deployment.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">VolumeIDQualifier[]</command:parameterValue>
+<dev:type><maml:name>VolumeIDQualifier[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="3" aliases="WindowsUnattendFile"><maml:name>AnswerFile</maml:name>
+<maml:Description><maml:para>Path to an XML file containing specialization information needed to automatically set up the OS in a shielded VM. For Windows VMs, this file is typically the unattend.xml file. The file varies for Linux distributions based on the specialization agent installed in the template disk.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">NamedFileContent</command:parameterValue>
+<dev:type><maml:name>NamedFileContent</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none"><maml:name>OtherFile</maml:name>
+<maml:Description><maml:para>Additional files (limited to 384KB) that should be encrypted at rest and copied to a provisioned virtual machine.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">NamedFileContent[]</command:parameterValue>
+<dev:type><maml:name>NamedFileContent[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="5" aliases="none"><maml:name>Guardian</maml:name>
+<maml:Description><maml:para>One or more HGS guardian objects representing fabrics trusted to run your virtual machine.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Guardian[]</command:parameterValue>
+<dev:type><maml:name>Guardian[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Policy</maml:name>
+<maml:Description><maml:para>Specifies the security policy for the resulting VM. The EncryptionSupported policy allows all normal VM devices, while the shielded policy adds additional protections to the VM, prevents basic console access and requires live migration traffic to be encrypted.
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Shielded</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">EncryptionSupported</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">FabricPolicyValue</command:parameterValue>
+<dev:type><maml:name>FabricPolicyValue</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="3" aliases="WindowsUnattendFile"><maml:name>AnswerFile</maml:name>
+<maml:Description><maml:para>Path to an XML file containing specialization information needed to automatically set up the OS in a shielded VM. For Windows VMs, this file is typically the unattend.xml file. The file varies for Linux distributions based on the specialization agent installed in the template disk.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">NamedFileContent</command:parameterValue>
+<dev:type><maml:name>NamedFileContent</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="5" aliases="none"><maml:name>Guardian</maml:name>
+<maml:Description><maml:para>One or more HGS guardian objects representing fabrics trusted to run your virtual machine.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Guardian[]</command:parameterValue>
+<dev:type><maml:name>Guardian[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none"><maml:name>OtherFile</maml:name>
+<maml:Description><maml:para>Additional files (limited to 384KB) that should be encrypted at rest and copied to a provisioned virtual machine.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">NamedFileContent[]</command:parameterValue>
+<dev:type><maml:name>NamedFileContent[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none"><maml:name>Owner</maml:name>
+<maml:Description><maml:para>The guardian object containing the certificates of the VM owner. Only the VM owner can modify the shielding data file in the future.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Guardian</command:parameterValue>
+<dev:type><maml:name>Guardian</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Policy</maml:name>
+<maml:Description><maml:para>Specifies the security policy for the resulting VM. The EncryptionSupported policy allows all normal VM devices, while the shielded policy adds additional protections to the VM, prevents basic console access and requires live migration traffic to be encrypted.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">FabricPolicyValue</command:parameterValue>
+<dev:type><maml:name>FabricPolicyValue</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>ShieldingDataFilePath</maml:name>
+<maml:Description><maml:para>Specifies the path where the newly created shielding data file should be saved.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none"><maml:name>VolumeIDQualifier</maml:name>
+<maml:Description><maml:para>One or more VolumeIDQualifier objects representing template disks trusted for shielded VM deployment.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">VolumeIDQualifier[]</command:parameterValue>
+<dev:type><maml:name>VolumeIDQualifier[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>Microsoft.Windows.HardenedFabric.Cmdlets.Common.Guardian</maml:name>
+</dev:type>
+<maml:description><maml:para>Microsoft.Windows.HardenedFabric.Cmdlets.Common.VolumeIDQualifier[] Microsoft.Windows.HardenedFabric.Cmdlets.Common.NamedFileContent Microsoft.Windows.HardenedFabric.Cmdlets.Common.NamedFileContent[] Microsoft.Windows.HardenedFabric.Cmdlets.Common.Guardian[] Microsoft.Windows.HardenedFabric.Cmdlets.Common.FabricPolicyValue
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1</maml:title>
+<dev:code>PS C:\&gt; $owner = Get-HgsGuardian -Name Owner
+PS C:\&gt; $hoster = Get-HgsGuardian -Name MyHostingProvider
+PS C:\&gt; $viq = New-VolumeIDQualifier -VolumeSignatureCatalogFilePath 'C:\temp\trustedtemplate.vsc' -VersionRule Equals
+PS C:\&gt; New-ShieldingDataFile -ShieldingDataFilePath 'C:\temp\shieldingdata.pdk' -Owner $owner -Guardian $hoster -VolumeIDQualifier $viq -AnswerFile 'C:\temp\unattend.xml'</dev:code>
+<dev:remarks><maml:para>Creates a shielding data file using the "Owner" and "MyHostingProvider" guardians and a single volume ID qualifier representing the trusted template disk.
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks></command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>New-VolumeIDQualifier</command:name>
+<command:verb>New</command:verb>
+<command:noun>VolumeIDQualifier</command:noun>
+<maml:description><maml:para>Creates a volume ID qualifier.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The New-VolumeIDQualifier cmdlet creates a VolumeIDQualifier object from a volume signature catalog file and an associated rule.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>New-VolumeIDQualifier</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>TemplateDiskFilePath</maml:name>
+<maml:Description><maml:para>The path to the template file.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>VersionRule</maml:name>
+<maml:Description><maml:para>Specifies a rule that defines what volume versions the VolumeIDQualifier matches. The acceptable values for this parameter are:
+</maml:para>
+<maml:para>- Equals
+</maml:para>
+<maml:para>- GreaterThan
+</maml:para>
+<maml:para>- GreaterThanOrEquals
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Equals</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">GreaterThan</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">GreaterThanOrEquals</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">VolumeVersionRule</command:parameterValue>
+<dev:type><maml:name>VolumeVersionRule</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+<command:syntaxItem><maml:name>New-VolumeIDQualifier</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>VolumeSignatureCatalogFilePath</maml:name>
+<maml:Description><maml:para>Specifies the path of a volume signature catalog file. This type of file uses the .vsc file name extension.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>VersionRule</maml:name>
+<maml:Description><maml:para>Specifies a rule that defines what volume versions the VolumeIDQualifier matches. The acceptable values for this parameter are:
+</maml:para>
+<maml:para>- Equals
+</maml:para>
+<maml:para>- GreaterThan
+</maml:para>
+<maml:para>- GreaterThanOrEquals
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Equals</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">GreaterThan</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">GreaterThanOrEquals</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">VolumeVersionRule</command:parameterValue>
+<dev:type><maml:name>VolumeVersionRule</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>TemplateDiskFilePath</maml:name>
+<maml:Description><maml:para>The path to the template file.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>VersionRule</maml:name>
+<maml:Description><maml:para>Specifies a rule that defines what volume versions the VolumeIDQualifier matches. The acceptable values for this parameter are:
+</maml:para>
+<maml:para>- Equals
+</maml:para>
+<maml:para>- GreaterThan
+</maml:para>
+<maml:para>- GreaterThanOrEquals
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">VolumeVersionRule</command:parameterValue>
+<dev:type><maml:name>VolumeVersionRule</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>VolumeSignatureCatalogFilePath</maml:name>
+<maml:Description><maml:para>Specifies the path of a volume signature catalog file. This type of file uses the .vsc file name extension.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>String, VolumeVersionRule</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>VolumeIDQualifier</maml:name>
+</dev:type>
+<maml:description><maml:para>This object returns a new VolumeIDQualifier object. Provide this object to the Protect-ShieldingDataFile to create a provisioning data file.
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1: Create a volume ID qualifier</maml:title>
+<dev:code>PS C:\&gt;New-VolumeIDQualifier -VolumeSignatureCatalogFilePath "SignatureCatalog.vsc" -VolumeVersionRule Equals</dev:code>
+<dev:remarks><maml:para>This command creates a VolumeIDQualifier object that contains information associated with a .vsc file. The VolumeSignatureCatalogFilePath parameter the .vsc file.
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks></command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Save-ShieldedVMRecoveryKey</command:name>
+<command:verb>Save</command:verb>
+<command:noun>ShieldedVMRecoveryKey</command:noun>
+<maml:description><maml:para>Extracts the encrypted BitLocker recovery key from a shielded virtual machine's operating system disk.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Save-ShieldedVMRecoveryKey cmdlet is used to extract the encrypted BitLocker recovery key from a shielded virtual machine's operaing system disk. The key can be obtained from an offline VHDX or an online, mounted disk. The encrypted recovery key can be passed to the Unprotect-ShieldedVMRecoveryKey (Unprotect-ShieldedVMRecoveryKey.md)cmdlet to decrypt the recovery key.
+</maml:para>
+<maml:para>This cmdlet only works with Windows shielded VMs created with a shielding data file created on Windows Server, version 1709 or newer.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Save-ShieldedVMRecoveryKey</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>DiskNumber</maml:name>
+<maml:Description><maml:para>Identifier for the mounted disk containing the OS partition of a Windows shielded VM
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Force</maml:name>
+<maml:Description><maml:para>Overwrites the encrypted recovery key file located at the specified path
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Path</maml:name>
+<maml:Description><maml:para>Location to save the encrypted recovery key
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+<command:syntaxItem><maml:name>Save-ShieldedVMRecoveryKey</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Force</maml:name>
+<maml:Description><maml:para>Overwrites the encrypted recovery key file located at the specified path
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Path</maml:name>
+<maml:Description><maml:para>Location to save the encrypted recovery key
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>VHDPath</maml:name>
+<maml:Description><maml:para>Location of the VHDX file for a Windows shielded VM to be searched for an encrypted recovery key
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>DiskNumber</maml:name>
+<maml:Description><maml:para>Identifier for the mounted disk containing the OS partition of a Windows shielded VM
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Force</maml:name>
+<maml:Description><maml:para>Overwrites the encrypted recovery key file located at the specified path
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Path</maml:name>
+<maml:Description><maml:para>Location to save the encrypted recovery key
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>VHDPath</maml:name>
+<maml:Description><maml:para>Location of the VHDX file for a Windows shielded VM to be searched for an encrypted recovery key
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1</maml:title>
+<dev:code>PS C:\&gt; Save-ShieldedVMRecoveryKey -VHDPath 'C:\temp\MyShieldedVM.vhdx' -Path 'C:\temp\MyShieldedVMEncryptedRecoveryKey.ebek'</dev:code>
+<dev:remarks><maml:para>Extracts the encrypted recovery key from the "MyShieldedVM.vhdx" file and saves it to the temp directory.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 1</maml:title>
+<dev:code>PS C:\&gt; Save-ShieldedVMRecoveryKey -DiskNumber 1 -Path 'C:\temp\MyShieldedVMEncryptedRecoveryKey.ebek'</dev:code>
+<dev:remarks><maml:para>Extracts the encrypted recovery key from the second disk (disk number 1) mounted on the system, and saves the recovery key to the temp directory.
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Unprotect-ShieldedVMRecoveryKey</maml:linkText>
+<maml:uri></maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Save-VolumeSignatureCatalog</command:name>
+<command:verb>Save</command:verb>
+<command:noun>VolumeSignatureCatalog</command:noun>
+<maml:description><maml:para>Extracts and saves a volume signature catalog file from a given shielded VM template disk.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Save-VolumeSignatureCatalog cmdlet extracts the volume signature catalog containing the disk signer, name, and version number of a shielded VM template disk and persists it to a file. This file can be given to VM owners who wish to deploy a VM using this template disk for use in the Shielding Data File Wizard.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Save-VolumeSignatureCatalog</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>TemplateDiskPath</maml:name>
+<maml:Description><maml:para>Specifies the path to a VHDX file that has been templatized in preparation for deploying shielded VMs.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>VolumeSignatureCatalogPath</maml:name>
+<maml:Description><maml:para>Specifies the desired path for the volume signature catalog file. The path should use a .vsc extension.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>TemplateDiskPath</maml:name>
+<maml:Description><maml:para>Specifies the path to a VHDX file that has been templatized in preparation for deploying shielded VMs.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>VolumeSignatureCatalogPath</maml:name>
+<maml:Description><maml:para>Specifies the desired path for the volume signature catalog file. The path should use a .vsc extension.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1</maml:title>
+<dev:code>PS C:\&gt; Save-VolumeSignatureCatalog -TemplateDiskPath 'C:\temp\mydisk.vhdx' -VolumeSignatureCatalogPath 'C:\temp\mydiskcatalog.vsc'</dev:code>
+<dev:remarks><maml:para>Saves the volume signature from the template disk to a file.
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks></command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Unprotect-ShieldedVMRecoveryKey</command:name>
+<command:verb>Unprotect</command:verb>
+<command:noun>ShieldedVMRecoveryKey</command:noun>
+<maml:description><maml:para>Decrypts an encrypted recovery key for a Windows shielded VM obtained from the Save-ShieldedVMRecoveryKey (Save-ShieldedVMRecoveryKey.md)cmdlet.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Unprotect-ShieldedVMRecoveryKey cmdlet decrypts an encrypted BitLocker recovery key file obtained from a Windows shielded VM. To run the cmdlet, you must have the shielding data file that was used to deploy the shielded VM and have the private key for the owner guardian installed on your computer.
+</maml:para>
+<maml:para>The resulting recovery key can be provided to `manage-bde.exe`, `Unlock-BitLocker`, or the BitLocker Recovery pre-boot environment to access the contents of your shielded VM OS volume.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Unprotect-ShieldedVMRecoveryKey</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>DecryptedBitLockerKeyPath</maml:name>
+<maml:Description><maml:para>Location to save the decrypted BitLocker encryption key (.bek)
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>EncryptedBitLockerKeyPath</maml:name>
+<maml:Description><maml:para>Location of the encrypted BitLocker encryption key
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Recurse</maml:name>
+<maml:Description><maml:para>Specifies the cmdlet should search subdirectories of the shielding data file search path for compatible PDK files.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShieldingDataFileSearchPath</maml:name>
+<maml:Description><maml:para>Location of one or more directories to search for a shielding data file that can be used to decrypt the provided encrypted BitLocker encryption key.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+<dev:type><maml:name>String[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+<command:syntaxItem><maml:name>Unprotect-ShieldedVMRecoveryKey</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>DecryptedBitLockerKeyPath</maml:name>
+<maml:Description><maml:para>Location to save the decrypted BitLocker encryption key (.bek)
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>EncryptedBitLockerKeyPath</maml:name>
+<maml:Description><maml:para>Location of the encrypted BitLocker encryption key
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShieldingDataFilePath</maml:name>
+<maml:Description><maml:para>Location of the shielding data file (.pdk) used to deploy the shielded VM.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>DecryptedBitLockerKeyPath</maml:name>
+<maml:Description><maml:para>Location to save the decrypted BitLocker encryption key (.bek)
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>EncryptedBitLockerKeyPath</maml:name>
+<maml:Description><maml:para>Location of the encrypted BitLocker encryption key
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Recurse</maml:name>
+<maml:Description><maml:para>Specifies the cmdlet should search subdirectories of the shielding data file search path for compatible PDK files.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShieldingDataFilePath</maml:name>
+<maml:Description><maml:para>Location of the shielding data file (.pdk) used to deploy the shielded VM.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShieldingDataFileSearchPath</maml:name>
+<maml:Description><maml:para>Location of one or more directories to search for a shielding data file that can be used to decrypt the provided encrypted BitLocker encryption key.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+<dev:type><maml:name>String[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1</maml:title>
+<dev:code>PS C:\&gt; Unprotect-ShieldedVMRecoveryKey -ShieldingDataFilePath 'C:\temp\ShieldingDataFile.pdk' -EncryptedBitLockerKeyPath 'C:\temp\MyShieldedVMEncryptedRecoveryKey.ebek' -DecryptedBitLockerKeyPath 'C:\temp\DecryptedRecoveryKey.bek'</dev:code>
+<dev:remarks><maml:para>Decrypts the provided encrypted BitLocker recovery key using the shielding data file and owner guardian private keys, and saves it to the temp directory.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 2</maml:title>
+<dev:code>PS C:\&gt; Unprotect-ShieldedVMRecoveryKey -ShieldingDataSearchPath 'C:\temp\AllShieldingDataFiles\' -Recurse -EncryptedBitLockerKeyPath 'C:\temp\MyShieldedVMEncryptedRecoveryKey.ebek' -DecryptedBitLockerKeyPath 'C:\temp\DecryptedRecoveryKey.bek'</dev:code>
+<dev:remarks><maml:para>Searches the 'AllShieldingDataFiles' directory and all subdirectories for shielding data files that can be used to decrypt the provided encrypted BitLocker recovery key. If a suitable shielding data file is found and the private key for its owner guardian is available on the local computer, the decrypted BitLocker encryption key will be saved to the temp directory.
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Save-ShieldedVMRecoveryKey</maml:linkText>
+<maml:uri></maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+</helpItems>

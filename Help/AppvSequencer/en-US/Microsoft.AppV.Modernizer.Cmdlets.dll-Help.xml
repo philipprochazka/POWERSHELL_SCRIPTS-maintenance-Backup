@@ -1,0 +1,898 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml" xmlns="http://msh">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Expand-AppvSequencerPackage</command:name>
+      <command:verb>Expand</command:verb>
+      <command:noun>AppvSequencerPackage</command:noun>
+      <maml:description>
+        <maml:para>Expands an existing App-V package.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Expand-AppvSequencerPackage cmdlet expands a Microsoft Application Virtualization (App-V) package into its native form to the NTFS file system on the computer running the sequencer. You can more easily add prerequisites or dependent applications to the sequencer before generating the package.</maml:para>
+      <maml:para>Run this cmdlet each time to expand a new package onto the computer running the sequencer.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Expand-AppvSequencerPackage</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="AppvPackage">
+          <maml:name>AppvPackagePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the file path to an existing App-V package to be expanded to the NTFS file system of the computer running the cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="AppvPackage">
+        <maml:name>AppvPackagePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the file path to an existing App-V package to be expanded to the NTFS file system of the computer running the cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>----------------- Example 1: Expand a package -----------------</maml:title>
+        <dev:code>PS C:\&gt; Expand-AppvSequencerPackage -AppvPackagePath "C:\MyPackages\PreReq.appv"</dev:code>
+        <dev:remarks>
+          <maml:para>This command expands the package PreReq.appv to the sequencing computer.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://learn.microsoft.com/powershell/module/appvsequencer/expand-appvsequencerpackage?view=windowsserver2022-ps&amp;wt.mc_id=ps-gethelp</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-AppvSequencerPackage</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Update-AppvSequencerPackage</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-AppvPackageAccelerator</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>AppvPackageAccelerator</command:noun>
+      <maml:description>
+        <maml:para>Generates a package accelerator.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The New-AppvPackageAccelerator cmdlet generates a package accelerator object. It accepts an existing Application Virtualization (App-V) 5.0 package file along with the appropriately installed files or installation media. The cmdlet then generates a package accelerator file.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-AppvPackageAccelerator</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>InstalledFilesPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to the folder containing the directory where the package is installed to, to generate an accelerator for.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>InputPackagePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to the App-V package used as input to generate the accelerator from.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="OutputPath">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies the full path to the .cab package accelerator output file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AcceleratorDescriptionFile</maml:name>
+          <maml:description>
+            <maml:para>Specifies the package accelerator description file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>New-AppvPackageAccelerator</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Installer</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to the folder of the application installer to generate an accelerator from. The installer must be of the format msi, or cab, or zip. If you do not have an installer of this format, use the InstalledFilesPath parameter instead.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>InputPackagePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to the App-V package used as input to generate the accelerator from.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="OutputPath">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies the full path to the .cab package accelerator output file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AcceleratorDescriptionFile</maml:name>
+          <maml:description>
+            <maml:para>Specifies the package accelerator description file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AcceleratorDescriptionFile</maml:name>
+        <maml:description>
+          <maml:para>Specifies the package accelerator description file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>InputPackagePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path to the App-V package used as input to generate the accelerator from.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>InstalledFilesPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path to the folder containing the directory where the package is installed to, to generate an accelerator for.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Installer</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path to the folder of the application installer to generate an accelerator from. The installer must be of the format msi, or cab, or zip. If you do not have an installer of this format, use the InstalledFilesPath parameter instead.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="OutputPath">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specifies the full path to the .cab package accelerator output file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>----------- Example 1: Create a package accelerator -----------</maml:title>
+        <dev:code>PS C:\&gt; New-AppvPackageAccelerator -AppvPackageFilePath "C:\MyPackages\Package1\Package1.appv" -Installer "C:\MyPackages\Package1" -OutputPath "C:\Output\packages\Package1.cab"</dev:code>
+        <dev:remarks>
+          <maml:para>This command creates a package accelerator using an installer folder containing, for example, MSI installers.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2: Create a package accelerator with instruction sheet</maml:title>
+        <dev:code>PS C:\&gt; New-AppvPackageAccelerator -AppvPackageFilePath "C:\MyPackages\Package1\Package1.appv" -InstalledFilesPath "C:\Program Files\Package1InstallFolder" -OutputPath "C:\Output\packages\Package1.cab" -AcceleratorDescriptionFilePath "C:\MyPackages\Package1\Package1Description.rtf"</dev:code>
+        <dev:remarks>
+          <maml:para>This command creates a package accelerator and inserts an instruction sheet on how to accelerate package.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://learn.microsoft.com/powershell/module/appvsequencer/new-appvpackageaccelerator?view=windowsserver2022-ps&amp;wt.mc_id=ps-gethelp</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Expand-AppvSequencerPackage</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Update-AppvSequencerPackage</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-AppvSequencerPackage</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>AppvSequencerPackage</command:noun>
+      <maml:description>
+        <maml:para>Creates a new App-V package.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The New-AppvSequencerPackage cmdlet creates a new Microsoft Application Virtualization (App-V) package, either using an installer, an App-V accelerator, or an accelerator with an installed application. The cmdlet accepts a template file, as well as the option to force the package to be fully streamed to the computer before running the package.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-AppvSequencerPackage</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Specifies the name of the App-V package. This is also the name of all files outputted by the sequencing process.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="OutputPath">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies the folder where the package is saved.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>AcceleratorFilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to the accelerator file for this package. If the accelerator is not signed or is not accepted by the Sequencer, an error is returned.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>InstallMediaPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the location of the installation media that the Sequencer points to and generates an accelerator.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>New-AppvSequencerPackage</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Specifies the name of the App-V package. This is also the name of all files outputted by the sequencing process.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="OutputPath">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies the folder where the package is saved.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>AcceleratorFilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to the accelerator file for this package. If the accelerator is not signed or is not accepted by the Sequencer, an error is returned.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>InstalledFilesPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the location of the already installed files used to create a new App-V package with the aid of an App-V Accelerator.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>New-AppvSequencerPackage</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Specifies the name of the App-V package. This is also the name of all files outputted by the sequencing process.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="OutputPath">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies the folder where the package is saved.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Installer</maml:name>
+          <maml:description>
+            <maml:para>Specifies a collection of MSIs, setup executables, or other executables needed to be run to create the App-V package.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>PrimaryVirtualApplicationDirectory</maml:name>
+          <maml:description>
+            <maml:para>Specifies the location where the application is being installed. This must be a path on the local computer.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>FullLoad</maml:name>
+          <maml:description>
+            <maml:para>Indicates that the package is required to be fully downloaded before being launched.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>InstallerOptions</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of Installer Command-Line Options as parameter values, such as /quiet, /passive, or /norestart.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>TemplateFilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to the App-V package template file to be used for this package.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>AcceleratorFilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path to the accelerator file for this package. If the accelerator is not signed or is not accepted by the Sequencer, an error is returned.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>FullLoad</maml:name>
+        <maml:description>
+          <maml:para>Indicates that the package is required to be fully downloaded before being launched.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>InstalledFilesPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the location of the already installed files used to create a new App-V package with the aid of an App-V Accelerator.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Installer</maml:name>
+        <maml:description>
+          <maml:para>Specifies a collection of MSIs, setup executables, or other executables needed to be run to create the App-V package.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>InstallerOptions</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of Installer Command-Line Options as parameter values, such as /quiet, /passive, or /norestart.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>InstallMediaPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the location of the installation media that the Sequencer points to and generates an accelerator.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Specifies the name of the App-V package. This is also the name of all files outputted by the sequencing process.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="OutputPath">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specifies the folder where the package is saved.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>PrimaryVirtualApplicationDirectory</maml:name>
+        <maml:description>
+          <maml:para>Specifies the location where the application is being installed. This must be a path on the local computer.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>TemplateFilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path to the App-V package template file to be used for this package.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>----------------- Example 1: Create a package -----------------</maml:title>
+        <dev:code>PS C:\&gt; New-AppvSequencerPackage -Name "MyPackage" -OutputPath "C:\MyPackage" -PrimaryVirtualApplicationDirectory "C:\Program Files\MyApp" -Installer "C:\installers\MyApp\setup.exe"</dev:code>
+        <dev:remarks>
+          <maml:para>This command creates a package for the application MyApp.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-- Example 2: Create a package that must be fully downloaded --</maml:title>
+        <dev:code>PS C:\&gt; New-AppvSequencerPackage -Name MyPackage2 -OutputPath C:\MyPackages -PrimaryVirtualApplicationDirectory "C:\Program Files\MyApp -Installer C:\installers\MyApp\setup.exe -FullLoad</dev:code>
+        <dev:remarks>
+          <maml:para>This command creates a package that must be fully downloaded for the application MyApp.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title> Example 3: Create a package using a pre-generated accelerator </maml:title>
+        <dev:code>PS C:\&gt; New-AppvSequencerPackage -Name "MyPackage" -OutputPath "C:\MyPackages" -AcceleratorFilePath "C:\MyAccelerators\MyAccelerator.cab" -PrimaryVirtualApplicationDirectory "C:\MyApp\" -InstalledMediaPath "C:\Installers\PreReq\" -Installer "C:\Installers\MyApp\setup.exe"</dev:code>
+        <dev:remarks>
+          <maml:para>This command creates a new package MyApp using a pre-generated package accelerator.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------ Example 4: Create a package using a template file ------</maml:title>
+        <dev:code>PS C:\&gt; New-AppvSequencerPackage -Name "MyPackage" -TemplateFilePath "C:\template.appvt" -OutputPath "C:\Packages\MyPackage" -PrimaryVirtualApplicationDirectory "C:\Program Files\MyApp" -Installer "C:\Installers\MyApp\setup.exe"</dev:code>
+        <dev:remarks>
+          <maml:para>This command creates a new MyApp package using a template file.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://learn.microsoft.com/powershell/module/appvsequencer/new-appvsequencerpackage?view=windowsserver2022-ps&amp;wt.mc_id=ps-gethelp</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Expand-AppvSequencerPackage</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-AppvPackageAccelerator</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Update-AppvSequencerPackage</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Update-AppvSequencerPackage</command:name>
+      <command:verb>Update</command:verb>
+      <command:noun>AppvSequencerPackage</command:noun>
+      <maml:description>
+        <maml:para>Upgrades virtual application packages.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Update-AppvSequencerPackage cmdlet upgrades virtual application packages. It takes as an input the original package, the upgrade installer, and an output path. The cmdlet returns a package that is upgraded.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Update-AppvSequencerPackage</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>InputPackagePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the existing Microsoft Application Virtualization (App-V) package to upgrade.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Specifies the friendly name of the package given during Sequencing time. This value is obtained from the package manifest.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="OutputPath">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the folder where the updated package is to be saved.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>Installer</maml:name>
+          <maml:description>
+            <maml:para>Specifies the installer used to upgrade the App-V package.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>FullLoad</maml:name>
+          <maml:description>
+            <maml:para>Indicates that the cmdlet forces the package to be fully downloaded onto the computer before it can be launched.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>InstallerOptions</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of Installer Command-Line Options as parameter values, such as /quiet, /passive, or /norestart.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>TemplateFilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to the App-V package template file to be used for this package.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>FullLoad</maml:name>
+        <maml:description>
+          <maml:para>Indicates that the cmdlet forces the package to be fully downloaded onto the computer before it can be launched.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>InputPackagePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of the existing Microsoft Application Virtualization (App-V) package to upgrade.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>Installer</maml:name>
+        <maml:description>
+          <maml:para>Specifies the installer used to upgrade the App-V package.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>InstallerOptions</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of Installer Command-Line Options as parameter values, such as /quiet, /passive, or /norestart.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Specifies the friendly name of the package given during Sequencing time. This value is obtained from the package manifest.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="OutputPath">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of the folder where the updated package is to be saved.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>TemplateFilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path to the App-V package template file to be used for this package.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>--------------- Example 1: Update an application ---------------</maml:title>
+        <dev:code>PS C:\&gt; Update-AppvSequencerPackage -AppvPackageFilePath "C:\Packages\MyPackage.appv" -Installer "C:\PackageInstall\PackageUpgrade.exe" -OutputPath "C:\UpgradedPackages"</dev:code>
+        <dev:remarks>
+          <maml:para>This command updates an application, changing the output path.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2: Update an application and require package to be fully loaded</maml:title>
+        <dev:code>PS C:\&gt; Update-AppvSequencerPackage -AppvPackageFilePath "C:\Packages\MyPackage.appv" -Installer "C:\PackageInstall\PackageUpgrade.exe" -OutputPath "C:\UpgradedPackages" -FullLoad</dev:code>
+        <dev:remarks>
+          <maml:para>This command updates an application, and sets the package to be fully loaded.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://learn.microsoft.com/powershell/module/appvsequencer/update-appvsequencerpackage?view=windowsserver2022-ps&amp;wt.mc_id=ps-gethelp</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Expand-AppvSequencerPackage</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-AppvSequencerPackage</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+</helpItems>

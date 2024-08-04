@@ -1,0 +1,101 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "os",
+          "style": "plain",
+          "foreground": "#FFD700",
+          "properties": {
+            "prefix": " ",
+            "windows": "\uF0E7 ",
+            "postfix": ""
+          }
+        },
+        {
+          "type": "path",
+          "style": "diamond",
+          "foreground": "#FFFFFF",
+          "background": "#bd93f9",
+          "properties": {
+            "prefix": "<#FFD700> \ue5ff </>",
+            "home_icon": "~",
+            "style": "folder"
+          }
+        },
+        {
+          "type": "git",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#193549",
+          "background": "#ff77c3",
+          "properties": {
+            "display_stash_count": true,
+            "display_upstream_icon": true,
+            "display_status": true,
+            "status_colors_enabled": true,
+            "local_changes_color": "#ff9248",
+            "ahead_and_behind_color": "#f26d50",
+            "behind_color": "#f17c37",
+            "ahead_color": "#89d1dc",
+            "stash_count_icon": "\uF692 "
+          }
+        },
+        {
+          "type": "python",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#193549",
+          "background": "#59f66f",
+          "properties": {
+            "display_virtual_env": true,
+            "display_default": true,
+            "display_version": true,
+            "prefix": "<#1E90FF> \uE235 </>"
+          }
+        },
+        {
+          "type": "executiontime",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#193549",
+          "background": "#99ecfc",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "properties": {
+            "always_enabled": true,
+            "threshold": 500,
+            "style": "austin",
+            "prefix": " \uFA1E"
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "properties": {
+            "prefix": "",
+            "text": "🧛"
+          }
+        }
+      ]
+    }
+  ]
+}
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
