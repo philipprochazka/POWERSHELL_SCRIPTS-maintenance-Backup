@@ -12,7 +12,7 @@
 
     If you specify Machine, you must be running as administrator. or using Gsudo
 .EXAMPLE
-	Set-RepositoryTrust -Addrepo PSgallery 
+	Set-RepositoryTrust -Addrepo PSgallery
   Set-RepositoryTrust -RemoveRepo PSgallery
 
 	Set-RepositoryTrust -Addrepo Chocolatey 
