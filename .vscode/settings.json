@@ -42,7 +42,7 @@
         "COBOL",
         "ACUCOBOL"
     ],
-    "cSpell.enableFiletypes": [
+    "cSpell.enabledFileTypes": [
         "!COBOL",
         "!c",
         "!csharp",
@@ -60,5 +60,21 @@
         "powershell",
         "properties",
         "search-result"
-    ]
+    ],
+    "makefile.makefilePath": "${workspaceFolder}/build/windows/main/Makefile",
+    "makefile.alwaysPreConfigure": true,
+    "makefile.configurations": [
+        {
+            "name"        : "default",
+            "makeArgs"    : [],
+            "makefilePath": "${workspaceFolder}/build/windows/main/Makefile"
+        }
+    ],
+    "makefile.defaultConfiguration": "default",
+    "editor.gotoLocation.alternativeImplementationCommand": "editor.action.referenceSearch.trigger",
+    "editor.gotoLocation.alternativeReferenceCommand": "editor.action.peekImplementation",
+    "editor.gotoLocation.multipleDefinitions": "gotoAndPeek",
+    "editor.gotoLocation.multipleImplementations": "gotoAndPeek",
+    // To log build output, you need to redirect output in the build task or Makefile itself, as VS Code Makefile Tools does not support a log file setting directly.
+    // Example: Add a custom build task in tasks.json to run 'make' and redirect output to build.log next to the Makefile.
 }
