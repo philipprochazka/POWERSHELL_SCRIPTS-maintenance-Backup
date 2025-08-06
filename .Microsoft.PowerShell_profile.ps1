@@ -1,17 +1,21 @@
 # Powershell 7 main-system config
-#TODO: make this a remote profile back it up to github 
+#TODO: make this a remote profile back it up to github
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
-
+# Auto-load repository .powershell environment if it exists
+if (Test-Path ".\.powershell\profile.ps1") {
+    . ".\.powershell\profile.ps1"
+}
 # Init oh my powershell and load dracula powerline
-oh-my-posh init pwsh --config 'C:\Users\philip\Documents\PowerShell\Theme\dracula.omp.json' | Invoke-Expression
+oh-my-posh init pwsh --config '$env:backup\Powershell\Theme\dracula.omp.json' | Invoke-Expression
+# Import modules folder for powershell
+$env:PSModulePath += ";C:\backup\Powershell\PowerShellModules"
 
-# Import modules for powershell 
 Import-Module Az.Tools.Predictor
 Import-Module -Name Terminal-Icons
 Import-Module z
 # PSReadLine variables
-Set-PSReadLineOption -Colors @{emphasis = '#ff0000'; inlinePrediction = 'Cyan'}
+Set-PSReadLineOption -Colors @{emphasis = '#ff0000'; inlinePrediction = 'Cyan' }
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 Set-PSReadLineOption -PredictionViewStyle inlinePrediction + ListView
 Set-PSReadLineOption -EditMode Windows
@@ -25,7 +29,7 @@ Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 # New-Alias <alias> <aliased-command>
 # New-Alias open ii
-Set-Alias ls "dir" 
+Set-Alias ls "dir"
 Set-Alias l "ls"
 Set-Alias ll "ls -la"
 # Set-Alias cd "z"

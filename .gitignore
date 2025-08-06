@@ -20,3 +20,6 @@ Backup of *.doc*
 # Ignore my Transcript folder
 C:\transcripts\*
 desktop.ini
+
+# Rust build artifacts
+target/

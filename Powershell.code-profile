@@ -1,0 +1,183 @@
+{
+  "name": "Powershell",
+  "icon": "terminal",
+  // Editor and workspace settings
+  "settings": {
+    "settings": {
+      // JSON with comments support
+      "[jsonc]": {
+        "editor.quickSuggestions": {
+          "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+      },
+      // Accessibility configuration
+      "editor.accessibilitySupport": "on"
+    }
+  },
+  // Keyboard shortcuts configuration
+  "keybindings": {
+    "keybindings": "",
+    "platform": 3
+  },
+  // Installed extensions for this profile
+  "extensions": [
+    {
+      "identifier": {
+        "id": "antfu.theme-vitesse",
+        "uuid": "e0a67685-8605-4546-8520-73b228de61b5"
+      },
+      "displayName": "Vitesse Theme",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "firefox-devtools.vscode-firefox-debug",
+        "uuid": "c5f4d87f-a524-462c-ac01-923eb19cf3e9"
+      },
+      "displayName": "Debugger for Firefox",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "github.copilot",
+        "uuid": "23c4aeee-f844-43cd-b53e-1113e483f1a6"
+      },
+      "displayName": "GitHub Copilot",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "gruntfuggly.todo-tree",
+        "uuid": "261cac81-cd7b-4555-bb41-0c2d2bcd3e70"
+      },
+      "displayName": "Todo Tree",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "louiswt.regexp-preview",
+        "uuid": "5a755e10-8942-4d75-bb56-6d7435d3b500"
+      },
+      "displayName": "Regexp Explain",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "luisfontes19.vscode-swissknife",
+        "uuid": "53d8fce2-be01-4fc7-af1b-f1d86aa206e8"
+      },
+      "displayName": "Swissknife",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "ms-azuretools.vscode-azureresourcegroups",
+        "uuid": "260e9ed1-160d-4f7e-807c-2eb076ba3846"
+      },
+      "displayName": "Azure Resources",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "ms-ceintl.vscode-language-pack-cs",
+        "uuid": "7bdfa40f-8fe8-46ef-ba18-19dda85cb2a2"
+      },
+      "displayName": "Czech Language Pack for Visual Studio Code",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "ms-ceintl.vscode-language-pack-de",
+        "uuid": "bf2ad3a8-0475-49ea-8851-4e9e8074a4f2"
+      },
+      "displayName": "German Language Pack for Visual Studio Code",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "pkief.material-icon-theme",
+        "uuid": "5db78037-f674-459f-a236-db622c427c5b"
+      },
+      "displayName": "Material Icon Theme",
+      "version": "5.23.0",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "pkief.material-product-icons",
+        "uuid": "f797dacd-4e80-4f33-8b63-d665c0956013"
+      },
+      "displayName": "Material Product Icons",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "sleistner.vscode-fileutils",
+        "uuid": "d637104e-1fd7-4063-98fc-8afe46012c9b"
+      },
+      "displayName": "File Utils",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "urosvujosevic.explorer-manager",
+        "uuid": "9a3158cf-aa30-4955-bd90-adb118650ff3"
+      },
+      "displayName": "Explorer Bookmark",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "vin-liberty.powershell-snippets",
+        "uuid": "fdc59035-7c53-495b-bef1-975c2d3db3a7"
+      },
+      "displayName": "PowerShell Snippets",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "visualstudioexptteam.vscodeintellicode",
+        "uuid": "876e8f93-74d0-4f4f-91b7-34a09f19f444"
+      },
+      "displayName": "IntelliCode",
+      "applicationScoped": true
+    },
+    {
+      "identifier": {
+        "id": "wattenberger.footsteps",
+        "uuid": "6fba56bf-cfb6-48e5-9aae-c0a2de39f6ba"
+      },
+      "displayName": "footsteps",
+      "applicationScoped": true
+    }
+  ],
+  "globalState": {
+    "storage": {
+      "workbench.panel.alignment": "center",
+      "workbench.activityBar.location": "default",
+      "colorThemeData": {
+        "id": "vs-dark vscode-theme-defaults-themes-dark_modern-json",
+        "label": "Dark Modern",
+        "settingsId": "Default Dark Modern",
+        "themeSemanticHighlighting": true,
+        "watch": false
+      },
+      "workbench.telemetryOptOutShown": "true",
+      "expandSuggestionDocs": "false",
+      "commandPalette.mru.counter": "119",
+      "workbench.activity.pinnedViewlets2": "/* Array of pinned activity bar items */",
+      "workbench.panel.pinnedPanels": "/* Array of pinned panel items */",
+      "workbench.explorer.views.state.hidden": "/* Array of hidden explorer views */",
+      "workbench.view.extensions.state.hidden": "/* Array of hidden extension views */",
+      "workbench.view.debug.state.hidden": "/* Array of hidden debug views */",
+      "workbench.scm.views.state.hidden": "/* Array of hidden SCM views */",
+      "workbench.panel.chat.hidden": "/* Array of hidden chat views */",
+      "workbench.view.extension.azure.state.hidden": "/* Array of hidden Azure views */",
+      "workbench.view.extension.azurePanel.state.hidden": "/* Array of hidden Azure panel views */",
+      "workbench.welcomePage.walkthroughMetadata": "/* Walkthrough completion data */",
+      "memento/gettingStartedService": "/* Getting started completion data */",
+      "memento/workbench.editor.keybindings": "/* Keybindings search history */"
+    }
+  }
+}

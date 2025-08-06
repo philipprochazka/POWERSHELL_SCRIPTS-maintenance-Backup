@@ -1,13 +1,214 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		}
-	],
-	"settings": {
-		"cSpell.enabledLanguageIds": [
-			"COBOL",
-			"ACUCOBOL"
-		]
-	}
+  "folders": [
+    {
+      "path": ".."
+    },
+    {
+      "path": "../../../Users/philip/Documents/PowerShell"
+    }
+  ],
+  "settings": {
+    "cSpell.enabledFileTypes": ["powershell", "markdown", "plaintext", "json", "jsonc", "yaml", "xml", "html", "css", "javascript", "typescript", "shellscript", "dockerfile", "python"],
+    "cSpell.language": "en,en-US",
+    "cSpell.diagnosticLevel": "Hint",
+    "cSpell.ignorePaths": ["**/node_modules/**", "**/dist/**", "**/out/**", "**/build/**"],
+    "powershell.codeFolding.enable": true,
+    "powershell.codeFolding.showPreview": true,
+    "powershell.codeFormatting.autoCorrectAliases": true,
+    "powershell.codeFormatting.autoIndent": true,
+    "powershell.codeFormatting.formatOnPaste": true,
+    "powershell.codeFormatting.formatOnSave": true,
+    "powershell.codeFormatting.indentStyle": "Block",
+    "powershell.codeFormatting.openBraceOnSameLine": true,
+    "powershell.codeFormatting.newLineAfterOpenBrace": true,
+    "powershell.codeFormatting.newLineBeforeCloseBrace": true,
+    "powershell.codeFormatting.newLineAfterCloseBrace": true,
+    "powershell.codeFormatting.newLineAfterFunction": true,
+    "powershell.codeFormatting.newLineAfterControlBlock": true,
+    "powershell.codeFormatting.newLineBeforeCatch": true,
+    "powershell.codeFormatting.newLineAfterCatch": true,
+    "powershell.codeFormatting.newLineAfterFinally": true,
+    "powershell.codeFormatting.newLineBeforeParamBlock": true,
+    "powershell.codeFormatting.newLineAfterParamBlock": true,
+    "powershell.codeFormatting.newLineAfterProperty": true,
+    "powershell.codeFormatting.newLineAfterTypeBlock": true,
+    "powershell.codeFormatting.newLineAfterUsingStatement": true,
+    "powershell.codeFormatting.newLineBeforeFinally": true,
+    "powershell.codeFormatting.newLineBeforeElse": true,
+    "powershell.codeFormatting.newLineAfterElse": true,
+    "powershell.codeFormatting.newLineBeforeElseIf": true,
+    "powershell.codeFormatting.newLineAfterElseIf": true,
+    "powershell.helpCompletion": "BlockComment",
+    "powershell.enableProfileLoading": true,
+    "powershell.powerShellDefaultVersion": "PowerShell",
+    "powershell.powerShellAdditionalExePaths": {
+      "PowerShell Core": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+    },
+    "powershell.enableConsoleRepl": true,
+    "powershell.integratedConsole.showOnStartup": true,
+    "powershell.integratedConsole.showOnStartupWarning": false,
+    "powershell.integratedConsole.focusConsoleOnExecute": true,
+    "powershell.integratedConsole.showHelpOnStartup": false,
+    "powershell.integratedConsole.showToolBar": true,
+    "powershell.integratedConsole.showToolBarOnStartup": true,
+    "powershell.integratedConsole.showToolBarOnFocus": true,
+    "powershell.integratedConsole.showToolBarOnExecute": true,
+    "powershell.integratedConsole.showToolBarOnError": true,
+    "powershell.integratedConsole.showToolBarOnWarning": true,
+    "powershell.integratedConsole.showToolBarOnInfo": true,
+    "powershell.integratedConsole.showToolBarOnDebug": true,
+    "powershell.integratedConsole.showToolBarOnPrompt": true,
+    "files.defaultLanguage": "powershell",
+    "files.associations": {
+      "*.ps1": "powershell",
+      "*.psm1": "powershell",
+      "*.psd1": "powershell"
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.profiles.windows": {
+      "PowerShell": {
+        "source": "PowerShell",
+        "icon": "terminal-powershell",
+        "args": ["-ExecutionPolicy", "Bypass", "-NoLogo", "-NoExit"]
+      }
+    },
+    "github.copilot.enable": {
+      "*": true,
+      "powershell": true,
+      "markdown": true
+    },
+    "editor.inlineSuggest.enabled": true,
+    "editor.suggest.preview": true,
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": true,
+      "strings": true
+    },
+    "editor.suggestSelection":"first",
+    "editor.tabCompletion"   :"on",
+    "editor.formatOnType"    :true,
+    "editor.formatOnPaste"   :true,
+    "editor.formatOnSave"    :true,
+    
+    "[powershell]": {
+      "editor.defaultFormatter":"ms-vscode.powershell"
+    },
+    "[markdown]": {
+      "editor.defaultFormatter":"yzhang.markdown-all-in-one"
+    },
+    "[plaintext]": {
+      "editor.defaultFormatter":null
+    },
+    "[json]": {
+      "editor.defaultFormatter":"vscode.json-language-features"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter":"vscode.json-language-features"
+    },
+    "[html]": {
+      "editor.defaultFormatter":"vscode.html-language-features"
+    },
+    "[yaml]": {
+      "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[xml]": {
+      "editor.defaultFormatter": "DotJoshJohnson.xml"
+    },
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.python"
+    },
+    "[dockerfile]": {
+      "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[css]": {
+      "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    },
+  "launch": {
+    "configurations": [
+      {
+        "name": "PowerShell Interactive Session",
+        "type": "PowerShell",
+        "request": "launch",
+        "script": "${workspaceFolder}/Microsoft.PowerShell_profile_MCP.ps1",
+        "createTemporaryIntegratedConsole": true
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "PowerShell: Run Script",
+        "type": "shell",
+        "command": "pwsh",
+        "args": ["-ExecutionPolicy", "Bypass", "-File", "${file}"],
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        },
+        "problemMatcher": ["$pester"],
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "PowerShell: Run with Profile",
+        "type": "shell",
+        "command": "pwsh",
+        "args": ["-ExecutionPolicy", "Bypass", "-NoExit", "-Command", ". '${workspaceFolder}/Microsoft.PowerShell_profile.ps1'; & '${file}'"],
+        "group": "test",
+        "problemMatcher": ["$pester"]
+      },
+      {
+        "label": "PowerShell: Format Document",
+        "type": "shell",
+        "command": "pwsh",
+        "args": ["-ExecutionPolicy", "Bypass", "-Command", "Invoke-Formatter -ScriptDefinition (Get-Content '${file}' -Raw)"],
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "PowerShell: PSScriptAnalyzer",
+        "type": "shell",
+        "command": "pwsh",
+        "args": ["-ExecutionPolicy", "Bypass", "-Command", "Invoke-ScriptAnalyzer -Path '${file}' -Settings PSGallery"],
+        "group": "test",
+        "problemMatcher": []
+      },
+      {
+        "label": "PowerShell: Clean Workspace",
+        "type": "shell",
+        "command": "pwsh",
+        "args": ["-ExecutionPolicy", "Bypass", "-Command", "Get-ChildItem -Path '${workspaceFolder}/temp' -Recurse -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force"],
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "PowerShell: Setup MCP Environment",
+        "type": "shell",
+        "command": "pwsh",
+        "args": ["-ExecutionPolicy", "Bypass", "-Command", "& '${workspaceFolder}/Scripts/Setup-MCPEnvironment.ps1'"],
+        "group": "build",
+        "problemMatcher": []
+      }
+    ]
+  },
+  "extensions": {
+    "modulesPath"    :"C:\\backup\\Powershell\\PowerShellModules",
+    "recommendations":[
+      "ms-vscode.powershell",
+      "github.copilot",
+      "github.copilot-chat",
+      "streetsidesoftware.code-spell-checker",
+      "ms-vscode.vscode-json",
+      "redhat.vscode-yaml",
+      "ms-vscode.test-adapter-converter",
+      "lextudio.restructuredtext"
+    ]
+  },
+  "VSCode.Profile.Launch.Workspace": "Profile.Powershell"
 }

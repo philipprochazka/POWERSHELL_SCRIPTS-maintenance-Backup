@@ -1,5 +1,0 @@
-# Cspell Utilities Dictionary Words
-nupkg
-onedrive
-ovpnconnect	
-p2p

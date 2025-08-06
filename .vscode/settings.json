@@ -1,80 +1,120 @@
 {
-    "cSpell.enabledLanguageIds": [
-        "asciidoc",
-        "c",
-        "cpp",
-        "csharp",
-        "css",
-        "elixir",
-        "erlang",
-        "git-commit",
-        "go",
-        "graphql",
-        "handlebars",
-        "haskell",
-        "html",
-        "jade",
-        "java",
-        "javascript",
-        "javascriptreact",
-        "json",
-        "jsonc",
-        "jupyter",
-        "latex",
-        "less",
-        "markdown",
-        "php",
-        "plaintext",
-        "python",
-        "pug",
-        "restructuredtext",
-        "rust",
-        "scala",
-        "scss",
-        "scminput",
-        "swift",
-        "text",
-        "typescript",
-        "typescriptreact",
-        "vue",
-        "yaml",
-        "yml",
-        "COBOL",
-        "ACUCOBOL"
-    ],
-    "cSpell.enabledFileTypes": [
-        "!COBOL",
-        "!c",
-        "!csharp",
-        "!php",
-        "!python",
-        "!rust",
-        "!typescriptreact",
-        "ahk",
-        "ahk2",
-        "bat",
-        "csv (semicolon)",
-        "env",
-        "markdown-math",
-        "markdown_latex_combined",
-        "powershell",
-        "properties",
-        "search-result"
-    ],
-    "makefile.makefilePath": "${workspaceFolder}/build/windows/main/Makefile",
-    "makefile.alwaysPreConfigure": true,
-    "makefile.configurations": [
-        {
-            "name"        : "default",
-            "makeArgs"    : [],
-            "makefilePath": "${workspaceFolder}/build/windows/main/Makefile"
-        }
-    ],
-    "makefile.defaultConfiguration": "default",
-    "editor.gotoLocation.alternativeImplementationCommand": "editor.action.referenceSearch.trigger",
-    "editor.gotoLocation.alternativeReferenceCommand": "editor.action.peekImplementation",
-    "editor.gotoLocation.multipleDefinitions": "gotoAndPeek",
-    "editor.gotoLocation.multipleImplementations": "gotoAndPeek",
-    // To log build output, you need to redirect output in the build task or Makefile itself, as VS Code Makefile Tools does not support a log file setting directly.
-    // Example: Add a custom build task in tasks.json to run 'make' and redirect output to build.log next to the Makefile.
+  // 🚀 UnifiedPowerShellProfile VS Code Configuration
+  "powershell.codeFormatting.preset": "OTBS",
+  "powershell.codeFormatting.openBraceOnSameLine": true,
+  "powershell.codeFormatting.newLineAfterOpenBrace": true,
+  "powershell.codeFormatting.newLineAfterCloseBrace": true,
+  "powershell.codeFormatting.whitespaceBeforeOpenBrace": true,
+  "powershell.codeFormatting.whitespaceBeforeOpenParen": true,
+  "powershell.codeFormatting.whitespaceAroundOperator": true,
+  "powershell.codeFormatting.whitespaceAfterSeparator": true,
+  "powershell.codeFormatting.ignoreOneLineBlock": false,
+  "powershell.codeFormatting.alignPropertyValuePairs": true,
+  "powershell.scriptAnalysis.enable": true,
+  "powershell.scriptAnalysis.settingsPath": ".vscode/PSScriptAnalyzerSettings.psd1",
+  "powershell.integratedConsole.startLocation": "Workspace",
+  "powershell.integratedConsole.showOnStartup": false,
+  "powershell.developer.powerShellExePath": "pwsh.exe",
+  
+  // 📁 File Associations
+  "files.associations": {
+    "*.ps1": "powershell",
+    "*.psm1": "powershell",
+    "*.psd1": "powershell"
+  },
+  
+  // 🎨 Editor Configuration
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.gotoLocation.alternativeImplementationCommand": "editor.action.referenceSearch.trigger",
+  "editor.gotoLocation.alternativeReferenceCommand": "editor.action.peekImplementation",
+  "editor.gotoLocation.multipleDefinitions": "gotoAndPeek",
+  "editor.gotoLocation.multipleImplementations": "gotoAndPeek",
+  
+  // 🔍 Spell Check Configuration
+  "cSpell.enabledFileTypes": [
+    "!c", "!csharp", "!php", "!python", "!rust", "!typescriptreact",
+    "ahk", "ahk2", "bat", "csv (semicolon)", "env", "markdown-math",
+    "markdown_latex_combined", "powershell", "properties", "search-result"
+  ],
+  
+  // 🖥️ Terminal Profiles
+  "terminal.integrated.defaultProfile.windows": "🚀 UnifiedProfile",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "🚀 UnifiedProfile": {
+      "path": "pwsh.exe",
+      "args": [
+        "-NoLogo", 
+        "-ExecutionPolicy", "Bypass", 
+        "-NoExit", 
+        "-Command", 
+        "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode Dracula -EnableRealtimeLinting"
+      ],
+      "icon": "terminal-powershell",
+      "color": "terminal.ansiMagenta"
+    },
+    "🧛 Dracula Mode": {
+      "path": "pwsh.exe",
+      "args": [
+        "-NoLogo", 
+        "-ExecutionPolicy", "Bypass", 
+        "-NoExit", 
+        "-Command", 
+        "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode Dracula -EnableRealtimeLinting"
+      ],
+      "icon": "terminal-powershell",
+      "color": "terminal.ansiMagenta"
+    },
+    "🤖 MCP Mode": {
+      "path": "pwsh.exe",
+      "args": [
+        "-NoLogo", 
+        "-ExecutionPolicy", "Bypass", 
+        "-NoExit", 
+        "-Command", 
+        "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode MCP -EnableRealtimeLinting"
+      ],
+      "icon": "terminal-powershell",
+      "color": "terminal.ansiGreen"
+    },
+    "⚡ LazyAdmin Mode": {
+      "path": "pwsh.exe",
+      "args": [
+        "-NoLogo", 
+        "-ExecutionPolicy", "Bypass", 
+        "-NoExit", 
+        "-Command", 
+        "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode LazyAdmin -EnableRealtimeLinting"
+      ],
+      "icon": "terminal-powershell",
+      "color": "terminal.ansiYellow"
+    }
+  },
+  
+  // 🗂️ File Nesting
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ps1": "${capture}.Tests.ps1,${capture}.test.ps1",
+    "*.psm1": "${capture}.psd1,${capture}.Tests.ps1",
+    "UnifiedPowerShellProfile.psm1": "UnifiedPowerShellProfile.psd1,README.md"
+  },
+  
+  // 🔧 Build Tools
+  "makefile.makefilePath": "${workspaceFolder}/build/windows/main/Makefile",
+  "makefile.alwaysPreConfigure": true,
+  "makefile.configurations": [
+    {
+      "name": "default",
+      "makeArgs": [],
+      "makefilePath": "${workspaceFolder}/build/windows/main/Makefile"
+    }
+  ],
+  "makefile.defaultConfiguration": "default",
+  "cmake.ignoreCMakeListsMissing": true
 }

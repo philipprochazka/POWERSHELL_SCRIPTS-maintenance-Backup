@@ -1,0 +1,243 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "PowerShell: Format Document",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "Import-Module PSScriptAnalyzer; Invoke-Formatter -ScriptDefinition (Get-Content '${file}' -Raw) | Set-Content '${file}' -Encoding UTF8"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Format current PowerShell file using PSScriptAnalyzer"
+        },
+        {
+            "label": "PowerShell: Format All PS1 Files",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "Import-Module PSScriptAnalyzer; Get-ChildItem -Path '${workspaceFolder}' -Filter '*.ps1' -Recurse | ForEach-Object { Write-Host \"Formatting: $($_.Name)\"; $content = Get-Content $_.FullName -Raw; $formatted = Invoke-Formatter -ScriptDefinition $content; Set-Content -Path $_.FullName -Value $formatted -Encoding UTF8 }"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Format all PowerShell files in workspace"
+        },
+        {
+            "label": "PowerShell: Lint Current File",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "Import-Module PSScriptAnalyzer; Invoke-ScriptAnalyzer -Path '${file}' -Severity @('Error', 'Warning', 'Information') | Format-Table -AutoSize"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": {
+                "owner": "powershell",
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(Error|Warning|Information)\\s+(.*)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5,
+                    "code": 6
+                }
+            },
+            "detail": "Run PSScriptAnalyzer on current file"
+        },
+        {
+            "label": "PowerShell: Lint All PS1 Files",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "Import-Module PSScriptAnalyzer; Get-ChildItem -Path '${workspaceFolder}' -Filter '*.ps1' -Recurse | Invoke-ScriptAnalyzer -Severity @('Error', 'Warning') | Format-Table -AutoSize"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": {
+                "owner": "powershell",
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(Error|Warning|Information)\\s+(.*)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5,
+                    "code": 6
+                }
+            },
+            "detail": "Run PSScriptAnalyzer on all PowerShell files in workspace"
+        },
+        {
+            "label": "PowerShell: Format & Lint Current File",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "PowerShell: Format Document",
+                "PowerShell: Lint Current File"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Format and then lint the current PowerShell file"
+        },
+        {
+            "label": "PowerShell: Custom Lint with Settings",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "$settings = @{ Rules = @{ PSAvoidUsingCmdletAliases = @{ severity = 'Warning' }; PSAvoidUsingWriteHost = @{ severity = 'Information' }; PSUseShouldProcessForStateChangingFunctions = @{ severity = 'Warning' } } }; Import-Module PSScriptAnalyzer; Invoke-ScriptAnalyzer -Path '${file}' -Settings $settings | Format-Table -AutoSize"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": {
+                "owner": "powershell",
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(Error|Warning|Information)\\s+(.*)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5,
+                    "code": 6
+                }
+            },
+            "detail": "Run PSScriptAnalyzer with custom rule settings"
+        },
+        {
+            "label": "PowerShell: Install/Update PSScriptAnalyzer",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "if (!(Get-Module -ListAvailable -Name PSScriptAnalyzer)) { Write-Host 'Installing PSScriptAnalyzer...'; Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser } else { Write-Host 'Updating PSScriptAnalyzer...'; Update-Module -Name PSScriptAnalyzer -Force }; Write-Host 'PSScriptAnalyzer is ready!'"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Install or update PSScriptAnalyzer module"
+        },
+        {
+            "label": "PowerShell: Fix All Fixable Issues",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "Import-Module PSScriptAnalyzer; $issues = Invoke-ScriptAnalyzer -Path '${file}' -Fix; if ($issues) { Write-Host 'Fixed issues:'; $issues | Format-Table -AutoSize } else { Write-Host 'No fixable issues found.' }"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Automatically fix all fixable PSScriptAnalyzer issues"
+        },
+        {
+            "label": "PowerShell: Generate Analysis Report",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "Import-Module PSScriptAnalyzer; $reportPath = Join-Path '${workspaceFolder}' 'ps-analysis-report.html'; $results = Get-ChildItem -Path '${workspaceFolder}' -Filter '*.ps1' -Recurse | Invoke-ScriptAnalyzer; $results | ConvertTo-Html -Property ScriptName, Line, Column, Severity, RuleName, Message | Out-File -FilePath $reportPath -Encoding UTF8; Write-Host \"Report generated: $reportPath\"; if ($results) { $results | Format-Table -AutoSize } else { Write-Host 'No issues found!' }"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Generate HTML analysis report for all PowerShell files"
+        },
+        {
+            "label": "PowerShell: Format with Custom Settings",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "$settings = @{ IncludeRules = @('PSAlignAssignmentStatement', 'PSUseCorrectCasing', 'PSPlaceOpenBrace', 'PSPlaceCloseBrace') }; Import-Module PSScriptAnalyzer; $content = Get-Content '${file}' -Raw; $formatted = Invoke-Formatter -ScriptDefinition $content -Settings $settings; Set-Content -Path '${file}' -Value $formatted -Encoding UTF8"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Format with specific formatting rules"
+        }
+    ]
+}

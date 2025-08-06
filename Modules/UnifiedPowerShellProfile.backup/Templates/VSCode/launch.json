@@ -1,0 +1,83 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "PowerShell: Launch Current File (Unified)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${file}",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": false,
+      "args": [],
+      "env": {
+        "UNIFIED_PROFILE_MODE": "${input:profileMode}",
+        "POWERSHELL_MODULES_PATH": "c:\\backup\\Powershell\\PowerShellModules"
+      }
+    },
+    {
+      "name": "PowerShell: Interactive Session (Dracula)",
+      "type": "PowerShell", 
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-Command", "Import-Module UnifiedPowerShellProfile; Initialize-UnifiedProfile -Mode Dracula"
+      ]
+    },
+    {
+      "name": "PowerShell: Interactive Session (MCP)",
+      "type": "PowerShell",
+      "request": "launch", 
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-Command", "Import-Module UnifiedPowerShellProfile; Initialize-UnifiedProfile -Mode MCP"
+      ]
+    },
+    {
+      "name": "PowerShell: Interactive Session (LazyAdmin)",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-Command", "Import-Module UnifiedPowerShellProfile; Initialize-UnifiedProfile -Mode LazyAdmin"
+      ]
+    },
+    {
+      "name": "PowerShell: Debug Current File (Enhanced)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${file}",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": false,
+      "args": [],
+      "env": {
+        "UNIFIED_PROFILE_MODE": "${input:profileMode}",
+        "DEBUG_MODE": "true"
+      },
+      "stopOnEntry": true
+    },
+    {
+      "name": "PowerShell: Attach to Host Process",
+      "type": "PowerShell",
+      "request": "attach",
+      "runspaceId": "${command:PowerShell.PickRunspace}"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "profileMode",
+      "description": "Select profile mode for debugging",
+      "type": "pickString", 
+      "options": [
+        "Dracula",
+        "MCP", 
+        "LazyAdmin",
+        "Minimal",
+        "Custom"
+      ],
+      "default": "Dracula"
+    }
+  ]
+}

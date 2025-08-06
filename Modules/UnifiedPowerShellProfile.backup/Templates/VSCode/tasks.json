@@ -1,0 +1,191 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Initialize Unified Profile",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module UnifiedPowerShellProfile; Initialize-UnifiedProfile -Mode ${input:profileMode} -VSCodeIntegration"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🎯 Switch Profile Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module UnifiedPowerShellProfile; Switch-ProfileMode"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🔧 Test Profile Configuration",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module UnifiedPowerShellProfile; Test-ProfileConfiguration"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "📊 Show Profile Status",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module UnifiedPowerShellProfile; Show-AvailableProfiles"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "🧛‍♂️ Launch Dracula Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-NoExit",
+        "-Command", "Import-Module UnifiedPowerShellProfile; Initialize-UnifiedProfile -Mode Dracula"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": false,
+        "reveal": "never",
+        "focus": false,
+        "panel": "new"
+      },
+      "isBackground": false
+    },
+    {
+      "label": "🚀 Launch MCP Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-NoExit",
+        "-Command", "Import-Module UnifiedPowerShellProfile; Initialize-UnifiedProfile -Mode MCP"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": false,
+        "reveal": "never",
+        "focus": false,
+        "panel": "new"
+      },
+      "isBackground": false
+    },
+    {
+      "label": "⚡ Launch LazyAdmin Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-NoExit",
+        "-Command", "Import-Module UnifiedPowerShellProfile; Initialize-UnifiedProfile -Mode LazyAdmin"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": false,
+        "reveal": "never",
+        "focus": false,
+        "panel": "new"
+      },
+      "isBackground": false
+    },
+    {
+      "label": "🧹 Update Module Paths",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module UnifiedPowerShellProfile; Update-ModulePath -Force"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "🔍 Validate PowerShell Syntax",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "$file = '${file}'; if ($file -match '\\.(ps1|psm1|psd1)$') { $null = [System.Management.Automation.Language.Parser]::ParseFile($file, [ref]$null, [ref]$null); Write-Host '✅ Syntax is valid!' -ForegroundColor Green } else { Write-Host '⚠️ Not a PowerShell file' -ForegroundColor Yellow }"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "profileMode",
+      "description": "Select profile mode",
+      "type": "pickString",
+      "options": [
+        {
+          "label": "🧛‍♂️ Dracula - Enhanced theme with productivity features",
+          "value": "Dracula"
+        },
+        {
+          "label": "🚀 MCP - Model Context Protocol with AI integration", 
+          "value": "MCP"
+        },
+        {
+          "label": "⚡ LazyAdmin - System administration utilities",
+          "value": "LazyAdmin"
+        },
+        {
+          "label": "🎯 Minimal - Lightweight setup",
+          "value": "Minimal"
+        },
+        {
+          "label": "🛠️ Custom - User-defined configuration",
+          "value": "Custom"
+        }
+      ],
+      "default": "Dracula"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+    "defaultProfiles": {
+        "Dracula": {
+            "description": "Dracula theme with enhanced PowerShell experience",
+            "theme": "dracula-enhanced.omp.json",
+            "modules": [
+                "DraculaProfile",
+                "PSReadLine",
+                "Terminal-Icons",
+                "z"
+            ],
+            "features": [
+                "oh-my-posh",
+                "dracula-theme",
+                "enhanced-prompt"
+            ],
+            "workspaceType": "Development"
+        },
+        "MCP": {
+            "description": "Model Context Protocol integration with GitHub Copilot",
+            "theme": "dracula.omp.json",
+            "modules": [
+                "PSReadLine",
+                "Az.Tools.Predictor",
+                "CompletionPredictor"
+            ],
+            "features": [
+                "github-copilot",
+                "mcp-server",
+                "ai-assistance"
+            ],
+            "workspaceType": "AI-Development"
+        },
+        "LazyAdmin": {
+            "description": "System administration and management utilities",
+            "theme": "LazyAdmin",
+            "modules": [
+                "posh-git",
+                "oh-my-posh",
+                "ActiveDirectory",
+                "Exchange",
+                "Azure"
+            ],
+            "features": [
+                "admin-tools",
+                "cloud-management",
+                "automation"
+            ],
+            "workspaceType": "Administration"
+        },
+        "Minimal": {
+            "description": "Lightweight PowerShell setup with essential features only",
+            "theme": null,
+            "modules": [
+                "PSReadLine"
+            ],
+            "features": [
+                "basic-completion"
+            ],
+            "workspaceType": "Basic"
+        },
+        "Custom": {
+            "description": "User-defined custom profile configuration",
+            "theme": "custom",
+            "modules": [],
+            "features": [
+                "user-defined"
+            ],
+            "workspaceType": "Custom"
+        }
+    },
+    "repositorySettings": {
+        "PowerShell": {
+            "autoLoad": true,
+            "priority": 1,
+            "moduleCategories": [
+                "Core",
+                "Theme",
+                "Utilities"
+            ]
+        },
+        "PowerShellModules": {
+            "autoLoad": true,
+            "priority": 2,
+            "moduleCategories": [
+                "Microsoft",
+                "System",
+                "Custom"
+            ]
+        },
+        "LazyAdmin": {
+            "autoLoad": false,
+            "priority": 3,
+            "moduleCategories": [
+                "Administration",
+                "Cloud",
+                "Exchange"
+            ]
+        }
+    },
+    "vscodeIntegration": {
+        "enableTasks": true,
+        "enableLaunch": true,
+        "enableSettings": true,
+        "autoOpenTerminal": true,
+        "defaultProfile": "PowerShell"
+    }
+}

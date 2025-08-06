@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🧛‍♂️ Dracula PowerShell Profile Test Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #282a36; color: #f8f8f2; margin: 20px; }
+        .header { background: #44475a; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .summary { display: flex; gap: 20px; margin-bottom: 20px; }
+        .metric { background: #44475a; padding: 15px; border-radius: 8px; text-align: center; flex: 1; }
+        .passed { color: #50fa7b; }
+        .failed { color: #ff5555; }
+        .skipped { color: #ffb86c; }
+        .test-results { background: #44475a; padding: 20px; border-radius: 8px; }
+        .test-item { padding: 10px; border-bottom: 1px solid #6272a4; }
+        .test-item:last-child { border-bottom: none; }
+        .test-name { font-weight: bold; }
+        .test-details { font-size: 0.9em; color: #6272a4; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧛‍♂️ Dracula PowerShell Profile Test Report</h1>
+        <p>Generated on: 08/06/2025 04:54:42</p>
+    </div>
+    
+    <div class="summary">
+        <div class="metric">
+            <h3 class="passed">14</h3>
+            <p>Passed</p>
+        </div>
+        <div class="metric">
+            <h3 class="failed">4</h3>
+            <p>Failed</p>
+        </div>
+        <div class="metric">
+            <h3 class="skipped">0</h3>
+            <p>Skipped</p>
+        </div>
+    </div>
+    
+    <div class="test-results">
+        <h2>Test Results</h2>        <div class="test-item">
+            <div class="test-name passed">✅ Main Profile File Exists</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> Path: C:\backup\Powershell\Tests\..\Microsoft.PowerShell_profile_Dracula.ps1</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:11</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ Theme Directory Exists</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> Path: C:\backup\Powershell\Tests\..\Theme</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:11</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ Dracula Theme File</div>
+            <div class="test-details">
+                
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:11</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ Enhanced Theme File</div>
+            <div class="test-details">
+                
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:11</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ PowerPack Module</div>
+            <div class="test-details">
+                
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:11</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ PSReadLine Config</div>
+            <div class="test-details">
+                
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:11</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ Profile Syntax Valid</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> No parse errors found</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:11</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ Module Available: PSReadLine</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> Version: 2.3.4</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:14</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ Module Available: Terminal-Icons</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> Version: 0.10.0</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:17</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ Module Available: z</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> Version: 1.1.13</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:20</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ Module Available: Az.Tools.Predictor</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> Version: 1.0.3</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:23</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name failed">❌ Module Available: CompletionPredictor</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> Module not found</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:26</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ Theme JSON Valid: dracula.omp.json</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> JSON structure is valid</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:26</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ Theme JSON Valid: dracula-enhanced.omp.json</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> JSON structure is valid</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:26</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name passed">✅ PowerPack Module Syntax</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> No syntax errors</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:26</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name failed">❌ Profile Loads Successfully</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> Load error: Import-Module : The specified module 'C:\backup\Power shell\Modules\UnifiedPowerShellProfile' was not loade d because no valid module file was found in any modul e directory. At C:\backup\Powershell\.powershell\profile.ps1:16 ch ar:13 +             Import-Module $_.FullName -Force +             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     + CategoryInfo          : ResourceUnavailable: (     C:\backup\Power...werShellProfile:String) [Impor     t-Module], FileNotFoundException     + FullyQualifiedErrorId : Modules_ModuleNotFound     ,Microsoft.PowerShell.Commands.ImportModuleComma     nd   Repository PowerShell environment loaded for: POWERSHELL_SCRIPTS-maintenance-Backup Import-Module : The version of Windows PowerShell on  this computer is '5.1.19041.3803'. The module 'C:\bac kup\Powershell\PowerShellModules\Az.Tools.Predictor\1 .0.3\Az.Tools.Predictor.psd1' requires a minimum Wind ows PowerShell version of '7.2' to run. Verify that y ou have the minimum required version of Windows Power Shell installed, and then try again. At C:\Users\philip\Documents\WindowsPowerShell\Micros oft.PowerShell_profile.ps1:14 char:1 + Import-Module Az.Tools.Predictor + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     + CategoryInfo          : ResourceUnavailable: (     C:\backup\Power....Predictor.psd1:String) [Impor     t-Module], InvalidOperationException     + FullyQualifiedErrorId : Modules_InsufficientPo     werShellVersion,Microsoft.PowerShell.Commands.Im     portModuleCommand   Import-PowerShellDataFile : The term 'Import-PowerShe llDataFile' is not recognized as the name of a cmdlet , function, script file, or operable program. Check t he spelling of the name, or if a path was included, v erify that the path is correct and try again. At C:\backup\Powershell\PowerShellModules\Terminal-Ic ons\0.10.0\Terminal-Icons.psm1:210 char:33 +         $hash.Add($_.Basename, (Import-PowerShellDa taFile $_.FullName ... +                                 ~~~~~~~~~~~~~~~~~~~ ~~~~~~     + CategoryInfo          : ObjectNotFound: (Impor     t-PowerShellDataFile:String) [], CommandNotFound     Exception     + FullyQualifiedErrorId : CommandNotFoundExcepti     on   Import-PowerShellDataFile : The term 'Import-PowerShe llDataFile' is not recognized as the name of a cmdlet , function, script file, or operable program. Check t he spelling of the name, or if a path was included, v erify that the path is correct and try again. At C:\backup\Powershell\PowerShellModules\Terminal-Ic ons\0.10.0\Terminal-Icons.psm1:196 char:22 +         $colorData = Import-PowerShellDataFile $_.F ullName +                      ~~~~~~~~~~~~~~~~~~~~~~~~~     + CategoryInfo          : ObjectNotFound: (Impor     t-PowerShellDataFile:String) [], CommandNotFound     Exception     + FullyQualifiedErrorId : CommandNotFoundExcepti     on   Index operation failed; the array index evaluated to  null. At C:\backup\Powershell\PowerShellModules\Terminal-Ic ons\0.10.0\Terminal-Icons.psm1:197 char:9 +         $hash[$colorData.Name] = $colorData +         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     + CategoryInfo          : InvalidOperation: (:)      [], RuntimeException     + FullyQualifiedErrorId : NullArrayIndex   Index operation failed; the array index evaluated to  null. At C:\backup\Powershell\PowerShellModules\Terminal-Ic ons\0.10.0\Terminal-Icons.psm1:198 char:9 +         $hash[$colorData.Name].Types.Directories['' ] = $colorReset +         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~     + CategoryInfo          : InvalidOperation: (:)      [], RuntimeException     + FullyQualifiedErrorId : NullArrayIndex   Index operation failed; the array index evaluated to  null. At C:\backup\Powershell\PowerShellModules\Terminal-Ic ons\0.10.0\Terminal-Icons.psm1:199 char:9 +         $hash[$colorData.Name].Types.Files['']        = $colorReset +         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~     + CategoryInfo          : InvalidOperation: (:)      [], RuntimeException     + FullyQualifiedErrorId : NullArrayIndex   Import-PowerShellDataFile : The term 'Import-PowerShe llDataFile' is not recognized as the name of a cmdlet , function, script file, or operable program. Check t he spelling of the name, or if a path was included, v erify that the path is correct and try again. At C:\backup\Powershell\PowerShellModules\Terminal-Ic ons\0.10.0\Terminal-Icons.psm1:196 char:22 +         $colorData = Import-PowerShellDataFile $_.F ullName +                      ~~~~~~~~~~~~~~~~~~~~~~~~~     + CategoryInfo          : ObjectNotFound: (Impor     t-PowerShellDataFile:String) [], CommandNotFound     Exception     + FullyQualifiedErrorId : CommandNotFoundExcepti     on   Index operation failed; the array index evaluated to  null. At C:\backup\Powershell\PowerShellModules\Terminal-Ic ons\0.10.0\Terminal-Icons.psm1:197 char:9 +         $hash[$colorData.Name] = $colorData +         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     + CategoryInfo          : InvalidOperation: (:)      [], RuntimeException     + FullyQualifiedErrorId : NullArrayIndex   Index operation failed; the array index evaluated to  null. At C:\backup\Powershell\PowerShellModules\Terminal-Ic ons\0.10.0\Terminal-Icons.psm1:198 char:9 +         $hash[$colorData.Name].Types.Directories['' ] = $colorReset +         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~     + CategoryInfo          : InvalidOperation: (:)      [], RuntimeException     + FullyQualifiedErrorId : NullArrayIndex   Index operation failed; the array index evaluated to  null. At C:\backup\Powershell\PowerShellModules\Terminal-Ic ons\0.10.0\Terminal-Icons.psm1:199 char:9 +         $hash[$colorData.Name].Types.Files['']        = $colorReset +         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~     + CategoryInfo          : InvalidOperation: (:)      [], RuntimeException     + FullyQualifiedErrorId : NullArrayIndex   Set-PSReadLineOption : The predictive suggestion feat ure cannot be enabled because the console output does n't support virtual terminal processing or it's redir ected. At C:\Users\philip\Documents\WindowsPowerShell\Micros oft.PowerShell_profile.ps1:19 char:1 + Set-PSReadLineOption -PredictionSource HistoryAndPl ugin + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~     + CategoryInfo          : NotSpecified: (:) [Set     -PSReadLineOption], ArgumentException     + FullyQualifiedErrorId : System.ArgumentExcepti     on,Microsoft.PowerShell.SetPSReadLineOption   Set-PSReadLineOption : Cannot bind parameter 'Predict ionViewStyle'. Cannot convert value "inlinePrediction " to type "Microsoft.PowerShell.PredictionViewStyle".  Error: "Unable to match the identifier name inlinePr ediction to a valid enumerator name. Specify one of t he following enumerator names and try again: InlineView, ListView" At C:\Users\philip\Documents\WindowsPowerShell\Micros oft.PowerShell_profile.ps1:20 char:43 + Set-PSReadLineOption -PredictionViewStyle inlinePre diction + ListView +                                           ~~~~~~~~~ ~~~~~~~     + CategoryInfo          : InvalidArgument: (:) [     Set-PSReadLineOption], ParameterBindingException     + FullyQualifiedErrorId : CannotConvertArgumentN     oMessage,Microsoft.PowerShell.SetPSReadLineOptio     n   Set-PSReadLineKeyHandler : Cannot validate argument o n parameter 'Function'. The argument "MoveToStartOfLi ne" does not belong to the set "Abort;AcceptAndGetNex t;AcceptLine;AcceptNextSuggestionWord;AcceptSuggestio n;AddLine;BackwardDeleteChar;BackwardDeleteInput;Back wardDeleteLine;BackwardDeleteWord;BackwardChar;Backwa rdKillInput;BackwardKillLine;BackwardKillWord;Backwar dWord;BeginningOfHistory;BeginningOfLine;CancelLine;C apitalizeWord;CaptureScreen;ClearHistory;ClearScreen; Complete;Copy;CopyOrCancelLine;Cut;DeleteEndOfBuffer; DeleteEndOfWord;DeleteChar;DeleteCharOrExit;DeleteLin e;DeleteLineToFirstChar;DeletePreviousLines;DeleteToE nd;DeleteWord;DigitArgument;DowncaseWord;EndOfHistory ;EndOfLine;ExchangePointAndMark;ForwardDeleteInput;Fo rwardDeleteLine;ForwardChar;ForwardSearchHistory;Forw ardWord;GotoBrace;GotoColumn;GotoFirstNonBlankOfLine; HistorySearchBackward;HistorySearchForward;CharacterS earch;CharacterSearchBackward;InsertLineAbove;InsertL ineBelow;InvertCase;InvokePrompt;KillLine;KillRegion; KillWord;MenuComplete;MoveToEndOfLine;NextHistory;Nex tLine;NextSuggestion;NextWord;NextWordEnd;Paste;Paste After;PasteBefore;PossibleCompletions;PrependAndAccep t;PreviousHistory;PreviousLine;PreviousSuggestion;Red o;RepeatLastCommand;RepeatLastCharSearch;RepeatLastCh arSearchBackwards;RepeatSearch;RepeatSearchBackward;R everseSearchHistory;RevertLine;ScrollDisplayDown;Scro llDisplayDownLine;ScrollDisplayToCursor;ScrollDisplay Top;ScrollDisplayUp;ScrollDisplayUpLine;SearchForward ;SearchChar;SearchCharBackward;SearchCharBackwardWith Backoff;SearchCharWithBackoff;SelectAll;SelectBackwar dChar;SelectBackwardsLine;SelectBackwardWord;SelectCo mmandArgument;SelectForwardChar;SelectForwardWord;Sel ectLine;SelectNextWord;SelectShellBackwardWord;Select ShellForwardWord;SelectShellNextWord;SelfInsert;SetMa rk;ShellBackwardKillWord;ShellBackwardWord;ShellForwa rdWord;ShellKillWord;ShellNextWord;ShowCommandHelp;Sh owFullPredictionTooltip;ShowKeyBindings;ShowParameter Help;SwapCharacters;SwitchPredictionView;TabCompleteN ext;TabCompletePrevious;Undo;UndoAll;UnixWordRubout;U pcaseWord;ValidateAndAcceptLine;ViAcceptLine;ViAccept LineOrExit;ViAppendLine;ViBackwardDeleteGlob;ViBackwa rdGlob;ViBackwardChar;ViBackwardWord;ViCommandMode;Vi DeleteBrace;ViDeleteEndOfGlob;ViDeleteGlob;ViDeleteTo BeforeChar;ViDeleteToBeforeCharBackward;ViDeleteToCha r;ViDeleteToCharBackward;ViDigitArgumentInChord;ViEdi tVisually;ViEndOfGlob;ViEndOfPreviousGlob;ViExit;ViFo rwardChar;ViGotoBrace;ViInsertAtBegining;ViInsertAtEn d;ViInsertLine;ViInsertMode;ViInsertWithAppend;ViInse rtWithDelete;ViJoinLines;ViNextGlob;ViNextWord;ViRepl aceLine;ViReplaceToBeforeChar;ViReplaceToBeforeCharBa ckward;ViReplaceToChar;ViReplaceToCharBackward;ViSear chHistoryBackward;ViTabCompleteNext;ViTabCompletePrev ious;ViYankBeginningOfLine;ViYankEndOfGlob;ViYankEndO fWord;ViYankLeft;ViYankLine;ViYankNextGlob;ViYankNext Word;ViYankPercent;ViYankPreviousGlob;ViYankPreviousW ord;ViYankRight;ViYankToEndOfLine;ViYankToFirstChar;W hatIsKey;Yank;YankLastArg;YankNthArg;YankPop" specifi ed by the ValidateSet attribute. Supply an argument t hat is in the set and then try the command again. At C:\Users\philip\Documents\WindowsPowerShell\Micros oft.PowerShell_profile.ps1:25 char:55 + ... t-PSReadLineKeyHandler -Key Alt+LeftArrow -Func tion MoveToStartOfLine +                                                          ~~~~~~~~~~~~~~~~~     + CategoryInfo          : InvalidData: (:) [Set-     PSReadLineKeyHandler], ParameterBindingValidatio     nException     + FullyQualifiedErrorId : ParameterArgumentValid     ationError,Microsoft.PowerShell.SetPSReadLineKey     HandlerCommand   Set-Alias : The AllScope option cannot be removed fro m the alias 'ls'. At C:\Users\philip\Documents\WindowsPowerShell\Micros oft.PowerShell_profile.ps1:32 char:1 + Set-Alias ls "dir" + ~~~~~~~~~~~~~~~~~~     + CategoryInfo          : WriteError: (ls:String     ) [Set-Alias], SessionStateUnauthorizedAccessExc     eption     + FullyQualifiedErrorId : AliasAllScopeOptionCan     notBeRemoved,Microsoft.PowerShell.Commands.SetAl     iasCommand   PROFILE_LOAD_ERROR: At C:\backup\Powershell\Microsoft.PowerShell_profile_Dracula.ps1:142 char:172 + ... Name='đź-Ąď¸Ź Computer';Expression={$_.CsName}}, @{Name='đź'» OS';Exp ... +                                                                 ~ Unexpected token '»' in expression or statement.  At C:\backup\Powershell\Microsoft.PowerShell_profile_Dracula.ps1:142 char:172 + ... {Name='đź-Ąď¸Ź Computer';Expression={$_.CsName}}, @{Name='đź'» OS';Ex ... +                                                                  ~ The hash literal was incomplete.  At C:\backup\Powershell\Microsoft.PowerShell_profile_Dracula.ps1:76 char:13 +         try { +             ~ Missing closing '}' in statement block or type definition.  At C:\backup\Powershell\Microsoft.PowerShell_profile_Dracula.ps1:142 char:346 + ... đź'ľ RAM';Expression={'{0:N2} GB' -f ($_.TotalPhysicalMemory/1GB)}}") +                                                                         ~ The Try statement is missing its Catch or Finally block.  At C:\backup\Powershell\Microsoft.PowerShell_profile_Dracula.ps1:75 char:35 +     foreach ($module in $modules) { +                                   ~ Missing closing '}' in statement block or type definition.  At C:\backup\Powershell\Microsoft.PowerShell_profile_Dracula.ps1:32 char:8 + } else { +        ~ Missing closing '}' in statement block or type definition.  At C:\backup\Powershell\Microsoft.PowerShell_profile_Dracula.ps1:142 char:346 + ... đź'ľ RAM';Expression={'{0:N2} GB' -f ($_.TotalPhysicalMemory/1GB)}}") +                                                                         ~ Unexpected token ')' in expression or statement.  At C:\backup\Powershell\Microsoft.PowerShell_profile_Dracula.ps1:143 char:13 +             } +             ~ Unexpected token '}' in expression or statement.  At C:\backup\Powershell\Microsoft.PowerShell_profile_Dracula.ps1:150 char:82 + ... rch = [Microsoft.PowerShell.PSConsoleReadLine]::ReadLine("đź"Ť Search ... +                                                                  ~ Missing ')' in method call.  At C:\backup\Powershell\Microsoft.PowerShell_profile_Dracula.ps1:150 char:82 + ... ch = [Microsoft.PowerShell.PSConsoleReadLine]::ReadLine("đź"Ť Search: ... +                                                                 ~ Unexpected token 'Ť' in expression or statement.  Not all parse errors were reported.  Correct the reported errors and try again.</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:30</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name failed">❌ Alias Testing</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> Failed to test aliases: Cannot process argument transformation on parameter 'Passed'. Cannot convert value "System.Object[]" to type "System.Boolean". Boolean parameters accept only Boolean values and numbers, such as $True, $False, 1 or 0.</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:33</p>
+            </div>
+        </div>        <div class="test-item">
+            <div class="test-name failed">❌ Profile Load Performance</div>
+            <div class="test-details">
+                <p><strong>Message:</strong> Could not measure load times</p>
+                
+                <p><strong>Timestamp:</strong> 08/06/2025 04:54:42</p>
+            </div>
+        </div>    </div>
+</body>
+</html>

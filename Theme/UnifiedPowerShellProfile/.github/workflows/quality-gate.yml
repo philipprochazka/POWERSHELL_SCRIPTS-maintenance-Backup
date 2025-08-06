@@ -1,0 +1,217 @@
+name: PowerShell Quality Gate
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+env:
+  POWERSHELL_TELEMETRY_OPTOUT: 1
+
+jobs:
+  quality-gate:
+    runs-on: windows-latest
+    name: 🔍 PowerShell Quality Gate
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+      
+    - name: 🔧 Setup PowerShell
+      uses: microsoft/setup-msbuild@v1.1
+      
+    - name: 📦 Install Required Modules
+      shell: pwsh
+      run: |
+        Write-Host "🔧 Installing required PowerShell modules..." -ForegroundColor Cyan
+        
+        # Install PSScriptAnalyzer
+        if (-not (Get-Module PSScriptAnalyzer -ListAvailable)) {
+          Install-Module PSScriptAnalyzer -Force -Scope CurrentUser -SkipPublisherCheck
+          Write-Host "✅ PSScriptAnalyzer installed" -ForegroundColor Green
+        }
+        
+        # Install Pester 5.x
+        if (-not (Get-Module Pester -ListAvailable | Where-Object Version -ge "5.0.0")) {
+          Install-Module Pester -Force -Scope CurrentUser -SkipPublisherCheck -MinimumVersion 5.0.0
+          Write-Host "✅ Pester 5.x installed" -ForegroundColor Green
+        }
+        
+        # Verify installations
+        Get-Module PSScriptAnalyzer, Pester -ListAvailable | Select-Object Name, Version
+        
+    - name: 🔍 PowerShell Script Analysis
+      shell: pwsh
+      run: |
+        Write-Host "🔍 Running PSScriptAnalyzer..." -ForegroundColor Cyan
+        
+        $files = Get-ChildItem -Recurse -Filter "*.ps1" -File | Where-Object { 
+          $_.FullName -notmatch '\\\.git\\|\\node_modules\\|\\bin\\|\\obj\\' 
+        }
+        
+        $totalIssues = 0
+        $criticalIssues = 0
+        $allResults = @()
+        
+        # Critical rules that must pass
+        $criticalRules = @(
+          'PSAvoidUsingCmdletAliases',
+          'PSAvoidUsingPositionalParameters', 
+          'PSAvoidGlobalVars',
+          'PSUseDeclaredVarsMoreThanAssignments',
+          'PSAvoidUsingPlainTextForPassword',
+          'PSAvoidUsingInvokeExpression',
+          'PSAvoidUsingWriteHost'
+        )
+        
+        foreach ($file in $files) {
+          Write-Host "📄 Analyzing: $($file.Name)" -ForegroundColor Gray
+          
+          $results = Invoke-ScriptAnalyzer -Path $file.FullName -Severity @('Error', 'Warning', 'Information')
+          
+          if ($results) {
+            $allResults += $results
+            $totalIssues += $results.Count
+            
+            # Check for critical rule violations
+            $critical = $results | Where-Object { $_.RuleName -in $criticalRules }
+            $criticalIssues += $critical.Count
+            
+            # Display issues
+            foreach ($issue in $results) {
+              $severity = $issue.Severity
+              $color = switch ($severity) {
+                'Error' { 'Red' }
+                'Warning' { 'Yellow' }
+                'Information' { 'Blue' }
+              }
+              
+              $prefix = if ($issue.RuleName -in $criticalRules) { "🔴 CRITICAL" } else { "⚠️ $severity" }
+              Write-Host "   $prefix [$($issue.RuleName)]: $($issue.Message)" -ForegroundColor $color
+              Write-Host "      Line $($issue.Line): $($issue.ScriptName)" -ForegroundColor Gray
+            }
+          }
+        }
+        
+        # Summary
+        Write-Host "`n📊 Analysis Summary:" -ForegroundColor Cyan
+        Write-Host "Files analyzed: $($files.Count)" -ForegroundColor Blue
+        Write-Host "Total issues: $totalIssues" -ForegroundColor Yellow
+        Write-Host "Critical issues: $criticalIssues" -ForegroundColor Red
+        
+        # Quality Gate Decision
+        if ($criticalIssues -gt 0) {
+          Write-Host "`n❌ QUALITY GATE FAILED: Critical issues found!" -ForegroundColor Red
+          Write-Host "Critical issues must be resolved before merging." -ForegroundColor Red
+          exit 1
+        } elseif ($totalIssues -gt 10) {
+          Write-Host "`n⚠️ QUALITY GATE WARNING: High number of issues ($totalIssues)" -ForegroundColor Yellow
+          Write-Host "Consider addressing issues to improve code quality." -ForegroundColor Yellow
+        } else {
+          Write-Host "`n✅ QUALITY GATE PASSED!" -ForegroundColor Green
+        }
+        
+    - name: 🧪 Pester Tests
+      shell: pwsh
+      run: |
+        Write-Host "🧪 Running Pester tests..." -ForegroundColor Cyan
+        
+        # Import Pester 5.x
+        Import-Module Pester -Force -MinimumVersion 5.0.0
+        
+        # Find test files
+        $testFiles = Get-ChildItem -Recurse -Filter "*.Tests.ps1" -File
+        
+        if ($testFiles.Count -eq 0) {
+          Write-Host "⚠️ No Pester test files found (*.Tests.ps1)" -ForegroundColor Yellow
+          Write-Host "Consider adding tests to improve reliability." -ForegroundColor Yellow
+          return
+        }
+        
+        # Configure Pester
+        $configuration = New-PesterConfiguration
+        $configuration.Run.Path = $testFiles.FullName
+        $configuration.Output.Verbosity = 'Detailed'
+        $configuration.CodeCoverage.Enabled = $true
+        $configuration.CodeCoverage.Path = (Get-ChildItem -Recurse -Filter "*.ps1" -File | Where-Object { $_.Name -notmatch '\.Tests\.ps1$' }).FullName
+        $configuration.TestResult.Enabled = $true
+        $configuration.TestResult.OutputFormat = 'NUnitXml'
+        $configuration.TestResult.OutputPath = 'TestResults.xml'
+        
+        # Run tests
+        $result = Invoke-Pester -Configuration $configuration
+        
+        # Test Results Summary
+        Write-Host "`n🧪 Test Summary:" -ForegroundColor Cyan
+        Write-Host "Tests run: $($result.TotalCount)" -ForegroundColor Blue
+        Write-Host "Passed: $($result.PassedCount)" -ForegroundColor Green
+        Write-Host "Failed: $($result.FailedCount)" -ForegroundColor Red
+        Write-Host "Skipped: $($result.SkippedCount)" -ForegroundColor Yellow
+        
+        if ($result.CodeCoverage) {
+          $coverage = [math]::Round(($result.CodeCoverage.CoveragePercent), 2)
+          Write-Host "Code Coverage: $coverage%" -ForegroundColor Blue
+        }
+        
+        # Fail if tests failed
+        if ($result.FailedCount -gt 0) {
+          Write-Host "`n❌ TEST FAILURE: $($result.FailedCount) test(s) failed!" -ForegroundColor Red
+          exit 1
+        } else {
+          Write-Host "`n✅ ALL TESTS PASSED!" -ForegroundColor Green
+        }
+        
+    - name: 📊 Upload Test Results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: TestResults.xml
+        
+    - name: 📈 Quality Report
+      if: always()
+      shell: pwsh
+      run: |
+        Write-Host "📈 Final Quality Report" -ForegroundColor Cyan
+        Write-Host "======================" -ForegroundColor Gray
+        
+        # Count PowerShell files
+        $psFiles = Get-ChildItem -Recurse -Filter "*.ps1" -File | Where-Object { 
+          $_.FullName -notmatch '\\\.git\\|\\node_modules\\|\\bin\\|\\obj\\' 
+        }
+        
+        Write-Host "📄 PowerShell files: $($psFiles.Count)" -ForegroundColor Blue
+        
+        # Re-run quick analysis for summary
+        $issues = $psFiles | ForEach-Object {
+          Invoke-ScriptAnalyzer -Path $_.FullName -Severity @('Error', 'Warning')
+        }
+        
+        $errors = ($issues | Where-Object Severity -eq 'Error').Count
+        $warnings = ($issues | Where-Object Severity -eq 'Warning').Count
+        
+        Write-Host "🔴 Errors: $errors" -ForegroundColor Red
+        Write-Host "🟡 Warnings: $warnings" -ForegroundColor Yellow
+        
+        # Calculate quality score
+        $qualityScore = if ($psFiles.Count -eq 0) { 1.0 } else {
+          [math]::Max(0, 1.0 - (($errors * 0.1) + ($warnings * 0.05)) / $psFiles.Count)
+        }
+        
+        Write-Host "⭐ Quality Score: $($qualityScore.ToString('P1'))" -ForegroundColor Green
+        
+        # Grade
+        $grade = switch ($qualityScore) {
+          { $_ -ge 0.95 } { 'A+' }
+          { $_ -ge 0.90 } { 'A' }
+          { $_ -ge 0.85 } { 'B+' }
+          { $_ -ge 0.80 } { 'B' }
+          { $_ -ge 0.75 } { 'C+' }
+          { $_ -ge 0.70 } { 'C' }
+          { $_ -ge 0.60 } { 'D' }
+          default { 'F' }
+        }
+        
+        Write-Host "🎯 Grade: $grade" -ForegroundColor Magenta

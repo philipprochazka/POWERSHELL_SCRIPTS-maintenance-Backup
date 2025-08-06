@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BuildStep>
+    <StepName>$STEP_NAME_PLACEHOLDER</StepName>
+    <Status>PENDING</Status> <!-- PENDING | IN_PROGRESS | COMPLETED | FAILED | PAUSED -->
+    <StartTime></StartTime>
+    <EndTime></EndTime>
+    <Dependencies>
+        <!-- List of prerequisite steps that must complete first -->
+        <Dependency>StepName1</Dependency>
+        <Dependency>StepName2</Dependency>
+    </Dependencies>
+    <Description>$STEP_DESCRIPTION_PLACEHOLDER</Description>
+    <EstimatedDuration>$DURATION_PLACEHOLDER</EstimatedDuration>
+    <ActualDuration></ActualDuration>
+    <ErrorMessages>
+        <!-- Populated if Status = FAILED -->
+    </ErrorMessages>
+    <LastAction>
+        <!-- Last action taken before pause/failure -->
+    </LastAction>
+    <NextActions>
+        <!-- What to do when resuming -->
+        <Action>$NEXT_ACTION_PLACEHOLDER</Action>
+    </NextActions>
+    <OutputFiles>
+        <!-- Files created/modified by this step -->
+        <File>$OUTPUT_FILE_PLACEHOLDER</File>
+    </OutputFiles>
+    <ValidatedBy>
+        <!-- How to verify step completion -->
+        <Validation>$VALIDATION_PLACEHOLDER</Validation>
+    </ValidatedBy>
+</BuildStep>

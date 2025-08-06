@@ -1,0 +1,74 @@
+{
+    "version": "1.0.0",
+    "workspace": {
+        "name": "PowerShell-MCP-Workspace",
+        "root": "c:\\backup\\Powershell",
+        "description": "PowerShell development workspace with MCP integration and GitHub Copilot optimization"
+    },
+    "servers": {
+        "filesystem": {
+            "command": "pwsh",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "Scripts/MCP/filesystem-server.ps1"
+            ],
+            "capabilities": [
+                "file_operations",
+                "directory_listing"
+            ]
+        },
+        "git": {
+            "command": "pwsh",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "Scripts/MCP/git-server.ps1"
+            ],
+            "capabilities": [
+                "git_operations",
+                "version_control"
+            ]
+        },
+        "development": {
+            "command": "pwsh",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "Scripts/MCP/development-server.ps1"
+            ],
+            "capabilities": [
+                "code_analysis",
+                "script_execution",
+                "module_management"
+            ]
+        }
+    },
+    "tools": {
+        "script_analyzer": {
+            "path": "Scripts/MCP/Invoke-ScriptAnalysis.ps1",
+            "description": "PowerShell script analysis tool using PSScriptAnalyzer"
+        },
+        "module_manager": {
+            "path": "Scripts/MCP/Manage-Modules.ps1",
+            "description": "PowerShell module management and discovery tool"
+        },
+        "project_generator": {
+            "path": "Scripts/MCP/New-ProjectStructure.ps1",
+            "description": "Generate new PowerShell project structures and templates"
+        }
+    },
+    "ai_context": {
+        "preferred_assistant": "github_copilot",
+        "workspace_type": "powershell_development",
+        "optimization": {
+            "code_completion": true,
+            "inline_suggestions": true,
+            "context_awareness": true,
+            "template_generation": true
+        }
+    }
+}
