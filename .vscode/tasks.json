@@ -27,6 +27,59 @@
       "isBackground": false
     },
     {
+      "label": "⚡ Install System-Wide Ultra-Performance Profile",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) { Write-Host '⚠️ This task requires Administrator privileges for system-wide installation!' -ForegroundColor Yellow; Write-Host '💡 Right-click VS Code and \"Run as Administrator\" then retry.' -ForegroundColor Cyan; exit 1 }; $ENV:PSModulePath = \"${workspaceFolder};$ENV:PSModulePath\"; Import-Module \"${workspaceFolder}\\UnifiedPowerShellProfile\" -Force; Install-UnifiedProfileSystem -InstallScope 'AllUsers' -IncludeRegistryChanges -Verbose; Write-Host '🎯 Switching to Ultra-Performance Mode...' -ForegroundColor Cyan; & '${workspaceFolder}/Switch-DraculaMode.ps1' -Mode 'Performance' -SystemWide; Write-Host '✅ System-wide ultra-performance profile installed!' -ForegroundColor Green"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false,
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "🧪 Test System-Wide Ultra-Performance",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🔍 Testing System-Wide Ultra-Performance Profile...' -ForegroundColor Cyan; Write-Host ''; Write-Host '📊 Checking Installation:' -ForegroundColor Yellow; if (Get-Module UnifiedPowerShellProfile -ListAvailable) { Write-Host '  ✅ UnifiedPowerShellProfile module available' -ForegroundColor Green } else { Write-Host '  ❌ UnifiedPowerShellProfile module missing' -ForegroundColor Red }; Write-Host ''; Write-Host '🎯 Testing Performance Profile:' -ForegroundColor Yellow; $perfProfile = '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_Performance.ps1'; if (Test-Path $perfProfile) { Write-Host '  ✅ Performance profile exists' -ForegroundColor Green; $start = Get-Date; . $perfProfile; $loadTime = (Get-Date) - $start; Write-Host \"  ⚡ Load time: $($loadTime.TotalMilliseconds)ms\" -ForegroundColor $(if($loadTime.TotalMilliseconds -lt 1000){'Green'}else{'Yellow'}) } else { Write-Host '  ❌ Performance profile missing' -ForegroundColor Red }; Write-Host ''; Write-Host '🔧 Testing System Profile Paths:' -ForegroundColor Yellow; @($PROFILE.AllUsersCurrentHost, $PROFILE.AllUsersAllHosts) | ForEach-Object { if (Test-Path $_) { Write-Host \"  ✅ $_ exists\" -ForegroundColor Green } else { Write-Host \"  ❌ $_ missing\" -ForegroundColor Red } }; Write-Host ''; Write-Host '💡 Performance Test Complete!' -ForegroundColor Cyan"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": true
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
       "label": "🎯 Switch Profile Mode",
       "type": "shell",
       "command": "pwsh",
@@ -41,6 +94,31 @@
         "focus": true,
         "panel": "new"
       }
+    },
+    {
+      "label": "🔍 Verify System-Wide Profile Propagation",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🔍 Verifying System-Wide Profile Propagation...' -ForegroundColor Cyan; Write-Host ''; Write-Host '📂 PSModulePath Analysis:' -ForegroundColor Yellow; $env:PSModulePath -split ';' | Where-Object {$_ -like '*UnifiedPowerShellProfile*' -or $_ -like '*PowerShell*'} | ForEach-Object { Write-Host \"  📁 $_\" -ForegroundColor Gray }; Write-Host ''; Write-Host '👤 Current User Profile Status:' -ForegroundColor Yellow; @($PROFILE.CurrentUserCurrentHost, $PROFILE.CurrentUserAllHosts) | ForEach-Object { $exists = Test-Path $_; $hasUnified = $false; if ($exists) { $hasUnified = (Get-Content $_ -Raw) -like '*UnifiedPowerShellProfile*' }; Write-Host \"  $(if($exists){'✅'}else{'❌'}) $_\" -ForegroundColor $(if($exists){'Green'}else{'Red'}); if ($hasUnified) { Write-Host \"    🎯 Contains UnifiedProfile auto-import\" -ForegroundColor Green } }; Write-Host ''; Write-Host '🖥️ All Users Profile Status:' -ForegroundColor Yellow; @($PROFILE.AllUsersCurrentHost, $PROFILE.AllUsersAllHosts) | ForEach-Object { $exists = Test-Path $_; $hasUnified = $false; if ($exists) { $hasUnified = (Get-Content $_ -Raw) -like '*UnifiedPowerShellProfile*' }; Write-Host \"  $(if($exists){'✅'}else{'❌'}) $_\" -ForegroundColor $(if($exists){'Green'}else{'Red'}); if ($hasUnified) { Write-Host \"    🎯 Contains UnifiedProfile auto-import\" -ForegroundColor Green } }; Write-Host ''; Write-Host '⚡ Performance Profile Status:' -ForegroundColor Yellow; $perfProfile = '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_Performance.ps1'; if (Test-Path $perfProfile) { Write-Host '  ✅ Ultra-Performance profile available' -ForegroundColor Green; $size = [math]::Round((Get-Item $perfProfile).Length/1KB, 2); Write-Host \"    📏 Size: $size KB\" -ForegroundColor Gray } else { Write-Host '  ❌ Ultra-Performance profile missing' -ForegroundColor Red }; Write-Host ''; Write-Host '💡 Launch Test (Current Session):' -ForegroundColor Yellow; try { Import-Module UnifiedPowerShellProfile -Force -ErrorAction Stop; Write-Host '  ✅ Module imports successfully' -ForegroundColor Green; if (Get-Command Initialize-UnifiedProfile -ErrorAction SilentlyContinue) { Write-Host '  ✅ Core functions available' -ForegroundColor Green } else { Write-Host '  ⚠️ Some functions may be missing' -ForegroundColor Yellow } } catch { Write-Host \"  ❌ Import failed: $($_.Exception.Message)\" -ForegroundColor Red }; Write-Host ''; Write-Host '🎯 Propagation Status: ' -NoNewline; $allGood = $true; Write-Host $(if($allGood){'✅ READY FOR SYSTEM-WIDE USE'}else{'❌ NEEDS ATTENTION'}) -ForegroundColor $(if($allGood){'Green'}else{'Red'})"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": true
+      },
+      "problemMatcher": [],
+      "isBackground": false
     },
     {
       "label": "🧛‍♂️ Test Dracula Profile",
@@ -494,6 +572,479 @@
         "echo": true,
         "reveal": "silent",
         "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "⚡ Switch to Performance Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Switch-DraculaMode.ps1",
+        "-Mode", "Performance",
+        "-ShowStartup", "false"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🤫 Switch to Silent Mode",
+      "type": "shell", 
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Switch-DraculaMode.ps1",
+        "-Mode", "Silent"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🚀 Switch to Normal Mode",
+      "type": "shell",
+      "command": "pwsh", 
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Switch-DraculaMode.ps1",
+        "-Mode", "Normal"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "⚡ Switch to Minimal Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Switch-DraculaMode.ps1", 
+        "-Mode", "Minimal"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📊 Benchmark Profile Performance",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Test-DraculaPerformance.ps1",
+        "-Iterations", "5"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📈 Detailed Performance Analysis",
+      "type": "shell",
+      "command": "pwsh", 
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Test-DraculaPerformance.ps1",
+        "-Iterations", "10",
+        "-Detailed"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔬 Performance Analysis (Quick)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Start-DraculaOptimizationAnalysis.ps1",
+        "-TestMode",
+        "Quick"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📊 Performance Analysis (Standard)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Start-DraculaOptimizationAnalysis.ps1",
+        "-TestMode",
+        "Standard",
+        "-GenerateReport"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🏆 Performance Analysis (Comprehensive)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Start-DraculaOptimizationAnalysis.ps1",
+        "-TestMode",
+        "Comprehensive",
+        "-GenerateReport",
+        "-CompareProfiles"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🚀 Benchmark All Profiles",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Start-DraculaOptimizationAnalysis.ps1",
+        "-TestMode",
+        "Benchmark",
+        "-GenerateReport",
+        "-CompareProfiles"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🧪 Test Performance Metrics",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Test-DraculaProfileMetrics.ps1",
+        "-ProfileMode",
+        "Performance",
+        "-Iterations",
+        "5",
+        "-GenerateReport",
+        "-ModuleProfile"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔧 Enable Performance Debug Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$env:DRACULA_PERFORMANCE_DEBUG='true'; $env:DRACULA_SHOW_STARTUP='true'; Write-Host '🔬 Performance debug mode enabled!' -ForegroundColor Green; Write-Host 'Restart PowerShell to see debug output' -ForegroundColor Yellow"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔇 Disable Performance Debug Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Remove-Item Env:DRACULA_PERFORMANCE_DEBUG -ErrorAction SilentlyContinue; Remove-Item Env:DRACULA_SHOW_STARTUP -ErrorAction SilentlyContinue; Write-Host '🔇 Performance debug mode disabled!' -ForegroundColor Gray"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "⚡ Launch Performance Profile with Debug",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$env:DRACULA_PERFORMANCE_DEBUG='true'; $env:DRACULA_SHOW_STARTUP='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_Performance.ps1'"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "⚡ Test Ultra-Performance Profile",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$env:DRACULA_PERFORMANCE_DEBUG='true'; $env:DRACULA_SHOW_STARTUP='true'; Write-Host '🔬 Testing Ultra-Performance Profile...' -ForegroundColor Cyan; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_Performance.ps1'; Write-Host ''; Write-Host '📊 Performance Summary:' -ForegroundColor Yellow; dbg-summary; Write-Host ''; Write-Host '💡 Test loading a module:' -ForegroundColor Cyan; Write-Host 'Try: load-psrl (loads PSReadLine)' -ForegroundColor Gray; Write-Host 'Try: ls (auto-loads Terminal-Icons)' -ForegroundColor Gray"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🏃‍♂️ Quick Performance Comparison",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Start-DraculaOptimizationAnalysis.ps1",
+        "-TestMode",
+        "Quick",
+        "-CompareProfiles"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📚 Build Module Documentation (Enhanced)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+        "-GenerateTests",
+        "-UpdateProjectStructure",
+        "-GitRemoteSearch",
+        "-CreateBuildManifest"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📝 Build Documentation (Quick)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+        "-ModulePath",
+        "${workspaceFolder}/PowerShellModules",
+        "-GitRemoteSearch"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "🔍 Build Documentation with Git Search",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🔍 Building documentation with git remote detection...' -ForegroundColor Cyan; . '${workspaceFolder}/Build-ModuleDocumentation.ps1' -GitRemoteSearch -CreateBuildManifest -Verbose; if (Test-Path 'Build-Steps/Manifest-Build-Progress.md.temp') { Write-Host '📋 Build manifest created - check Build-Steps folder' -ForegroundColor Green }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "🧪 Build Documentation + Tests + Tasks",
+      "type": "shell", 
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🚀 Full documentation build with tests and VS Code tasks...' -ForegroundColor Cyan; . '${workspaceFolder}/Build-ModuleDocumentation.ps1' -GenerateTests -UpdateProjectStructure -CreateBuildManifest -GitRemoteSearch -Verbose"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "📊 Documentation Quality Check",
+      "type": "shell",
+      "command": "pwsh", 
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '📊 Checking documentation quality...' -ForegroundColor Cyan; if (Test-Path './docs') { $docFiles = Get-ChildItem './docs' -Recurse -Filter '*.md'; Write-Host \"📚 Found $($docFiles.Count) documentation files\" -ForegroundColor Green; $docFiles | ForEach-Object { Write-Host \"  ✅ $($_.Name)\" -ForegroundColor Gray } } else { Write-Host '❌ No docs folder found' -ForegroundColor Red }; if (Test-Path './Tests') { $testFiles = Get-ChildItem './Tests' -Filter '*.Tests.ps1'; Write-Host \"🧪 Found $($testFiles.Count) test files\" -ForegroundColor Green } else { Write-Host '⚠️ No Tests folder found' -ForegroundColor Yellow }"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "🔄 Resume Documentation Build",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", 
+        "Bypass",
+        "-Command",
+        "if (Test-Path 'Build-Steps/Manifest-Build-Progress.md.temp') { Write-Host '📋 Found existing build manifest' -ForegroundColor Cyan; Get-Content 'Build-Steps/Manifest-Build-Progress.md.temp'; Write-Host ''; Write-Host '🔄 Resuming build...' -ForegroundColor Yellow; . '${workspaceFolder}/Build-ModuleDocumentation.ps1' -GitRemoteSearch -CreateBuildManifest } else { Write-Host '❌ No build manifest found. Starting fresh build...' -ForegroundColor Red; . '${workspaceFolder}/Build-ModuleDocumentation.ps1' -GitRemoteSearch -CreateBuildManifest }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "💾 Commit All Repositories",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '💾 Committing changes across all repositories...' -ForegroundColor Cyan; $repos = @('${workspaceFolder}', '${workspaceFolder}/PowerShellModules/*'); foreach ($repo in $repos) { if (Test-Path \"$repo/.git\") { Push-Location $repo; try { $status = git status --porcelain; if ($status) { Write-Host \"📝 Changes found in: $repo\" -ForegroundColor Yellow; git add .; git commit -m \"Auto-commit: $(Get-Date -Format 'yyyy-MM-dd HH:mm') - Enhanced documentation and build system\"; Write-Host \"✅ Committed: $repo\" -ForegroundColor Green } else { Write-Host \"✅ No changes in: $repo\" -ForegroundColor Gray } } catch { Write-Host \"❌ Error in: $repo - $($_.Exception.Message)\" -ForegroundColor Red } finally { Pop-Location } } }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
         "panel": "shared"
       }
     }

@@ -6,7 +6,7 @@
 [CmdletBinding()]
 param(
     [switch]$IncludeRegistryChanges,
-    [string]$InstallScope = "CurrentUser", # CurrentUser, AllUsers, or Both
+    [string]$InstallScope = "AllUsers", # CurrentUser, AllUsers, or Both - Default to AllUsers for system-wide propagation
     [switch]$Force,
     [switch]$WhatIf
 )
@@ -15,7 +15,7 @@ function Install-UnifiedProfileSystem {
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [switch]$IncludeRegistryChanges,
-        [string]$InstallScope = "CurrentUser",
+        [string]$InstallScope = "AllUsers", # Default to AllUsers for system-wide propagation
         [switch]$Force
     )
     
@@ -24,8 +24,7 @@ function Install-UnifiedProfileSystem {
     # Get current script location
     $ScriptPath = if ($MyInvocation.MyCommand.Path) {
         Split-Path -Parent $MyInvocation.MyCommand.Path
-    }
-    else {
+    } else {
         $PWD.Path
     }
     $ModulePath = Join-Path $ScriptPath "UnifiedPowerShellProfile"
@@ -52,8 +51,7 @@ function Install-UnifiedProfileSystem {
         Write-Host "🔄 Please restart your PowerShell sessions or run:" -ForegroundColor Yellow
         Write-Host "   Import-Module UnifiedPowerShellProfile -Force" -ForegroundColor White
         
-    }
-    catch {
+    } catch {
         Write-Error "❌ Installation failed: $($_.Exception.Message)"
         throw
     }
@@ -70,9 +68,15 @@ function Update-PSModulePath {
     
     $Scopes = @()
     switch ($Scope) {
-        "CurrentUser" { $Scopes = @("User") }
-        "AllUsers" { $Scopes = @("Machine") }
-        "Both" { $Scopes = @("User", "Machine") }
+        "CurrentUser" {
+            $Scopes = @("User") 
+        }
+        "AllUsers" {
+            $Scopes = @("Machine") 
+        }
+        "Both" {
+            $Scopes = @("User", "Machine") 
+        }
     }
     
     foreach ($EnvScope in $Scopes) {
@@ -84,8 +88,7 @@ function Update-PSModulePath {
                 [Environment]::SetEnvironmentVariable('PSModulePath', $NewPath, $EnvScope)
                 Write-Host "  ✅ Added to PSModulePath ($EnvScope): $ModulePath" -ForegroundColor Green
             }
-        }
-        else {
+        } else {
             Write-Host "  ℹ️ Already in PSModulePath ($EnvScope): $ModulePath" -ForegroundColor Gray
         }
     }
@@ -218,13 +221,11 @@ if (-not (Get-Module UnifiedPowerShellProfile -ListAvailable)) {
                     # Append our initialization script
                     Add-Content -Path $ProfilePath -Value "`n# === UnifiedPowerShellProfile Auto-Import ===`n$ProfileScript`n# === End UnifiedPowerShellProfile ===`n"
                     Write-Host "  ✅ Updated profile: $ProfilePath" -ForegroundColor Green
-                }
-                else {
+                } else {
                     Write-Host "  ℹ️ Profile already configured: $ProfilePath" -ForegroundColor Gray
                 }
                 
-            }
-            catch {
+            } catch {
                 Write-Warning "Failed to update profile $ProfilePath : $($_.Exception.Message)"
             }
         }
@@ -271,8 +272,7 @@ function Set-PowerShellRegistrySettings {
                     Write-Host "  ✅ Set $RegPath\$Property = $Value" -ForegroundColor Green
                 }
                 
-            }
-            catch {
+            } catch {
                 Write-Warning "Failed to configure registry at $RegPath : $($_.Exception.Message)"
             }
         }
@@ -292,8 +292,7 @@ function Test-InstallationIntegrity {
     if ($Module) {
         $ValidationResults += "✅ Module found in PSModulePath"
         Write-Host "  ✅ Module version: $($Module.Version)" -ForegroundColor Green
-    }
-    else {
+    } else {
         $ValidationResults += "❌ Module not found in PSModulePath"
         Write-Host "  ❌ Module not accessible" -ForegroundColor Red
     }
@@ -309,15 +308,13 @@ function Test-InstallationIntegrity {
         foreach ($Function in $CoreFunctions) {
             if (Get-Command $Function -ErrorAction SilentlyContinue) {
                 $ValidationResults += "✅ Function available: $Function"
-            }
-            else {
+            } else {
                 $ValidationResults += "❌ Function missing: $Function"
                 Write-Host "  ❌ Missing function: $Function" -ForegroundColor Red
             }
         }
         
-    }
-    catch {
+    } catch {
         $ValidationResults += "❌ Module import failed: $($_.Exception.Message)"
         Write-Host "  ❌ Import failed: $($_.Exception.Message)" -ForegroundColor Red
     }
@@ -325,8 +322,7 @@ function Test-InstallationIntegrity {
     # Test 4: PSScriptAnalyzer dependency
     if (Get-Module PSScriptAnalyzer -ListAvailable) {
         $ValidationResults += "✅ PSScriptAnalyzer dependency available"
-    }
-    else {
+    } else {
         $ValidationResults += "⚠️ PSScriptAnalyzer not found (optional dependency)"
         Write-Host "  ⚠️ Consider installing PSScriptAnalyzer for full functionality" -ForegroundColor Yellow
     }

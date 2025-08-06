@@ -91,12 +91,67 @@
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "🔧 Unified Profile System",
+      "name": "🔧 Unified Profile System (Basic)",
       "type": "PowerShell",
       "request": "launch",
       "script": "${workspaceFolder}/Install-UnifiedProfileSystem.ps1",
       "args": ["-Verbose"],
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🚀 Install UnifiedProfile (CurrentUser)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Install-UnifiedProfileSystem.ps1",
+      "args": ["-InstallScope", "CurrentUser", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "⚡ Install UnifiedProfile (AllUsers + Registry)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Install-UnifiedProfileSystem.ps1",
+      "args": ["-InstallScope", "AllUsers", "-IncludeRegistryChanges", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🔍 Test UnifiedProfile Installation",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Install-UnifiedProfileSystem.ps1",
+      "args": ["-WhatIf", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🧪 Debug UnifiedProfile Module",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile/UnifiedPowerShellProfile.psm1",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🔧 Initialize UnifiedProfile",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile/Scripts/Initialize-UnifiedProfile.ps1",
+      "args": ["-Mode", "Debug", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "📊 Test UnifiedProfile Quality",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile/Tests/UnifiedPowerShellProfile.Tests.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile",
+      "createTemporaryIntegratedConsole": true
     },
     {
       "name": "🧪 Pester Tests (PowerShellModules)",
@@ -125,12 +180,40 @@
       "createTemporaryIntegratedConsole": true
     },
     {
-      "name": "📚 Build Module Documentation",
+      "name": "📚 Build Module Documentation (Enhanced)",
       "type": "PowerShell",
       "request": "launch",
       "script": "${workspaceFolder}/Build-ModuleDocumentation.ps1",
-      "args": ["-Verbose"],
-      "cwd": "${workspaceFolder}"
+      "args": ["-GenerateTests", "-UpdateProjectStructure", "-GitRemoteSearch", "-CreateBuildManifest", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "📝 Build Documentation (Quick)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+      "args": ["-ModulePath", "${workspaceFolder}/PowerShellModules", "-GitRemoteSearch"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🔍 Build Documentation with Git Search",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+      "args": ["-GitRemoteSearch", "-CreateBuildManifest", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🧪 Full Documentation Build + Tests",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+      "args": ["-GenerateTests", "-UpdateProjectStructure", "-CreateBuildManifest", "-GitRemoteSearch", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
     },
     {
       "name": "🎯 Profile Mode Switcher",

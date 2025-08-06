@@ -41,11 +41,23 @@
   ],
   
   // 🖥️ Terminal Profiles
-  "terminal.integrated.defaultProfile.windows": "🚀 UnifiedProfile",
+  "terminal.integrated.defaultProfile.windows": "⚡ Ultra-Performance",
   "terminal.integrated.profiles.windows": {
     "PowerShell": {
       "source": "PowerShell",
       "icon": "terminal-powershell"
+    },
+    "⚡ Ultra-Performance": {
+      "path": "pwsh.exe",
+      "args": [
+        "-NoLogo", 
+        "-ExecutionPolicy", "Bypass", 
+        "-NoExit", 
+        "-Command", 
+        ". \"${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_Performance.ps1\""
+      ],
+      "icon": "terminal-powershell",
+      "color": "terminal.ansiYellow"
     },
     "🚀 UnifiedProfile": {
       "path": "pwsh.exe",
