@@ -43,52 +43,6 @@
       }
     },
     {
-      "label": "🔧 Install PowerShell 7+ System-Wide",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-File", "${workspaceFolder}/Install-PowerShell7SystemWide.ps1",
-        "-Verbose"
-      ],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "new",
-        "showReuseMessage": false,
-        "clear": true
-      },
-      "problemMatcher": [],
-      "runOptions": {
-        "runOn": "folderOpen"
-      },
-      "detail": "Install PowerShell 7+ and configure Dracula profile system-wide"
-    },
-    {
-      "label": "🎨 Install Profile Only (System-Wide)",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-File", "${workspaceFolder}/Install-PowerShell7SystemWide.ps1",
-        "-ProfileOnly",
-        "-Verbose"
-      ],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "new",
-        "showReuseMessage": false,
-        "clear": true
-      },
-      "problemMatcher": [],
-      "detail": "Install Dracula profile system-wide (skip PowerShell 7 installation)"
-    },
-    {
       "label": "🧛‍♂️ Test Dracula Profile",
       "type": "shell",
       "command": "pwsh",
@@ -343,81 +297,6 @@
         "focus": true,
         "panel": "new"
       }
-    },
-    {
-      "label": "⚙️ Configure Unified Profile (Interactive)",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-File", "${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile/Setup-UnifiedProfile.ps1",
-        "-SetupVSCode", "-InstallDependencies", "-CreateDocumentation", "-GenerateTests"
-      ],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "new"
-      },
-      "detail": "Complete setup with VS Code configuration, dependencies, documentation, and tests"
-    },
-    {
-      "label": "📦 Build Distribution Package",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-File", "${workspaceFolder}/Build-Distribution.ps1",
-        "-All"
-      ],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "new"
-      },
-      "detail": "Build complete distribution package with documentation, tests, and validation"
-    },
-    {
-      "label": "🧪 Test Module Distribution",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-Command",
-        "$TestPath = '${workspaceFolder}/Distribution/UnifiedPowerShellProfile'; if (Test-Path $TestPath) { Import-Module $TestPath -Force; Get-Command -Module UnifiedPowerShellProfile | Measure-Object | ForEach-Object { Write-Host \"✅ Module exports $($_.Count) functions\" -ForegroundColor Green }; Test-ModuleManifest (Join-Path $TestPath 'UnifiedPowerShellProfile.psd1') | Out-Null; Write-Host '✅ Module manifest is valid' -ForegroundColor Green } else { Write-Host '❌ Distribution package not found. Run Build Distribution Package first.' -ForegroundColor Red }"
-      ],
-      "group": {
-        "kind": "test",
-        "isDefault": false
-      },
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared"
-      },
-      "detail": "Test the distribution package integrity and module exports"
-    },
-    {
-      "label": "📚 Generate Module Documentation",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-File", "${workspaceFolder}/Build-ModuleDocumentation.ps1",
-        "-All"
-      ],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "new"
-      },
-      "detail": "Generate comprehensive documentation for the UnifiedPowerShellProfile module"
     },
     {
       "label": "🔐 Setup Google Hardware Key (All Methods)",

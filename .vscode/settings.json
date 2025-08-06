@@ -116,5 +116,9 @@
     }
   ],
   "makefile.defaultConfiguration": "default",
-  "cmake.ignoreCMakeListsMissing": true
+  "cmake.ignoreCMakeListsMissing": true,
+  "cSpell.enabledLanguageIds": [
+    "COBOL",
+    "ACUCOBOL"
+  ]
 }

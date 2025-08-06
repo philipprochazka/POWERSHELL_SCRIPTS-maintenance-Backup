@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "PowerShellModules"
+		},
+		{
+			"path": "../CLI-Artificial.ínteligenceAugmentations"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"powershell.cwd": "PowerShellModules"
+	}
+}

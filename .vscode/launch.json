@@ -4,6 +4,7 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+    
     {
       "name": "PowerShell Attach to Host Process",
       "type": "PowerShell",
@@ -88,6 +89,66 @@
       "script": "${workspaceFolder}/Tests/Start-DraculaLauncher.ps1",
       "args": [],
       "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "🔧 Unified Profile System",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Install-UnifiedProfileSystem.ps1",
+      "args": ["-Verbose"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "🧪 Pester Tests (PowerShellModules)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/PowerShellModules/Run-AllTests.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}/PowerShellModules",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🔑 Google Hardware Key Setup",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Install-GoogleHardwareKey.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "🧪 Google Hardware Key Tests",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/PowerShellModules/Google-Hardware-key/Tests/GoogleHardwareKey.Tests.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}/PowerShellModules/Google-Hardware-key",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "📚 Build Module Documentation",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+      "args": ["-Verbose"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "🎯 Profile Mode Switcher",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Theme/UnifiedPowerShellProfile/Scripts/Switch-ProfileMode.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🔍 PSScriptAnalyzer Check",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Run-ScriptAnalyzer.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
     }
   ]
 }

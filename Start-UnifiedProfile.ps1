@@ -49,13 +49,13 @@ if ($Quick) {
     Write-Host "`n⚡ Quick Setup Mode" -ForegroundColor Yellow
     Write-Host "Setting up with default configuration (Dracula mode)..." -ForegroundColor Gray
     
-    & "$PSScriptRoot\Setup-UnifiedProfile.ps1" -Mode Dracula -SetupVSCode -InstallDependencies -ConfigureSystemProfile
+    & "$PSScriptRoot\Install-UnifiedProfile.ps1" -Mode Dracula -SetupVSCode -InstallDependencies -ConfigureSystemProfile
 }
 elseif ($Full) {
     Write-Host "`n🔧 Full Setup Mode" -ForegroundColor Yellow
     Write-Host "Complete installation with all features..." -ForegroundColor Gray
     
-    & "$PSScriptRoot\Setup-UnifiedProfile.ps1" -Mode Dracula -SetupVSCode -InstallDependencies -ConfigureSystemProfile -Force
+    & "$PSScriptRoot\Install-UnifiedProfile.ps1" -Mode Dracula -SetupVSCode -InstallDependencies -ConfigureSystemProfile -Force
 }
 else {
     # Interactive mode
@@ -105,7 +105,7 @@ else {
     if ($configProfile) { $setupParams.ConfigureSystemProfile = $true }
     
     # Run setup
-    & "$PSScriptRoot\Setup-UnifiedProfile.ps1" @setupParams
+    & "$PSScriptRoot\Install-UnifiedProfile.ps1" @setupParams
 }
 
 Write-Host "`n💡 Quick Commands for VS Code:" -ForegroundColor Cyan
