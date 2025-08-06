@@ -1,0 +1,192 @@
+{
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "profileMode",
+            "description": "Select profile mode",
+            "type": "pickString",
+            "options": [
+                {
+                    "label": "🧛‍♂️ Dracula - Enhanced productivity theme",
+                    "value": "Dracula"
+                },
+                {
+                    "label": "🚀 MCP - AI-integrated development",
+                    "value": "MCP"
+                },
+                {
+                    "label": "⚡ LazyAdmin - System administration",
+                    "value": "LazyAdmin"
+                },
+                {
+                    "label": "🎯 Minimal - Lightweight setup",
+                    "value": "Minimal"
+                },
+                {
+                    "label": "🛠️ Custom - User-defined configuration",
+                    "value": "Custom"
+                },
+                {
+                    "label": "🤖 Auto - Smart detection",
+                    "value": "Auto"
+                }
+            ],
+            "default": "Auto"
+        },
+        {
+            "id": "profileFeatures",
+            "description": "Select features to enable",
+            "type": "pickString",
+            "options": [
+                {
+                    "label": "🔮 v4Alpha + MCP + Performance (Recommended)",
+                    "value": "v4Alpha,MCP,Performance"
+                },
+                {
+                    "label": "🎨 VSCode + XMLManifests + GitIntegration",
+                    "value": "VSCode,XMLManifests,GitIntegration"
+                },
+                {
+                    "label": "🧹 Cleanup + Performance + LegacyBridge",
+                    "value": "Cleanup,Performance,LegacyBridge"
+                },
+                {
+                    "label": "🚀 AITooling + MCP + VSCode",
+                    "value": "AITooling,MCP,VSCode"
+                },
+                {
+                    "label": "⚡ All Features (Maximum)",
+                    "value": "v4Alpha,MCP,Cleanup,VSCode,Performance,XMLManifests,LegacyBridge,GitIntegration,AITooling"
+                },
+                {
+                    "label": "🎯 Minimal Features",
+                    "value": "Performance"
+                }
+            ],
+            "default": "v4Alpha,MCP,Performance"
+        },
+        {
+            "id": "operationMode",
+            "description": "Select operation mode",
+            "type": "pickString",
+            "options": [
+                {
+                    "label": "🔥 Standard - Quick setup",
+                    "value": "standard"
+                },
+                {
+                    "label": "🚀 Advanced - Full configuration",
+                    "value": "advanced"
+                },
+                {
+                    "label": "🔍 Validate - Check system first",
+                    "value": "validate"
+                },
+                {
+                    "label": "🌍 Global - Apply system-wide",
+                    "value": "global"
+                },
+                {
+                    "label": "🤖 Auto-Detect - Smart environment detection",
+                    "value": "autodetect"
+                }
+            ],
+            "default": "standard"
+        }
+    ],
+    "tasks": [
+        {
+            "label": "🚀 Unified Profile Master - Quick Setup",
+            "type": "shell",
+            "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Invoke-UnifiedProfile -Mode ${input:profileMode} -Features @('${input:profileFeatures}' -split ',') -UseXMLManifest -ShowProgress",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🌍 Unified Profile Master - Global Setup",
+            "type": "shell",
+            "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Invoke-UnifiedProfile -Mode ${input:profileMode} -Features @('${input:profileFeatures}' -split ',') -UseXMLManifest -ApplyGlobally -ShowProgress -BackupCurrent",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🔍 Unified Profile Master - Validate & Setup",
+            "type": "shell",
+            "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Invoke-UnifiedProfile -Mode ${input:profileMode} -Features @('${input:profileFeatures}' -split ',') -UseXMLManifest -ValidateFirst -ShowProgress -BackupCurrent",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🤖 Unified Profile Master - Auto-Detect",
+            "type": "shell",
+            "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Invoke-UnifiedProfile -DetectEnvironment -UseXMLManifest -ShowProgress",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🔮 v4Alpha XML Manifest - Ultimate Mode",
+            "type": "shell",
+            "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Invoke-UnifiedProfile -Mode ${input:profileMode} -Features @('v4Alpha','XMLManifests','MCP','Performance','VSCode','GitIntegration','AITooling') -UseXMLManifest -ApplyGlobally -ValidateFirst -BackupCurrent -ShowProgress",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "📊 Unified Profile Master - System Analysis",
+            "type": "shell",
+            "command": "Write-Host '🔍 Analyzing Unified Profile System...' -ForegroundColor Cyan; Write-Host ''; Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; $analysis = [UnifiedProfileMaster]::new('${workspaceFolder}/PowerShellModules/UnifiedMCPProfile'); Write-Host '📋 System Analysis Complete:' -ForegroundColor Green; Write-Host \"  📁 Module Root: $($analysis.ModuleRoot)\" -ForegroundColor White; Write-Host \"  🔮 v4Alpha Enabled: $($analysis.V4AlphaEnabled)\" -ForegroundColor $(if($analysis.V4AlphaEnabled){'Green'}else{'Red'}); Write-Host \"  📄 XML Manifest Mode: $($analysis.XMLManifestMode)\" -ForegroundColor $(if($analysis.XMLManifestMode){'Green'}else{'Red'}); Write-Host \"  🎯 Current Mode: $($analysis.CurrentMode)\" -ForegroundColor Yellow; Write-Host ''; Write-Host '💡 Run a Unified Profile Master task to set up your profile!' -ForegroundColor Cyan",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        }
+    ]
+}

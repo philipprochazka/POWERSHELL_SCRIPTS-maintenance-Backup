@@ -1,0 +1,170 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🚀 Debug: Unified Profile Master",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Public/Invoke-UnifiedProfile.ps1",
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "args": [
+                "-Mode",
+                "Dracula",
+                "-Features",
+                "@('v4Alpha', 'MCP', 'Performance')",
+                "-UseXMLManifest",
+                "-ShowProgress",
+                "-ValidateFirst"
+            ],
+            "env": {
+                "UNIFIED_PROFILE_DEBUG": "true",
+                "PSModulePath": "${workspaceFolder}/PowerShellModules;${env:PSModulePath}"
+            }
+        },
+        {
+            "name": "🤖 Debug: Auto-Detect Mode",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Public/Invoke-UnifiedProfile.ps1",
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "args": [
+                "-DetectEnvironment",
+                "-UseXMLManifest",
+                "-ShowProgress"
+            ],
+            "env": {
+                "UNIFIED_PROFILE_DEBUG": "true",
+                "PSModulePath": "${workspaceFolder}/PowerShellModules;${env:PSModulePath}"
+            }
+        },
+        {
+            "name": "🔮 Debug: v4Alpha XML Ultimate",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Public/Invoke-UnifiedProfile.ps1",
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "args": [
+                "-Mode",
+                "MCP",
+                "-Features",
+                "@('v4Alpha', 'XMLManifests', 'MCP', 'Performance', 'VSCode', 'GitIntegration', 'AITooling')",
+                "-UseXMLManifest",
+                "-ApplyGlobally",
+                "-ValidateFirst",
+                "-BackupCurrent",
+                "-ShowProgress"
+            ],
+            "env": {
+                "UNIFIED_PROFILE_DEBUG": "true",
+                "MCP_INTEGRATION_ENABLED": "true",
+                "PSModulePath": "${workspaceFolder}/PowerShellModules;${env:PSModulePath}"
+            }
+        },
+        {
+            "name": "🧪 Debug: Test Unified Profile Master Class",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Tests/Invoke-UnifiedProfile.Tests.ps1",
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "args": [],
+            "env": {
+                "UNIFIED_PROFILE_DEBUG": "true",
+                "PSModulePath": "${workspaceFolder}/PowerShellModules;${env:PSModulePath}"
+            }
+        },
+        {
+            "name": "🌍 Debug: Global Profile Deployment",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Public/Invoke-UnifiedProfile.ps1",
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "args": [
+                "-Mode",
+                "Dracula",
+                "-Features",
+                "@('v4Alpha', 'Performance', 'VSCode')",
+                "-UseXMLManifest",
+                "-ApplyGlobally",
+                "-ShowProgress"
+            ],
+            "env": {
+                "UNIFIED_PROFILE_DEBUG": "true",
+                "UNIFIED_PROFILE_MODE": "Dracula",
+                "PSModulePath": "${workspaceFolder}/PowerShellModules;${env:PSModulePath}"
+            }
+        },
+        {
+            "name": "🔍 Debug: System Validation Only",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Public/Invoke-UnifiedProfile.ps1",
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "args": [
+                "-Mode",
+                "Minimal",
+                "-ValidateFirst",
+                "-ShowProgress",
+                "-WhatIf"
+            ],
+            "env": {
+                "UNIFIED_PROFILE_DEBUG": "true",
+                "PSModulePath": "${workspaceFolder}/PowerShellModules;${env:PSModulePath}"
+            }
+        },
+        {
+            "name": "⚡ Debug: Performance Benchmark",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Public/Invoke-UnifiedProfile.ps1",
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "args": [
+                "-Mode",
+                "Minimal",
+                "-Features",
+                "@('Performance')",
+                "-ShowProgress"
+            ],
+            "env": {
+                "UNIFIED_PROFILE_DEBUG": "true",
+                "MEASURE_PERFORMANCE": "true",
+                "PSModulePath": "${workspaceFolder}/PowerShellModules;${env:PSModulePath}"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "debugMode",
+            "description": "Select debug mode",
+            "type": "pickString",
+            "options": [
+                "Dracula",
+                "MCP",
+                "LazyAdmin",
+                "Minimal",
+                "Custom",
+                "Auto"
+            ],
+            "default": "Auto"
+        },
+        {
+            "id": "debugFeatures",
+            "description": "Select features for debugging",
+            "type": "pickString",
+            "options": [
+                "v4Alpha,MCP,Performance",
+                "XMLManifests,VSCode,GitIntegration",
+                "AITooling,MCP,VSCode",
+                "Performance",
+                "All"
+            ],
+            "default": "v4Alpha,MCP,Performance"
+        }
+    ]
+}
