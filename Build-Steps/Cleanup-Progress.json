@@ -14,8 +14,13 @@
     "Microsoft.PowerShell_profile_MCP.ps1",
     "Microsoft.PowerShell_profile.backup.ps1",
     "Microsoft.PowerShell_profile2.backup.ps1",
-    "Microsoft.PowerShell_profile3.backup.ps1"
+    "Microsoft.PowerShell_profile3.backup.ps1",
+    "CLEANUP-SUMMARY.md",
+    "DISTRIBUTION-SUMMARY.md",
+    "ENHANCED-DRACULA-PSREADLINE-SUMMARY.md",
+    "INSTALLATION_SUMMARY.md",
+    "LAZY-LOADING-ENHANCEMENT-SUMMARY.md"
   ],
-  "TotalFilesProcessed": 9,
-  "LastRun": "2025-08-07T00:22:13.8541343+02:00"
+  "TotalFilesProcessed": 14,
+  "LastRun": "2025-08-07T00:22:16.6480241+02:00"
 }
