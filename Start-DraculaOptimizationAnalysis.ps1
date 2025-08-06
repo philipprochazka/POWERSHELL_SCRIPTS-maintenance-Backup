@@ -246,10 +246,10 @@ if ($performanceResults.Count -gt 0) {
         # Performance rating
         Write-Host ""
         Write-Host "🎯 Performance Rating: " -NoNewline -ForegroundColor Cyan
-        if ($avgLoadTime -lt 300) {
-            Write-Host "⚡ EXCELLENT (Sub-300ms)" -ForegroundColor Green
+        if ($avgLoadTime -lt 200) {
+            Write-Host "⚡ EXCELLENT (Sub-200ms)" -ForegroundColor Green
         } elseif ($avgLoadTime -lt 500) {
-            Write-Host "✅ VERY GOOD (300-500ms)" -ForegroundColor Green
+            Write-Host "✅ VERY GOOD (200-500ms)" -ForegroundColor Green
         } elseif ($avgLoadTime -lt 750) {
             Write-Host "👍 GOOD (500-750ms)" -ForegroundColor Yellow
         } elseif ($avgLoadTime -lt 1000) {
@@ -355,6 +355,9 @@ if ($performanceResults.Count -gt 0) {
             $recommendations += "⚠️ Load time >750ms. Review module loading order and consider lazy loading."
         } elseif ($avgLoadTime -gt 500) {
             $recommendations += "ℹ️ Load time >500ms. Profile is good but has optimization potential."
+            $recommendations += "   Consider Oh My Posh theme optimization for improved startup times."
+        } elseif ($avgLoadTime -gt 200) {
+            $recommendations += "💡 Load time >200ms. Profile performance is good. Minor optimizations possible."
         }
         
         # Check for failed tests

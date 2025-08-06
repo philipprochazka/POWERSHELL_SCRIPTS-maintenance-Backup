@@ -1,0 +1,50 @@
+{
+    "version": "2.0.0",
+    "options": {
+        "shell": {
+            "executable": "pwsh.exe",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command"
+            ]
+        }
+    },
+    "tasks": [
+        {
+            "label": "📚 Show Task Categories",
+            "type": "shell",
+            "command": "Write-Host '🎯 PowerShell Task Categories Available:' -ForegroundColor Cyan; Write-Host ''; Write-Host '📁 .vscode/tasks/' -ForegroundColor Yellow; Write-Host '  ├── 🚀 unified-profile/     - Profile installation & setup' -ForegroundColor Green; Write-Host '  ├── 🧛‍♂️ dracula-profile/     - Dracula theme & variants' -ForegroundColor Magenta; Write-Host '  ├── ⚡ performance/        - Performance testing & optimization' -ForegroundColor Yellow; Write-Host '  ├── 🔐 google-hardware-key/ - Hardware key management' -ForegroundColor Blue; Write-Host '  ├── 🎨 oh-my-posh/         - Oh My Posh themes & integration' -ForegroundColor Cyan; Write-Host '  └── 📚 documentation/      - Documentation & build tasks' -ForegroundColor Gray; Write-Host ''; Write-Host '💡 Use VS Code Command Palette (Ctrl+Shift+P) → \"Tasks: Run Task\"' -ForegroundColor Green; Write-Host '   Then select from the organized task categories above!' -ForegroundColor Green",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🔧 Reload VS Code Tasks",
+            "type": "shell",
+            "command": "Write-Host '🔄 Reloading VS Code window to refresh tasks...' -ForegroundColor Cyan; Start-Sleep -Seconds 2",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        }
+    ],
+    "inputs": []
+}

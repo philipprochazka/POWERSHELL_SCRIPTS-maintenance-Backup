@@ -1,0 +1,26 @@
+{
+    "author": {
+        "name": "Philip Procházka",
+        "email": "contact@philipprochazka.cz",
+        "website": "https://philipprochazka.cz",
+        "github": "philipprochazka",
+        "githubUrl": "https://github.com/philipprochazka"
+    },
+    "project": {
+        "namespace": "PhilipProcházka.PowerShell",
+        "copyright": "(c) 2025 Philip Procházka. All rights reserved.",
+        "defaultVersion": "1.0.0",
+        "defaultLicense": "MIT"
+    },
+    "build": {
+        "toolName": "Build-ModuleDocumentation",
+        "toolVersion": "1.0.0",
+        "generatedByText": "Built with Build-ModuleDocumentation v1.0.0 by Philip Procházka",
+        "followsStandards": "Following PowerShell development best practices and enterprise standards"
+    },
+    "repositories": {
+        "primary": "POWERSHELL_SCRIPTS-maintenance-Backup",
+        "owner": "philipprochazka",
+        "defaultBranch": "master"
+    }
+}

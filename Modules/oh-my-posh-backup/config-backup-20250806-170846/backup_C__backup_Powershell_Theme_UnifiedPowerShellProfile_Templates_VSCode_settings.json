@@ -1,0 +1,122 @@
+{
+  "powershell.enableProfileLoading": true,
+  "powershell.powerShellDefaultVersion": "PowerShell",
+  "powershell.powerShellAdditionalExePaths": {
+    "PowerShell Core": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+  },
+  "powershell.codeFolding.enable": true,
+  "powershell.codeFolding.showPreview": true,
+  "powershell.codeFormatting.autoCorrectAliases": true,
+  "powershell.codeFormatting.formatOnSave": true,
+  "powershell.codeFormatting.openBraceOnSameLine": true,
+  "powershell.helpCompletion": "BlockComment",
+  "powershell.integratedConsole.showOnStartup": true,
+  "powershell.integratedConsole.focusConsoleOnExecute": true,
+  
+  "terminal.integrated.defaultProfile.windows": "PowerShell (Unified)",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell (Unified)": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell",
+      "args": [
+        "-ExecutionPolicy", "Bypass", 
+        "-NoLogo",
+        "-Command", "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode Dracula -WorkspaceRoot '${workspaceFolder}'"
+      ]
+    },
+    "PowerShell (MCP)": {
+      "source": "PowerShell",
+      "icon": "copilot",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-NoLogo", 
+        "-Command", "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode MCP -WorkspaceRoot '${workspaceFolder}'"
+      ]
+    },
+    "PowerShell (LazyAdmin)": {
+      "source": "PowerShell",
+      "icon": "tools",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-NoLogo",
+        "-Command", "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode LazyAdmin -WorkspaceRoot '${workspaceFolder}'"
+      ]
+    },
+    "PowerShell (Clean)": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-NoLogo", "-NoProfile"]
+    }
+  },
+  
+  "files.defaultLanguage": "powershell",
+  "files.associations": {
+    "*.ps1": "powershell",
+    "*.psm1": "powershell", 
+    "*.psd1": "powershell",
+    "*.psc1": "powershell"
+  },
+  
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
+  },
+  
+  "github.copilot.enable": {
+    "*": true,
+    "powershell": true,
+    "markdown": true
+  },
+  "github.copilot.chat.enabled": true,
+  
+  "editor.inlineSuggest.enabled": true,
+  "editor.suggest.preview": true,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  "editor.suggestSelection": "first",
+  "editor.tabCompletion": "on",
+  "editor.formatOnType": true,
+  
+  "workbench.colorTheme": "Dracula",
+  "workbench.iconTheme": "material-icon-theme",
+  
+  "extensions.recommendations": [
+    "ms-vscode.powershell",
+    "github.copilot",
+    "github.copilot-chat", 
+    "dracula-theme.theme-dracula",
+    "ms-vscode.vscode-json",
+    "pkief.material-icon-theme"
+  ],
+  
+  "cSpell.enabledFileTypes": [
+    "powershell",
+    "markdown",
+    "plaintext",
+    "json",
+    "jsonc"
+  ],
+  "cSpell.language": "en,en-US",
+  "cSpell.diagnosticLevel": "Hint",
+  
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/out": true,
+    "**/build": true,
+    "**/.git": true
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "shell": {
+      "executable": "pwsh.exe",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+    }
+  },
+  "tasks": [
+    {
+      "label": "🚀 Install Modern Oh My Posh v26+",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Install-ModernOhMyPosh.ps1",
+        "-InstallThemes",
+        "-UpdateProfiles"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "⚡ Install Modern Oh My Posh (Scoop)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Install-ModernOhMyPosh.ps1",
+        "-UseScoop",
+        "-InstallThemes",
+        "-UpdateProfiles"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🔄 Force Reinstall Modern Oh My Posh",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Install-ModernOhMyPosh.ps1",
+        "-Force",
+        "-InstallThemes",
+        "-UpdateProfiles"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🧪 Test Modern Oh My Posh (Quick)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Test-ModernOhMyPosh.ps1",
+        "-TestMode",
+        "Quick"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📊 Test Modern Oh My Posh (Comprehensive)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Test-ModernOhMyPosh.ps1",
+        "-TestMode",
+        "Comprehensive",
+        "-GenerateReport"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🎨 Test Modern Oh My Posh Themes",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        ". '${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile/Scripts/Initialize-ModernOhMyPosh.ps1'; Write-Host '🎨 Testing Dracula theme...' -ForegroundColor Cyan; Initialize-ModernOhMyPosh -Mode 'Dracula' -Verbose; Write-Host ''; Write-Host '⚡ Testing Performance theme...' -ForegroundColor Yellow; Initialize-ModernOhMyPosh -Mode 'Performance' -Verbose; Write-Host ''; Write-Host '🧹 Testing Minimal theme...' -ForegroundColor Green; Initialize-ModernOhMyPosh -Mode 'Minimal' -Verbose"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📋 Check Oh My Posh Version",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🔍 Oh My Posh Version Information:' -ForegroundColor Cyan; Write-Host ''; if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) { $version = oh-my-posh version; Write-Host \"✅ Version: $version\" -ForegroundColor Green; $major = if ($version -match '(\\d+)\\.') { [int]$matches[1] } else { 0 }; if ($major -ge 26) { Write-Host '🚀 Modern version (v26+) detected!' -ForegroundColor Green } else { Write-Host '⚠️ Legacy version detected. Consider upgrading.' -ForegroundColor Yellow }; Write-Host \"📁 Path: $((Get-Command oh-my-posh).Source)\" -ForegroundColor Gray; if ($env:POSH_THEMES_PATH) { Write-Host \"🎨 Themes Path: $env:POSH_THEMES_PATH\" -ForegroundColor Gray } } else { Write-Host '❌ Oh My Posh not found in PATH' -ForegroundColor Red; Write-Host '💡 Install with task: 🚀 Install Modern Oh My Posh v26+' -ForegroundColor Yellow }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🎯 Initialize Modern Dracula Theme",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        ". '${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile/Scripts/Initialize-ModernOhMyPosh.ps1'; Write-Host '🧛‍♂️ Initializing Modern Dracula Theme...' -ForegroundColor Magenta; Initialize-ModernOhMyPosh -Mode 'Dracula' -Verbose; Write-Host ''; Write-Host '✨ Dracula theme loaded! Your terminal should now show the enhanced prompt.' -ForegroundColor Green; Write-Host '💡 To make permanent, add to your PowerShell profile.' -ForegroundColor Yellow"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🔧 Validate Oh My Posh Installation",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🔍 Oh My Posh Installation Validation' -ForegroundColor Cyan; Write-Host ''; if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) { $version = oh-my-posh version; Write-Host \"✅ Oh My Posh installed: v$version\" -ForegroundColor Green; $versionNumber = [version]($version -replace '[^\\d\\.].*$'); if ($versionNumber.Major -ge 26) { Write-Host '🚀 Modern version (v26+) detected - Full features available!' -ForegroundColor Green } else { Write-Host '⚠️ Legacy version detected - Consider upgrading for full features' -ForegroundColor Yellow } } else { Write-Host '❌ Oh My Posh not found' -ForegroundColor Red; Write-Host '💡 Install with task: 🧛‍♂️ Install Enhanced Oh My Posh Integration' -ForegroundColor Yellow }; Write-Host ''; if ($env:POSH_THEMES_PATH) { Write-Host \"🎨 Themes path: $env:POSH_THEMES_PATH\" -ForegroundColor Blue; if (Test-Path $env:POSH_THEMES_PATH) { $themes = Get-ChildItem $env:POSH_THEMES_PATH -Filter '*.omp.json'; Write-Host \"📁 Found $($themes.Count) themes\" -ForegroundColor Green } else { Write-Host '⚠️ Themes path not accessible' -ForegroundColor Yellow } } else { Write-Host '⚠️ POSH_THEMES_PATH environment variable not set' -ForegroundColor Yellow }; Write-Host ''; if (Get-Module UnifiedPowerShellProfile -ListAvailable) { Write-Host '✅ UnifiedPowerShellProfile module available' -ForegroundColor Green; Import-Module UnifiedPowerShellProfile -Force; if (Get-Command Initialize-ModernOhMyPosh -ErrorAction SilentlyContinue) { Write-Host '✅ Initialize-ModernOhMyPosh function available' -ForegroundColor Green } else { Write-Host '⚠️ Initialize-ModernOhMyPosh function missing' -ForegroundColor Yellow } } else { Write-Host '❌ UnifiedPowerShellProfile module not found' -ForegroundColor Red }"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🌐 Open Oh My Posh Documentation",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Start-Process 'https://ohmyposh.dev/docs/installation/windows'"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    }
+  ]
+}

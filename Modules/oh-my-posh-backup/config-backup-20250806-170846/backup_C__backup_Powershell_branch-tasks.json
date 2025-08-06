@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "🔧 Setup Version Branches",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "cd /d c:\\backup\\Powershell && git add . && git commit -m \"feat: v4-Alpha XML Schema Architecture\" && git branch v3-stable && git branch v4-alpha && git checkout v4-alpha && echo Branch setup complete && git branch"
+            ],
+            "group": "build",
+            "isBackground": false
+        }
+    ]
+}

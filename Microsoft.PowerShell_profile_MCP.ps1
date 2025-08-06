@@ -415,3 +415,4 @@ Write-Host "Hello from $fileName!" -ForegroundColor Green
     Write-Host "`n💡 Type 'Show-MCPStatus' to see current MCP configuration" -ForegroundColor Yellow
     Write-Host "💡 Use F7 for enhanced command history" -ForegroundColor Yellow
     #endregion
+}

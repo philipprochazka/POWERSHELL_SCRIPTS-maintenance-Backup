@@ -1,0 +1,339 @@
+{
+    "version": "2.0.0",
+    "options": {
+        "shell": {
+            "executable": "pwsh.exe",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command"
+            ]
+        }
+    },
+    "tasks": [
+        {
+            "label": "🚀 Install Unified Profile System (Enhanced)",
+            "type": "shell",
+            "command": "Import-Module \"${workspaceFolder}\\PowerShellModules\\UnifiedPowerShellProfile\" -Force; Install-UnifiedProfileSystem -IncludeRegistryChanges -EnableCamelCaseNavigation -EnableDiacriticsSupport -Verbose",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "env": {
+                    "ENABLE_CAMELCASE_NAV": "true",
+                    "ENABLE_DIACRITICS": "true",
+                    "UNIFIED_PROFILE_DEBUG": "true"
+                }
+            }
+        },
+        {
+            "label": "⚡ Quick Install (Dracula + Smart Navigation)",
+            "type": "shell",
+            "command": "& \"${workspaceFolder}\\Start-UnifiedProfile.ps1\" -Quick; Write-Host '🐪 CamelCase Navigation: ENABLED' -ForegroundColor Green; Write-Host '🌍 Diacritics Support: ENABLED' -ForegroundColor Green",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            },
+            "options": {
+                "env": {
+                    "ENABLE_CAMELCASE_NAV": "true",
+                    "ENABLE_DIACRITICS": "true"
+                }
+            }
+        },
+        {
+            "label": "🔧 Full Install (All Features + Smart Navigation)",
+            "type": "shell",
+            "command": "& \"${workspaceFolder}\\Start-UnifiedProfile.ps1\" -Full; Write-Host '🎉 Complete installation with enhanced features!' -ForegroundColor Magenta",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            },
+            "options": {
+                "env": {
+                    "ENABLE_CAMELCASE_NAV": "true",
+                    "ENABLE_DIACRITICS": "true",
+                    "UNIFIED_PROFILE_DEBUG": "true"
+                }
+            }
+        },
+        {
+            "label": "🎛️ Interactive Install (Menu-Driven Setup)",
+            "type": "shell",
+            "command": "& \"${workspaceFolder}\\Start-UnifiedProfile.ps1\" -Interactive",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "🧛‍♂️ Switch to Dracula Mode (+ Smart Navigation)",
+            "type": "shell",
+            "command": "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode Dracula -EnableRealtimeLinting; Write-Host '🧛‍♂️ Dracula Mode Active with Enhanced Features!' -ForegroundColor Magenta",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "options": {
+                "env": {
+                    "ENABLE_CAMELCASE_NAV": "true",
+                    "ENABLE_DIACRITICS": "true",
+                    "DRACULA_ENHANCED_MODE": "true"
+                }
+            }
+        },
+        {
+            "label": "🚀 Switch to MCP Mode (+ Smart Navigation)",
+            "type": "shell",
+            "command": "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode MCP -EnableRealtimeLinting; Write-Host '🚀 MCP Mode Active with AI Integration!' -ForegroundColor Cyan",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "options": {
+                "env": {
+                    "ENABLE_CAMELCASE_NAV": "true",
+                    "ENABLE_DIACRITICS": "true",
+                    "MCP_ENHANCED_MODE": "true"
+                }
+            }
+        },
+        {
+            "label": "⚡ Switch to LazyAdmin Mode (+ Smart Navigation)",
+            "type": "shell",
+            "command": "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode LazyAdmin -EnableRealtimeLinting; Write-Host '⚡ LazyAdmin Mode Active with Sysadmin Tools!' -ForegroundColor Yellow",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "options": {
+                "env": {
+                    "ENABLE_CAMELCASE_NAV": "true",
+                    "ENABLE_DIACRITICS": "true",
+                    "LAZYADMIN_ENHANCED_MODE": "true"
+                }
+            }
+        },
+        {
+            "label": "🎯 Switch to Minimal Mode (+ Smart Navigation)",
+            "type": "shell",
+            "command": "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode Minimal; Write-Host '🎯 Minimal Mode Active - Lightweight with Core Features!' -ForegroundColor Green",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "options": {
+                "env": {
+                    "ENABLE_CAMELCASE_NAV": "true",
+                    "ENABLE_DIACRITICS": "true"
+                }
+            }
+        },
+        {
+            "label": "🧪 Test Profile Configuration (Comprehensive)",
+            "type": "shell",
+            "command": "Import-Module UnifiedPowerShellProfile -Force; Write-Host '🔍 Testing Profile Configuration...' -ForegroundColor Cyan; Test-ProfileConfiguration -Detailed; Write-Host ''; Write-Host '📊 Profile Status:' -ForegroundColor Yellow; Get-ProfileStatus -Verbose",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "📊 Module Version Validation",
+            "type": "shell",
+            "command": "Write-Host '🔍 PowerShell Environment Analysis' -ForegroundColor Magenta; Write-Host '==================================' -ForegroundColor DarkMagenta; Write-Host ''; Write-Host '📋 PowerShell Version:' -ForegroundColor Cyan; $PSVersionTable.PSVersion; Write-Host ''; Write-Host '📦 Required Modules Status:' -ForegroundColor Cyan; $requiredModules = @('PSReadLine', 'Terminal-Icons', 'z', 'PSFzf', 'UnifiedPowerShellProfile', 'PSScriptAnalyzer'); foreach ($module in $requiredModules) { $available = Get-Module $module -ListAvailable | Select-Object -First 1; if ($available) { Write-Host \"✅ $module - v$($available.Version)\" -ForegroundColor Green } else { Write-Host \"❌ $module - Not Found\" -ForegroundColor Red } }",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "🔍 PowerShell Environment Analysis",
+            "type": "shell",
+            "command": "Write-Host '🔍 Detailed Environment Analysis' -ForegroundColor Magenta; Write-Host '================================' -ForegroundColor DarkMagenta; Write-Host ''; Write-Host '📋 PowerShell Details:' -ForegroundColor Cyan; $PSVersionTable | Format-Table -AutoSize; Write-Host '📂 Module Paths:' -ForegroundColor Cyan; $env:PSModulePath -split ';' | ForEach-Object { Write-Host \"  $_\" -ForegroundColor Gray }; Write-Host ''; Write-Host '📦 All Loaded Modules:' -ForegroundColor Cyan; Get-Module | Format-Table Name, Version, ModuleType -AutoSize",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "🎯 Module Health Check (Quick)",
+            "type": "shell",
+            "command": "$healthModules = @('PSReadLine', 'Terminal-Icons', 'z', 'PSFzf', 'UnifiedPowerShellProfile', 'PSScriptAnalyzer', 'Pester'); Write-Host '🏥 Quick Module Health Check' -ForegroundColor Green; Write-Host '============================' -ForegroundColor DarkGreen; Write-Host ''; foreach ($module in $healthModules) { try { $available = Get-Module $module -ListAvailable | Select-Object -First 1; if ($available) { Write-Host \"✅ $module\" -NoNewline -ForegroundColor Green; Write-Host \" - v$($available.Version)\" -ForegroundColor Gray; if (Get-Module $module) { Write-Host \"   📍 Currently loaded\" -ForegroundColor Yellow } } else { Write-Host \"❌ $module - Not Available\" -ForegroundColor Red } } catch { Write-Host \"⚠️ $module - Error checking\" -ForegroundColor Yellow } }; Write-Host ''; Write-Host '💡 Run \"📊 Module Version Validation\" for detailed analysis' -ForegroundColor Cyan",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "🐪 Test CamelCase Navigation",
+            "type": "shell",
+            "command": "$env:ENABLE_CAMELCASE_NAV='true'; Write-Host '🐪 CamelCase Navigation Test' -ForegroundColor Yellow; Write-Host '============================' -ForegroundColor DarkYellow; Write-Host ''; Write-Host 'Testing CamelCase word boundaries...' -ForegroundColor Cyan; $examples = @('Get-ChildItem', 'New-VSCodeWorkspace', 'Initialize-UnifiedProfile', 'Test-PowerShellSyntax', 'Import-ModuleAdvanced'); Write-Host 'Example CamelCase commands:' -ForegroundColor Green; $examples | ForEach-Object { Write-Host \"  $_\" -ForegroundColor White }; Write-Host ''; Write-Host '💡 Use Ctrl+Left/Right to jump between CamelCase words!' -ForegroundColor Magenta; Write-Host '🎯 Smart navigation should work with these examples.' -ForegroundColor Cyan",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "🌍 Test Diacritics Support",
+            "type": "shell",
+            "command": "$env:ENABLE_DIACRITICS='true'; Write-Host '🌍 International Diacritics Support Test' -ForegroundColor Cyan; Write-Host '=======================================' -ForegroundColor DarkCyan; Write-Host ''; Write-Host 'Testing international character support...' -ForegroundColor Yellow; $examples = @(@{Lang='🇨🇿 Czech'; Text='příkaz-sNázvem-čeština_proměnná'}, @{Lang='🇪🇸 Spanish'; Text='función-conAcentos-español_variable'}, @{Lang='🇫🇷 French'; Text='commentaireAvecAccents-français_données'}, @{Lang='🇩🇪 German'; Text='funktionMitUmlauten-größe_variableÄöü'}, @{Lang='🇵🇱 Polish'; Text='funkcja-zPolskimiZnakami-ąćęłńóśźż_zmienna'}); Write-Host 'International examples:' -ForegroundColor Green; $examples | ForEach-Object { Write-Host \"  $($_.Lang): $($_.Text)\" -ForegroundColor White }; Write-Host ''; Write-Host '💡 Smart navigation works with ALL accented characters!' -ForegroundColor Magenta; Write-Host '🎯 Copy/paste these examples to test navigation.' -ForegroundColor Cyan",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "🎨 Demo Enhanced Features (Interactive)",
+            "type": "shell",
+            "command": "& \"${workspaceFolder}\\Demo-EnhancedDraculaFeatures.ps1\"",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            },
+            "options": {
+                "env": {
+                    "ENABLE_CAMELCASE_NAV": "true",
+                    "ENABLE_DIACRITICS": "true"
+                }
+            }
+        },
+        {
+            "label": "🏆 Performance Benchmark (Comprehensive)",
+            "type": "shell",
+            "command": "if (Test-Path \"${workspaceFolder}\\Test-UltraPerformanceComparison.ps1\") { & \"${workspaceFolder}\\Test-UltraPerformanceComparison.ps1\" -TestMode Comprehensive -Iterations 10 -GenerateReport } else { Write-Host '⚠️ Performance test script not found' -ForegroundColor Yellow; Write-Host '📍 Looking for: Test-UltraPerformanceComparison.ps1' -ForegroundColor Gray }",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "📊 Performance Benchmark (Quick)",
+            "type": "shell",
+            "command": "if (Test-Path \"${workspaceFolder}\\Test-UltraPerformanceComparison.ps1\") { & \"${workspaceFolder}\\Test-UltraPerformanceComparison.ps1\" -TestMode Quick -GenerateReport } else { Write-Host '⚠️ Performance test script not found' -ForegroundColor Yellow; Write-Host '💡 Creating basic performance test...' -ForegroundColor Cyan; Measure-Command { Get-Process | Select-Object -First 50 } | Format-Table TotalMilliseconds }",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "🔄 Reload Unified Profile System",
+            "type": "shell",
+            "command": "Write-Host '🔄 Reloading Unified Profile System...' -ForegroundColor Cyan; Remove-Module UnifiedPowerShellProfile -ErrorAction SilentlyContinue; Import-Module \"${workspaceFolder}\\PowerShellModules\\UnifiedPowerShellProfile\" -Force; Write-Host '✅ Module reloaded successfully!' -ForegroundColor Green",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "🧹 Clean Module Cache",
+            "type": "shell",
+            "command": "Write-Host '🧹 Cleaning PowerShell Module Cache...' -ForegroundColor Yellow; Get-Module | Where-Object { $_.Name -like '*Unified*' -or $_.Name -like '*Dracula*' } | Remove-Module -Force; Write-Host '✅ Module cache cleaned!' -ForegroundColor Green; Write-Host '💡 Use \"🔄 Reload Unified Profile System\" to reload.' -ForegroundColor Cyan",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "📚 Update Documentation",
+            "type": "shell",
+            "command": "if (Get-Command Build-ModuleDocumentation -ErrorAction SilentlyContinue) { Build-ModuleDocumentation -ModulePath \"${workspaceFolder}\\PowerShellModules\\UnifiedPowerShellProfile\" } else { Write-Host '📚 Building documentation...' -ForegroundColor Cyan; Write-Host '💡 Documentation build tools not available' -ForegroundColor Yellow }",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "🆘 Diagnose Profile Issues",
+            "type": "shell",
+            "command": "Write-Host '🆘 Profile Diagnostic Report' -ForegroundColor Red; Write-Host '============================' -ForegroundColor DarkRed; Write-Host ''; Write-Host '🔍 Checking module availability...' -ForegroundColor Yellow; $diagnosticModules = @('UnifiedPowerShellProfile', 'PSReadLine', 'Terminal-Icons'); foreach ($module in $diagnosticModules) { $moduleInfo = Get-Module $module -ListAvailable | Select-Object -First 1; if ($moduleInfo) { Write-Host \"✅ $module found at: $($moduleInfo.ModuleBase)\" -ForegroundColor Green } else { Write-Host \"❌ $module NOT FOUND\" -ForegroundColor Red } }; Write-Host ''; Write-Host '🔍 Checking profile files...' -ForegroundColor Yellow; $profiles = @($PROFILE.CurrentUserCurrentHost, $PROFILE.CurrentUserAllHosts, $PROFILE.AllUsersCurrentHost, $PROFILE.AllUsersAllHosts); foreach ($profile in $profiles) { if ($profile -and (Test-Path $profile)) { Write-Host \"✅ Profile exists: $profile\" -ForegroundColor Green } else { Write-Host \"⚠️ Profile missing: $profile\" -ForegroundColor Yellow } }",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "🔧 Reset Profile Configuration",
+            "type": "shell",
+            "command": "Write-Host '🔧 Resetting Profile Configuration...' -ForegroundColor Yellow; Write-Host '⚠️ This will reset your profile to defaults' -ForegroundColor Red; $confirmation = Read-Host 'Type YES to continue'; if ($confirmation -eq 'YES') { Remove-Module UnifiedPowerShellProfile -ErrorAction SilentlyContinue; & \"${workspaceFolder}\\Install-UnifiedProfile.ps1\" -Mode Dracula -Force; Write-Host '✅ Profile reset complete!' -ForegroundColor Green } else { Write-Host '❌ Reset cancelled' -ForegroundColor Gray }",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        }
+    ]
+}

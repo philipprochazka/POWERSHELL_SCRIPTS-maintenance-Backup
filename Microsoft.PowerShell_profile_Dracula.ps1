@@ -44,19 +44,39 @@ if (Get-Module DraculaProfile -ListAvailable) {
 
     #region 🎨 Theme Initialization
 
-    # Initialize Oh My Posh with enhanced Dracula theme
-    $draculaTheme = Join-Path $PSScriptRoot "Theme\dracula-enhanced.omp.json"
-    if (Test-Path $draculaTheme) {
-        $initScript = [ScriptBlock]::Create((oh-my-posh init pwsh --config $draculaTheme))
-        & $initScript
-        Write-Host "✨ Enhanced Dracula Oh My Posh theme loaded" -ForegroundColor Green
+    # Initialize Oh My Posh with modern v26+ support
+    $modernInitScript = Join-Path $PSScriptRoot "PowerShellModules\UnifiedPowerShellProfile\Scripts\Initialize-ModernOhMyPosh.ps1"
+    if (Test-Path $modernInitScript) {
+        . $modernInitScript
+        $initialized = Initialize-ModernOhMyPosh -Mode "Dracula"
+        if ($initialized) {
+            Write-Host "🚀 Modern Oh My Posh v26+ loaded successfully" -ForegroundColor Green
+        } else {
+            Write-Host "🔄 Falling back to legacy Oh My Posh initialization" -ForegroundColor Yellow
+            # Legacy fallback
+            $draculaTheme = Join-Path $PSScriptRoot "Theme\dracula-enhanced.omp.json"
+            if (Test-Path $draculaTheme -and (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
+                oh-my-posh init pwsh --config $draculaTheme | Invoke-Expression
+                Write-Host "✨ Legacy Dracula Oh My Posh theme loaded" -ForegroundColor Yellow
+            }
+        }
     } else {
-        # Fallback to original theme
-        $originalTheme = Join-Path $PSScriptRoot "Theme\dracula.omp.json"
-        if (Test-Path $originalTheme) {
-            $initScript = [ScriptBlock]::Create((oh-my-posh init pwsh --config $originalTheme))
+        # Original fallback method
+        $draculaTheme = Join-Path $PSScriptRoot "Theme\dracula-enhanced.omp.json"
+        if (Test-Path $draculaTheme -and (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
+            $initScript = [ScriptBlock]::Create((oh-my-posh init pwsh --config $draculaTheme))
             & $initScript
-            Write-Host "✨ Original Dracula Oh My Posh theme loaded" -ForegroundColor Yellow
+            Write-Host "✨ Enhanced Dracula Oh My Posh theme loaded" -ForegroundColor Green
+        } else {
+            # Fallback to original theme
+            $originalTheme = Join-Path $PSScriptRoot "Theme\dracula.omp.json"
+            if (Test-Path $originalTheme -and (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
+                $initScript = [ScriptBlock]::Create((oh-my-posh init pwsh --config $originalTheme))
+                & $initScript
+                Write-Host "✨ Original Dracula Oh My Posh theme loaded" -ForegroundColor Yellow
+            } else {
+                Write-Host "⚠️  Oh My Posh not found. Install with: Install-ModernOhMyPosh" -ForegroundColor Yellow
+            }
         }
     }
 

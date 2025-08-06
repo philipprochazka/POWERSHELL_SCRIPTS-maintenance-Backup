@@ -1,0 +1,237 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    
+    {
+      "name": "PowerShell Attach to Host Process",
+      "type": "PowerShell",
+      "request": "attach"
+    },
+    {
+      "name": "PowerShell Core",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${file}",
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "PowerShell ISE",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${file}",
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "PowerShell Integrated Console",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${file}",
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "PowerShell Interactive Session",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${file}",
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "PowerShell: Launch Current File",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${file}",
+      "args": []
+    },
+    {
+      "name": "🧛‍♂️ Debug Dracula Profile",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": false
+    },
+    {
+      "name": "🧪 Run Profile Tests",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Tests/Test-DraculaProfile.ps1",
+      "args": ["-Verbose", "-GenerateReport"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "🚀 Launch Profile (Clean)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Tests/Start-DraculaLauncher.ps1",
+      "args": ["-Mode", "Clean", "-NoExit"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "⚡ Performance Test",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Tests/Start-DraculaLauncher.ps1",
+      "args": ["-Mode", "Performance"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "🎮 Interactive Launcher",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Tests/Start-DraculaLauncher.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "🔧 Unified Profile System (Basic)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Install-UnifiedProfileSystem.ps1",
+      "args": ["-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🚀 Install UnifiedProfile (CurrentUser)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Install-UnifiedProfileSystem.ps1",
+      "args": ["-InstallScope", "CurrentUser", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "⚡ Install UnifiedProfile (AllUsers + Registry)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Install-UnifiedProfileSystem.ps1",
+      "args": ["-InstallScope", "AllUsers", "-IncludeRegistryChanges", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🔍 Test UnifiedProfile Installation",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Install-UnifiedProfileSystem.ps1",
+      "args": ["-WhatIf", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🧪 Debug UnifiedProfile Module",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile/UnifiedPowerShellProfile.psm1",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🔧 Initialize UnifiedProfile",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile/Scripts/Initialize-UnifiedProfile.ps1",
+      "args": ["-Mode", "Debug", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "📊 Test UnifiedProfile Quality",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile/Tests/UnifiedPowerShellProfile.Tests.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🧪 Pester Tests (PowerShellModules)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/PowerShellModules/Run-AllTests.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}/PowerShellModules",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🔑 Google Hardware Key Setup",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Install-GoogleHardwareKey.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "🧪 Google Hardware Key Tests",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/PowerShellModules/Google-Hardware-key/Tests/GoogleHardwareKey.Tests.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}/PowerShellModules/Google-Hardware-key",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "📚 Build Module Documentation (Enhanced)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+      "args": ["-GenerateTests", "-UpdateProjectStructure", "-GitRemoteSearch", "-CreateBuildManifest", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "📝 Build Documentation (Quick)",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+      "args": ["-ModulePath", "${workspaceFolder}/PowerShellModules", "-GitRemoteSearch"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🔍 Build Documentation with Git Search",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+      "args": ["-GitRemoteSearch", "-CreateBuildManifest", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🧪 Full Documentation Build + Tests",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+      "args": ["-GenerateTests", "-UpdateProjectStructure", "-CreateBuildManifest", "-GitRemoteSearch", "-Verbose"],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🎯 Profile Mode Switcher",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Theme/UnifiedPowerShellProfile/Scripts/Switch-ProfileMode.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    },
+    {
+      "name": "🔍 PSScriptAnalyzer Check",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/Run-ScriptAnalyzer.ps1",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true
+    }
+  ]
+}

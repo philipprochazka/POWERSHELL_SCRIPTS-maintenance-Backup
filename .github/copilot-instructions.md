@@ -30,7 +30,18 @@ For EVERY function created/modified, automatically generate:
 1. **Pester Tests** - Comprehensive coverage in `/Tests/` folder
 2. **Function Documentation** - `.md` file in `/docs/functions/`
 3. **VS Code Tasks** - Test execution and validation tasks
-4. **Project Structure Updates** - Update `docs/index.md` and folder tree
+4. **VS Code Launch Configs** - Debug configurations in `.vscode/launch.json`
+5. **Project Structure Updates** - Update `docs/index.md` and folder tree
+
+### VS Code Integration Requirements (CRITICAL)
+When creating or modifying PowerShell scripts, ALWAYS add corresponding launch configurations:
+
+1. **Debug Launch Config**: Direct script debugging with appropriate arguments
+2. **Test Launch Config**: Running with test parameters and report generation  
+3. **Interactive Launch Config**: For scripts requiring user interaction
+4. **Emoji Naming**: Use descriptive emojis in launch config names (🧪, 🔬, 🚀, 📊, etc.)
+5. **Temporary Console**: Set `createTemporaryIntegratedConsole: true` for most configs
+6. **Working Directory**: Always set `cwd` to appropriate context folder
 
 ### Build Step Tracking System (CRITICAL)
 When generating complex builds, create resumable checkpoints:

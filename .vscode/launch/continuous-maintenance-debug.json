@@ -1,0 +1,94 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🧹 Debug: Quick Cleanup",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/Start-ContinuousMaintenanceQuickStart.ps1",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "🔍 Debug: Preview Cleanup (WhatIf)",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Public/Start-ContinuousCleanup.ps1",
+            "args": [
+                "-MaxFilesPerRun",
+                "20",
+                "-WhatIf"
+            ],
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "📝 Debug: Incremental Commit",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Public/Invoke-IncrementalCommit.ps1",
+            "args": [
+                "-MaxFilesPerCommit",
+                "5",
+                "-CommitCategory",
+                "Modified",
+                "-WhatIf"
+            ],
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "📦 Debug: Stash Management",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Public/Invoke-IncrementalCommit.ps1",
+            "args": [
+                "-CommitCategory",
+                "Stash",
+                "-InteractiveMode"
+            ],
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "⏰ Debug: Maintenance Scheduler",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Public/Start-ContinuousMaintenanceScheduler.ps1",
+            "args": [
+                "-CleanupIntervalMinutes",
+                "5",
+                "-CommitIntervalMinutes",
+                "3",
+                "-MaxRunTimeHours",
+                "1",
+                "-WhatIf"
+            ],
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "🧪 Test: Module Functions",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "console": "integratedTerminal",
+            "program": "pwsh.exe",
+            "consoleHost": true,
+            "scriptRoot": "${workspaceFolder}",
+            "command": [
+                "Import-Module .\\PowerShellModules\\UnifiedMCPProfile -Force -Verbose;",
+                "Get-Module UnifiedMCPProfile | Select-Object -ExpandProperty ExportedFunctions;"
+            ]
+        }
+    ]
+}

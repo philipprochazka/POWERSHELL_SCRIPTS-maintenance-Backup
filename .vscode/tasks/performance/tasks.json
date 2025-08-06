@@ -1,0 +1,399 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "shell": {
+      "executable": "pwsh.exe",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+    }
+  },
+  "tasks": [
+    {
+      "label": "⚡ Test Ultra-Performance Startup Speed",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🔬 Testing Ultra-Performance Profile Startup Speed...' -ForegroundColor Cyan; Write-Host ''; $ultraProfile = '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_UltraPerformance.ps1'; if (Test-Path $ultraProfile) { $times = @(); for ($i = 1; $i -le 5; $i++) { $start = Get-Date; pwsh -NoProfile -Command \". '$ultraProfile'; exit\"; $elapsed = ((Get-Date) - $start).TotalMilliseconds; $times += $elapsed; Write-Host \"Run $i`: ${elapsed}ms\" -ForegroundColor Yellow }; $avg = ($times | Measure-Object -Average).Average; $min = ($times | Measure-Object -Minimum).Minimum; Write-Host ''; Write-Host '📊 Results:' -ForegroundColor Green; Write-Host \"  Average: ${avg}ms\" -ForegroundColor White; Write-Host \"  Fastest: ${min}ms\" -ForegroundColor Green; if ($avg -lt 200) { Write-Host '🏆 EXCELLENT PERFORMANCE!' -ForegroundColor Green } elseif ($avg -lt 500) { Write-Host '⚡ Very Good Performance' -ForegroundColor Yellow } else { Write-Host '⚠️ Needs Optimization' -ForegroundColor Red } } else { Write-Host '❌ Ultra-Performance profile not found at: $ultraProfile' -ForegroundColor Red }"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📊 Benchmark Profile Performance",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Test-DraculaPerformance.ps1",
+        "-Iterations",
+        "5"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📈 Detailed Performance Analysis",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Test-DraculaPerformance.ps1",
+        "-Iterations",
+        "10",
+        "-Detailed"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🏆 Ultra-Performance Comparison (Quick)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Test-UltraPerformanceComparison.ps1",
+        "-TestMode",
+        "Quick",
+        "-GenerateReport"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📊 Ultra-Performance Comparison (Standard)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Test-UltraPerformanceComparison.ps1",
+        "-TestMode",
+        "Standard",
+        "-Iterations",
+        "15",
+        "-GenerateReport"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🚀 Ultra-Performance Comparison (Comprehensive)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Test-UltraPerformanceComparison.ps1",
+        "-TestMode",
+        "Comprehensive",
+        "-GenerateReport",
+        "-IncludeLoremIpsum"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🎯 Compare All Ultra-Performance Versions",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🧛‍♂️ Running comprehensive comparison of all Ultra-Performance versions...' -ForegroundColor Cyan; Write-Host ''; & '${workspaceFolder}/Test-UltraPerformanceComparison.ps1' -TestMode 'Comprehensive' -GenerateReport -IncludeLoremIpsum -LoremIpsumSize 2000; Write-Host ''; Write-Host '🏆 Comparison complete! Check the generated HTML report.' -ForegroundColor Green"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📝 Lorem Ipsum Stress Test",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Test-UltraPerformanceComparison.ps1",
+        "-TestMode",
+        "LoremIpsum",
+        "-LoremIpsumSize",
+        "5000",
+        "-GenerateReport"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🔬 Performance Analysis (Quick)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Start-DraculaOptimizationAnalysis.ps1",
+        "-TestMode",
+        "Quick"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📊 Performance Analysis (Standard)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Start-DraculaOptimizationAnalysis.ps1",
+        "-TestMode",
+        "Standard",
+        "-GenerateReport"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🏆 Performance Analysis (Comprehensive)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Start-DraculaOptimizationAnalysis.ps1",
+        "-TestMode",
+        "Comprehensive",
+        "-GenerateReport",
+        "-CompareProfiles"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🧪 Test Performance Metrics",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Test-DraculaProfileMetrics.ps1",
+        "-ProfileMode",
+        "Performance",
+        "-Iterations",
+        "5",
+        "-GenerateReport",
+        "-ModuleProfile"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🎯 Test Realistic Performance Thresholds (200ms/500ms)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🎯 Testing with Realistic Performance Thresholds' -ForegroundColor Cyan; Write-Host '📊 Updated Targets: V3/V4=200ms, Original=500ms' -ForegroundColor Yellow; Write-Host ''; $env:DRACULA_PERFORMANCE_DEBUG='true'; & '${workspaceFolder}/Test-UltraPerformanceComparison.ps1' -TestMode 'Quick' -GenerateReport; Write-Host ''; Write-Host '📈 Performance Analysis with Realistic Expectations:' -ForegroundColor Green; Write-Host '  ⚡ Excellent: < 200ms' -ForegroundColor Green; Write-Host '  ✅ Very Good: 200-500ms' -ForegroundColor Green; Write-Host '  👍 Good: 500-750ms' -ForegroundColor Yellow; Write-Host '  ⚠️ Needs Optimization: > 750ms' -ForegroundColor Red; Write-Host ''; Write-Host '💡 Oh My Posh migration may affect initial load times' -ForegroundColor Gray"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🔧 Enable Performance Debug Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$env:DRACULA_PERFORMANCE_DEBUG='true'; $env:DRACULA_SHOW_STARTUP='true'; Write-Host '🔬 Performance debug mode enabled!' -ForegroundColor Green; Write-Host 'Restart PowerShell to see debug output' -ForegroundColor Yellow"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🔇 Disable Performance Debug Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Remove-Item Env:DRACULA_PERFORMANCE_DEBUG -ErrorAction SilentlyContinue; Remove-Item Env:DRACULA_SHOW_STARTUP -ErrorAction SilentlyContinue; Write-Host '🔇 Performance debug mode disabled!' -ForegroundColor Gray"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    }
+  ]
+}

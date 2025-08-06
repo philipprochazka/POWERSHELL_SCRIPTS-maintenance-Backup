@@ -1,0 +1,136 @@
+{
+  // 🚀 UnifiedPowerShellProfile VS Code Configuration
+  "powershell.codeFormatting.preset": "OTBS",
+  "powershell.codeFormatting.openBraceOnSameLine": true,
+  "powershell.codeFormatting.newLineAfterOpenBrace": true,
+  "powershell.codeFormatting.newLineAfterCloseBrace": true,
+  "powershell.codeFormatting.whitespaceBeforeOpenBrace": true,
+  "powershell.codeFormatting.whitespaceBeforeOpenParen": true,
+  "powershell.codeFormatting.whitespaceAroundOperator": true,
+  "powershell.codeFormatting.whitespaceAfterSeparator": true,
+  "powershell.codeFormatting.ignoreOneLineBlock": false,
+  "powershell.codeFormatting.alignPropertyValuePairs": true,
+  "powershell.scriptAnalysis.enable": true,
+  "powershell.scriptAnalysis.settingsPath": ".vscode/PSScriptAnalyzerSettings.psd1",
+  "powershell.integratedConsole.startLocation": "Workspace",
+  "powershell.integratedConsole.showOnStartup": false,
+  "powershell.developer.powerShellExePath": "pwsh.exe",
+  
+  // 📁 File Associations
+  "files.associations": {
+    "*.ps1": "powershell",
+    "*.psm1": "powershell",
+    "*.psd1": "powershell"
+  },
+  
+  // 🎨 Editor Configuration
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.gotoLocation.alternativeImplementationCommand": "editor.action.referenceSearch.trigger",
+  "editor.gotoLocation.alternativeReferenceCommand": "editor.action.peekImplementation",
+  "editor.gotoLocation.multipleDefinitions": "gotoAndPeek",
+  "editor.gotoLocation.multipleImplementations": "gotoAndPeek",
+  
+  // 🔍 Spell Check Configuration
+  "cSpell.enabledFileTypes": [
+    "!c", "!csharp", "!php", "!python", "!rust", "!typescriptreact",
+    "ahk", "ahk2", "bat", "csv (semicolon)", "env", "markdown-math",
+    "markdown_latex_combined", "powershell", "properties", "search-result"
+  ],
+  
+  // 🖥️ Terminal Profiles
+  "terminal.integrated.defaultProfile.windows": "⚡ Ultra-Performance",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "⚡ Ultra-Performance": {
+      "path": "pwsh.exe",
+      "args": [
+        "-NoLogo", 
+        "-ExecutionPolicy", "Bypass", 
+        "-NoExit", 
+        "-Command", 
+        ". \"${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_Performance.ps1\""
+      ],
+      "icon": "terminal-powershell",
+      "color": "terminal.ansiYellow"
+    },
+    "🚀 UnifiedProfile": {
+      "path": "pwsh.exe",
+      "args": [
+        "-NoLogo", 
+        "-ExecutionPolicy", "Bypass", 
+        "-NoExit", 
+        "-Command", 
+        "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode Dracula -EnableRealtimeLinting"
+      ],
+      "icon": "terminal-powershell",
+      "color": "terminal.ansiMagenta"
+    },
+    "🧛 Dracula Mode": {
+      "path": "pwsh.exe",
+      "args": [
+        "-NoLogo", 
+        "-ExecutionPolicy", "Bypass", 
+        "-NoExit", 
+        "-Command", 
+        "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode Dracula -EnableRealtimeLinting"
+      ],
+      "icon": "terminal-powershell",
+      "color": "terminal.ansiMagenta"
+    },
+    "🤖 MCP Mode": {
+      "path": "pwsh.exe",
+      "args": [
+        "-NoLogo", 
+        "-ExecutionPolicy", "Bypass", 
+        "-NoExit", 
+        "-Command", 
+        "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode MCP -EnableRealtimeLinting"
+      ],
+      "icon": "terminal-powershell",
+      "color": "terminal.ansiGreen"
+    },
+    "⚡ LazyAdmin Mode": {
+      "path": "pwsh.exe",
+      "args": [
+        "-NoLogo", 
+        "-ExecutionPolicy", "Bypass", 
+        "-NoExit", 
+        "-Command", 
+        "Import-Module UnifiedPowerShellProfile -Force; Initialize-UnifiedProfile -Mode LazyAdmin -EnableRealtimeLinting"
+      ],
+      "icon": "terminal-powershell",
+      "color": "terminal.ansiYellow"
+    }
+  },
+  
+  // 🗂️ File Nesting
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ps1": "${capture}.Tests.ps1,${capture}.test.ps1",
+    "*.psm1": "${capture}.psd1,${capture}.Tests.ps1",
+    "UnifiedPowerShellProfile.psm1": "UnifiedPowerShellProfile.psd1,README.md"
+  },
+  
+  // 🔧 Build Tools
+  "makefile.makefilePath": "${workspaceFolder}/build/windows/main/Makefile",
+  "makefile.alwaysPreConfigure": true,
+  "makefile.configurations": [
+    {
+      "name": "default",
+      "makeArgs": [],
+      "makefilePath": "${workspaceFolder}/build/windows/main/Makefile"
+    }
+  ],
+  "makefile.defaultConfiguration": "default",
+  "cmake.ignoreCMakeListsMissing": true,
+  "cSpell.enabledLanguageIds": [
+    "COBOL",
+    "ACUCOBOL"
+  ]
+}

@@ -37,7 +37,70 @@
     - Implements mandatory development workflow
     - Creates build step tracking system
     - Generates comprehensive documentation and tests
+
+.AUTHOR
+    Philip Procházka
+    
+.LINK
+    https://philipprochazka.cz
+
+.VERSION
+    1.0.0
+    
+.COPYRIGHT
+    (c) 2025 Philip Procházka. All rights reserved.
 #>
+
+# Script-level parameters for direct execution
+param(
+    [string]$ModulePath = (Get-Location).Path,
+    [string]$OutputPath = "docs",
+    [string]$ConfigPath = "build-config.json",
+    [switch]$GenerateTests,
+    [switch]$UpdateProjectStructure,
+    [switch]$CreateBuildManifest,
+    [switch]$GitRemoteSearch,
+    [int]$MaxSearchResults = 10
+)
+
+function Get-BuildConfiguration {
+    param([string]$ConfigPath = "build-config.json")
+    
+    if (Test-Path $ConfigPath) {
+        try {
+            $config = Get-Content $ConfigPath -Raw | ConvertFrom-Json
+            Write-Host "  ✅ Loaded build configuration from: $ConfigPath" -ForegroundColor Green
+            return $config
+        } catch {
+            Write-Warning "  ⚠️ Could not parse build configuration: $($_.Exception.Message)"
+        }
+    } else {
+        Write-Host "  ℹ️ No build configuration found at: $ConfigPath" -ForegroundColor Gray
+    }
+    
+    # Return default configuration
+    return [PSCustomObject]@{
+        author  = [PSCustomObject]@{
+            name      = "Philip Procházka"
+            email     = "contact@philipprochazka.cz"
+            website   = "https://philipprochazka.cz"
+            github    = "philipprochazka"
+            githubUrl = "https://github.com/philipprochazka"
+        }
+        project = [PSCustomObject]@{
+            namespace      = "PhilipProcházka.PowerShell"
+            copyright      = "(c) 2025 Philip Procházka. All rights reserved."
+            defaultVersion = "1.0.0"
+            defaultLicense = "MIT"
+        }
+        build   = [PSCustomObject]@{
+            toolName         = "Build-ModuleDocumentation"
+            toolVersion      = "1.0.0"
+            generatedByText  = "Built with Build-ModuleDocumentation v1.0.0 by Philip Procházka"
+            followsStandards = "Following PowerShell development best practices and enterprise standards"
+        }
+    }
+}
 
 function Build-ModuleDocumentation {
     [CmdletBinding()]
@@ -46,6 +109,8 @@ function Build-ModuleDocumentation {
         [string]$ModulePath = (Get-Location).Path,
         
         [string]$OutputPath = "docs",
+        
+        [string]$ConfigPath = "build-config.json",
         
         [switch]$GenerateTests,
         
@@ -60,6 +125,10 @@ function Build-ModuleDocumentation {
 
     begin {
         Write-Host "📚 Starting Enhanced Documentation Build Process..." -ForegroundColor Cyan
+        
+        # Load build configuration
+        Write-Host "⚙️ Loading build configuration..." -ForegroundColor Yellow
+        $buildConfig = Get-BuildConfiguration -ConfigPath $ConfigPath
         
         # Build Step Tracking System (CRITICAL per guidelines)
         if ($CreateBuildManifest) {
@@ -87,22 +156,22 @@ function Build-ModuleDocumentation {
             
             # Step 3: Documentation Generation (following standards)
             Write-Host "📝 Step 3: Generating Function Documentation..." -ForegroundColor Yellow
-            Build-FunctionDocumentation -ModuleInfo $moduleInfo -OutputPath $OutputPath
+            Build-FunctionDocumentation -ModuleInfo $moduleInfo -OutputPath $OutputPath -BuildConfig $buildConfig
             
             # Step 4: Test Generation (Mandatory per workflow)
             if ($GenerateTests) {
                 Write-Host "🧪 Step 4: Generating Pester Tests..." -ForegroundColor Yellow
-                Build-PesterTests -ModuleInfo $moduleInfo
+                Build-PesterTests -ModuleInfo $moduleInfo -BuildConfig $buildConfig
             }
             
             # Step 5: VS Code Integration
             Write-Host "🔧 Step 5: Creating VS Code Tasks..." -ForegroundColor Yellow
-            Build-VSCodeTasks -ModuleInfo $moduleInfo
+            Build-VSCodeTasks -ModuleInfo $moduleInfo -BuildConfig $buildConfig
             
             # Step 6: Project Structure Updates (Mandatory)
             if ($UpdateProjectStructure) {
                 Write-Host "🏗️ Step 6: Updating Project Structure..." -ForegroundColor Yellow
-                Update-ProjectStructure -ModuleInfo $moduleInfo -GitInfo $gitInfo -OutputPath $OutputPath
+                Update-ProjectStructure -ModuleInfo $moduleInfo -GitInfo $gitInfo -OutputPath $OutputPath -BuildConfig $buildConfig
             }
             
             Write-Host "✅ Documentation build completed successfully!" -ForegroundColor Green
@@ -190,9 +259,9 @@ function Get-ModuleInformation {
                 Name         = $psm1.BaseName
                 Path         = $psm1.DirectoryName
                 ManifestPath = $null
-                Version      = "Unknown"
-                Description  = "PowerShell Module"
-                Author       = "Unknown"
+                Version      = "1.0.0"
+                Description  = "PowerShell Module by Philip Procházka"
+                Author       = "Philip Procházka <contact@philipprochazka.cz>"
                 Functions    = @()
                 RootModule   = $psm1.FullName
             }
@@ -234,6 +303,8 @@ function Get-GitRemoteInformation {
                     Write-Host "  ✅ Git remote detected: $remoteUrl" -ForegroundColor Green
                 } else {
                     Write-Host "  ⚠️ Git repository found but no remote configured" -ForegroundColor Yellow
+                    # Set default owner information for Philip Procházka
+                    $gitInfo.Owner = "philipprochazka"
                 }
             } catch {
                 Write-Host "  ⚠️ Error reading git information: $($_.Exception.Message)" -ForegroundColor Yellow
@@ -264,6 +335,16 @@ function Search-ModuleRepositories {
     )
     
     $results = @()
+    
+    # Add specific searches for Philip Procházka's repositories
+    $results += [PSCustomObject]@{
+        Query             = "Philip Procházka $ModuleName"
+        Suggestion        = "Search Philip's GitHub repositories"
+        PotentialRepo     = "https://github.com/philipprochazka?q=$($ModuleName -replace ' ', '+')+language:PowerShell"
+        PowerShellGallery = "https://www.powershellgallery.com/packages?q=$ModuleName"
+        PersonalDomain    = "https://philipprochazka.cz"
+    }
+    
     foreach ($query in $searchQueries) {
         $results += [PSCustomObject]@{
             Query             = $query
@@ -280,7 +361,8 @@ function Search-ModuleRepositories {
 function Build-FunctionDocumentation {
     param(
         [object[]]$ModuleInfo,
-        [string]$OutputPath
+        [string]$OutputPath,
+        [object]$BuildConfig
     )
     
     foreach ($module in $ModuleInfo) {
@@ -339,15 +421,21 @@ $FunctionName -Parameter1 "Value"
 - Generated by Build-ModuleDocumentation
 - Module: $ModuleName
 - Created: $(Get-Date -Format 'yyyy-MM-dd')
+- Author: Philip Procházka
 
 ## Related Links
 - [Module Documentation](../index.md)
 - [PowerShell Gallery](https://www.powershellgallery.com/packages/$ModuleName)
+- [Philip Procházka's Website](https://philipprochazka.cz)
+- [GitHub Profile](https://github.com/philipprochazka)
 "@
 }
 
 function Build-PesterTests {
-    param([object[]]$ModuleInfo)
+    param(
+        [object[]]$ModuleInfo,
+        [object]$BuildConfig
+    )
     
     $testsPath = "Tests"
     if (-not (Test-Path $testsPath)) {
@@ -356,16 +444,33 @@ function Build-PesterTests {
     
     foreach ($module in $ModuleInfo) {
         $testFile = Join-Path $testsPath "$($module.Name).Tests.ps1"
-        $testContent = Build-PesterTestContent -ModuleInfo $module
+        $testContent = Build-PesterTestContent -ModuleInfo $module -BuildConfig $BuildConfig
         Set-Content -Path $testFile -Value $testContent -Encoding UTF8
         Write-Host "  ✅ Created test: $($module.Name).Tests.ps1" -ForegroundColor Green
     }
 }
 
 function Build-PesterTestContent {
-    param([object]$ModuleInfo)
+    param(
+        [object]$ModuleInfo,
+        [object]$BuildConfig
+    )
     
     return @"
+<#
+.SYNOPSIS
+    Pester tests for $($ModuleInfo.Name) module
+    
+.DESCRIPTION
+    Comprehensive test suite following PowerShell development standards
+    
+.AUTHOR
+    Philip Procházka <contact@philipprochazka.cz>
+    
+.LINK
+    https://philipprochazka.cz
+#>
+
 #Requires -Module Pester
 
 Describe "$($ModuleInfo.Name) Module Tests" {
@@ -410,7 +515,10 @@ Describe "$($ModuleInfo.Name) Module Tests" {
 }
 
 function Build-VSCodeTasks {
-    param([object[]]$ModuleInfo)
+    param(
+        [object[]]$ModuleInfo,
+        [object]$BuildConfig
+    )
     
     Write-Host "  🔧 Generating VS Code tasks with emoji labels..." -ForegroundColor Gray
     
@@ -454,11 +562,12 @@ function Update-ProjectStructure {
     param(
         [object[]]$ModuleInfo,
         [object]$GitInfo,
-        [string]$OutputPath
+        [string]$OutputPath,
+        [object]$BuildConfig
     )
     
     $indexPath = Join-Path $OutputPath "index.md"
-    $indexContent = Build-ProjectIndexMarkdown -ModuleInfo $ModuleInfo -GitInfo $GitInfo
+    $indexContent = Build-ProjectIndexMarkdown -ModuleInfo $ModuleInfo -GitInfo $GitInfo -BuildConfig $BuildConfig
     Set-Content -Path $indexPath -Value $indexContent -Encoding UTF8
     
     Write-Host "  ✅ Updated project index: $indexPath" -ForegroundColor Green
@@ -467,7 +576,8 @@ function Update-ProjectStructure {
 function Build-ProjectIndexMarkdown {
     param(
         [object[]]$ModuleInfo,
-        [object]$GitInfo
+        [object]$GitInfo,
+        [object]$BuildConfig
     )
     
     $gitSection = ""
@@ -491,8 +601,16 @@ $($GitInfo.SearchResults | ForEach-Object { "- [$($_.Query)]($($_.PotentialRepo)
     return @"
 # PowerShell Module Documentation
 
-Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
+**Author**: Philip Procházka  
+**Website**: [philipprochazka.cz](https://philipprochazka.cz)  
+**GitHub**: [philipprochazka](https://github.com/philipprochazka)  
+**Generated**: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
+
 $gitSection
+
+## About
+
+This documentation system is part of Philip Procházka's PowerShell development ecosystem. All modules and scripts are developed following enterprise-grade PowerShell standards and best practices.
 
 ## Modules
 
@@ -545,8 +663,16 @@ All modules follow these standards:
 - Error handling with try/catch blocks
 - Proper module manifest (.psd1) with versioning
 
+## Contact & Support
+
+- **Author**: Philip Procházka
+- **Email**: contact@philipprochazka.cz
+- **Website**: [philipprochazka.cz](https://philipprochazka.cz)
+- **GitHub**: [github.com/philipprochazka](https://github.com/philipprochazka)
+
 ---
-*Built with Build-ModuleDocumentation following PowerShell development best practices*
+*Built with Build-ModuleDocumentation v1.0.0 by Philip Procházka*  
+*Following PowerShell development best practices and enterprise standards*
 "@
 }
 
@@ -584,18 +710,5 @@ function Update-BuildStepStatus {
     }
 }
 
-# Main execution
-if ($MyInvocation.InvocationName -ne '.') {
-    # Script is being executed directly
-    param(
-        [string]$ModulePath = (Get-Location).Path,
-        [string]$OutputPath = "docs",
-        [switch]$GenerateTests,
-        [switch]$UpdateProjectStructure,
-        [switch]$CreateBuildManifest,
-        [switch]$GitRemoteSearch,
-        [int]$MaxSearchResults = 10
-    )
-    
-    Build-ModuleDocumentation -ModulePath $ModulePath -OutputPath $OutputPath -GenerateTests:$GenerateTests -UpdateProjectStructure:$UpdateProjectStructure -CreateBuildManifest:$CreateBuildManifest -GitRemoteSearch:$GitRemoteSearch -MaxSearchResults $MaxSearchResults
-}
+# Main execution when script is run directly
+Build-ModuleDocumentation -ModulePath $ModulePath -OutputPath $OutputPath -ConfigPath $ConfigPath -GenerateTests:$GenerateTests -UpdateProjectStructure:$UpdateProjectStructure -CreateBuildManifest:$CreateBuildManifest -GitRemoteSearch:$GitRemoteSearch -MaxSearchResults $MaxSearchResults

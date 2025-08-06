@@ -20,14 +20,17 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)]
-    [ValidateSet('Normal', 'Performance', 'Silent', 'Minimal')]
+    [ValidateSet('Normal', 'Performance', 'Silent', 'Minimal', 'UltraPerformance')]
     [string]$Mode,
     
     [Parameter()]
     [bool]$ShowStartup = $false,
     
     [Parameter()]
-    [switch]$NoBackup
+    [switch]$NoBackup,
+    
+    [Parameter()]
+    [switch]$SystemWide
 )
 
 Write-Host @"
@@ -42,10 +45,11 @@ $backupPath = "$profilePath.backup.$(Get-Date -Format 'yyyyMMdd-HHmmss')"
 
 # Profile file mappings
 $profileFiles = @{
-    'Normal'      = 'Microsoft.PowerShell_profile_Dracula.ps1'
-    'Performance' = 'Microsoft.PowerShell_profile_Dracula_Performance.ps1'
-    'Silent'      = 'Microsoft.PowerShell_profile_Dracula_Silent.ps1'
-    'Minimal'     = 'Microsoft.PowerShell_profile_Dracula_Minimal.ps1'
+    'Normal'           = 'Microsoft.PowerShell_profile_Dracula.ps1'
+    'Performance'      = 'Microsoft.PowerShell_profile_Dracula_Performance.ps1'
+    'Silent'           = 'Microsoft.PowerShell_profile_Dracula_Silent.ps1'
+    'Minimal'          = 'Microsoft.PowerShell_profile_Dracula_Minimal.ps1'
+    'UltraPerformance' = 'Microsoft.PowerShell_profile_Dracula_UltraPerformance.ps1'
 }
 
 Write-Host "`n🔄 Switching to $Mode mode..." -ForegroundColor Yellow

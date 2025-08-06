@@ -1,0 +1,81 @@
+{
+    "todo-tree.tree.showScanModeButton": false,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb",
+        "*.nupkg": "default"
+    },
+    "python.defaultInterpreterPath": "C:\\Python310\\python.exe",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "explorer.confirmDragAndDrop": false,
+    "editor.renderControlCharacters": true,
+    "cSpell.language": "en,cs",
+    "security.workspace.trust.untrustedFiles": "open",
+    "code-runner.defaultLanguage": "php",
+    "code-runner.cwd": "code-runner.fileDirectoryAsCwd",
+    "json.maxItemsComputed": 100000,
+    "sqltools.formatLanguages": [
+        "sql",
+        "mySQL"
+    ],
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false,
+    "cSpell.enableFiletypes": [
+        "powershell"
+    ],
+    "sass.format.debug": true,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "remote.downloadExtensionsLocally": true,
+    "[xml]": {
+        "editor.defaultFormatter": "svipas.prettier-plus"
+    },
+    "editor.accessibilitySupport": "off",
+    "cSpell.userWords": [
+        "Norditerm",
+        "widgety"
+    ],
+    "workbench.colorTheme": "Dracula Refined",
+    "explorer.confirmDelete": false,
+    "terminal.integrated.gpuAcceleration": "on",
+    "terminal.integrated.persistentSessionScrollback": 1000,
+    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.shellIntegration.history": 1000,
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.enableBell": true,
+    "terminal.integrated.fontFamily": "SauceCodePro NFM",
+    "terminal.integrated.fontSize": 13,
+    "window.zoomLevel": 1,
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "bookmarks.label.suggestion": "suggestWhenSelectedOrLineWhenNoSelected",
+    "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
+    "powershell.codeFormatting.useConstantStrings": true,
+    "powershell.codeFormatting.useCorrectCasing": true,
+    "powershell.codeFormatting.whitespaceBetweenParameters": true,
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        },
+        "PowerShell-edit": {
+            "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+        }
+    },
+    "terminal.integrated.cursorWidth": 3,
+    "terminal.integrated.defaultProfile.linux": ""
+}

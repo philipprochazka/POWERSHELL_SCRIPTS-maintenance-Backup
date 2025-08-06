@@ -1,0 +1,281 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "shell": {
+      "executable": "pwsh.exe",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+    }
+  },
+  "tasks": [
+    {
+      "label": "🔐 Setup Google Hardware Key (All Methods)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Install-GoogleHardwareKey -USBDriveLetter 'F:' -Method 'All' -CreateBackup"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🔑 Setup Google Hardware Key (FIDO2 Only)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Install-GoogleHardwareKey -USBDriveLetter 'F:' -Method 'FIDO2'"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🧪 Test Google Hardware Key",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Test-GoogleHardwareKey -USBDriveLetter 'F:' -Method 'All' -Detailed"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🚀 Launch Google Authentication",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Start-GoogleAuthentication -USBDriveLetter 'F:'"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📋 Google Hardware Key Info",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Get-GoogleHardwareKeyInfo -USBDriveLetter 'F:' -ShowCredentials"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "💾 Backup Google Hardware Key",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Backup-GoogleHardwareKey -USBDriveLetter 'F:' -IncludeCertificates"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📜 Create Google Security Certificate",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; New-GoogleSecurityCertificate -USBDriveLetter 'F:' -ValidYears 2"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🔓 Import Google Credentials",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; $cred = Import-GoogleCredentials -USBDriveLetter 'F:' -ShowDetails; if ($cred) { Write-Host 'Credentials successfully loaded for:' $cred.UserName -ForegroundColor Green } else { Write-Host 'Failed to load credentials' -ForegroundColor Red }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🗑️ Remove Google Hardware Key",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Remove-GoogleHardwareKey -USBDriveLetter 'F:' -CreateBackup -RemoveCertificates"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🧪 Run Google Hardware Key Tests (Pester)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Set-Location '${workspaceFolder}/PowerShellModules/Google-Hardware-key'; if (Get-Module Pester -ListAvailable) { Invoke-Pester ./Tests/GoogleHardwareKey.Tests.ps1 -Output Detailed } else { Write-Host 'Pester module not found. Installing...' -ForegroundColor Yellow; Install-Module Pester -Force -Scope CurrentUser; Invoke-Pester ./Tests/GoogleHardwareKey.Tests.ps1 -Output Detailed }"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📚 Open Google Hardware Key Documentation",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Start-Process 'notepad.exe' -ArgumentList '${workspaceFolder}/PowerShellModules/Google-Hardware-key/README.md'"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🎯 Open USB Hardware Key (F:)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "if (Test-Path 'F:') { Start-Process 'explorer.exe' -ArgumentList 'F:'; Write-Host 'Opened USB drive F:' -ForegroundColor Green } else { Write-Host 'USB drive F: not found. Please insert your hardware key.' -ForegroundColor Red }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    }
+  ]
+}

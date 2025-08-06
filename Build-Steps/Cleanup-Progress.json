@@ -1,0 +1,18 @@
+{
+  "CompletedCategories": [],
+  "ProcessedFiles": [
+    "Microsoft.PowerShell_profile_Dracula_Enhanced.ps1",
+    "Microsoft.PowerShell_profile_Dracula_Minimal.ps1",
+    "Microsoft.PowerShell_profile_Dracula_Performance.ps1",
+    "Microsoft.PowerShell_profile_Dracula_Silent.ps1",
+    "Microsoft.PowerShell_profile_Dracula_UltraPerformance_V3.ps1",
+    "Microsoft.PowerShell_profile_Dracula_UltraPerformance_V4.ps1",
+    "Microsoft.PowerShell_profile_Dracula_UltraPerformance.ps1",
+    "Microsoft.PowerShell_profile_Dracula.ps1",
+    "Microsoft.PowerShell_profile_MCP.ps1",
+    "Microsoft.PowerShell_profile.backup.ps1",
+    "Microsoft.PowerShell_profile2.backup.ps1"
+  ],
+  "TotalFilesProcessed": 8,
+  "LastRun": "2025-08-07T00:21:10.6407544+02:00"
+}

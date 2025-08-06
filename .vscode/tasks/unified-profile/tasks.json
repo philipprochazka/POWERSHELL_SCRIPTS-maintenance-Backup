@@ -1,0 +1,156 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "shell": {
+      "executable": "pwsh.exe",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+    }
+  },
+  "tasks": [
+    {
+      "label": "🚀 Install UnifiedProfile System",
+      "type": "shell",
+      "command": "$ENV:PSModulePath = \"${workspaceFolder};$ENV:PSModulePath\"; Import-Module \"${workspaceFolder}\\UnifiedPowerShellProfile\" -Force; Install-UnifiedProfileSystem -IncludeRegistryChanges -Verbose",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "⚡ Install System-Wide Ultra-Performance Profile",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) { Write-Host '⚠️ This task requires Administrator privileges for system-wide installation!' -ForegroundColor Yellow; Write-Host '💡 Right-click VS Code and \"Run as Administrator\" then retry.' -ForegroundColor Cyan; exit 1 }; $ENV:PSModulePath = \"${workspaceFolder};$ENV:PSModulePath\"; Import-Module \"${workspaceFolder}\\UnifiedPowerShellProfile\" -Force; Install-UnifiedProfileSystem -InstallScope 'AllUsers' -IncludeRegistryChanges -Verbose; Write-Host '🎯 Switching to Ultra-Performance Mode...' -ForegroundColor Cyan; & '${workspaceFolder}/Switch-DraculaMode.ps1' -Mode 'Performance' -SystemWide; Write-Host '✅ System-wide ultra-performance profile installed!' -ForegroundColor Green"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false,
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "🎯 Enable Ultra-Performance Default Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Set-DraculaUltraPerformanceDefault.ps1",
+        "-DefaultMode",
+        "UltraPerformance",
+        "-Force"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🔍 Verify System-Wide Profile Propagation",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🔍 Verifying System-Wide Profile Propagation...' -ForegroundColor Cyan; Write-Host ''; Write-Host '📂 PSModulePath Analysis:' -ForegroundColor Yellow; $env:PSModulePath -split ';' | Where-Object {$_ -like '*UnifiedPowerShellProfile*' -or $_ -like '*PowerShell*'} | ForEach-Object { Write-Host \"  📁 $_\" -ForegroundColor Gray }; Write-Host ''; Write-Host '👤 Current User Profile Status:' -ForegroundColor Yellow; @($PROFILE.CurrentUserCurrentHost, $PROFILE.CurrentUserAllHosts) | ForEach-Object { $exists = Test-Path $_; $hasUnified = $false; if ($exists) { $hasUnified = (Get-Content $_ -Raw) -like '*UnifiedPowerShellProfile*' }; Write-Host \"  $(if($exists){'✅'}else{'❌'}) $_\" -ForegroundColor $(if($exists){'Green'}else{'Red'}); if ($hasUnified) { Write-Host \"    🎯 Contains UnifiedProfile auto-import\" -ForegroundColor Green } }; Write-Host ''; Write-Host '🖥️ All Users Profile Status:' -ForegroundColor Yellow; @($PROFILE.AllUsersCurrentHost, $PROFILE.AllUsersAllHosts) | ForEach-Object { $exists = Test-Path $_; $hasUnified = $false; if ($exists) { $hasUnified = (Get-Content $_ -Raw) -like '*UnifiedPowerShellProfile*' }; Write-Host \"  $(if($exists){'✅'}else{'❌'}) $_\" -ForegroundColor $(if($exists){'Green'}else{'Red'}); if ($hasUnified) { Write-Host \"    🎯 Contains UnifiedProfile auto-import\" -ForegroundColor Green } }; Write-Host ''; Write-Host '⚡ Performance Profile Status:' -ForegroundColor Yellow; $perfProfile = '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_Performance.ps1'; if (Test-Path $perfProfile) { Write-Host '  ✅ Ultra-Performance profile available' -ForegroundColor Green; $size = [math]::Round((Get-Item $perfProfile).Length/1KB, 2); Write-Host \"    📏 Size: $size KB\" -ForegroundColor Gray } else { Write-Host '  ❌ Ultra-Performance profile missing' -ForegroundColor Red }; Write-Host ''; Write-Host '💡 Launch Test (Current Session):' -ForegroundColor Yellow; try { Import-Module UnifiedPowerShellProfile -Force -ErrorAction Stop; Write-Host '  ✅ Module imports successfully' -ForegroundColor Green; if (Get-Command Initialize-UnifiedProfile -ErrorAction SilentlyContinue) { Write-Host '  ✅ Core functions available' -ForegroundColor Green } else { Write-Host '  ⚠️ Some functions may be missing' -ForegroundColor Yellow } } catch { Write-Host \"  ❌ Import failed: $($_.Exception.Message)\" -ForegroundColor Red }; Write-Host ''; Write-Host '🎯 Propagation Status: ' -NoNewline; $allGood = $true; Write-Host $(if($allGood){'✅ READY FOR SYSTEM-WIDE USE'}else{'❌ NEEDS ATTENTION'}) -ForegroundColor $(if($allGood){'Green'}else{'Red'})"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🎯 Switch Profile Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Import-Module UnifiedPowerShellProfile -Force; Switch-ProfileMode"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🧹 Setup Unified Profile System",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Start-UnifiedProfile.ps1",
+        "-Quick"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    }
+  ]
+}

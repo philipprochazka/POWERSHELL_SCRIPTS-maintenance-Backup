@@ -1,0 +1,200 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "shell": {
+      "executable": "pwsh.exe",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+    }
+  },
+  "tasks": [
+    {
+      "label": "📚 Build Module Documentation (Enhanced)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+        "-GenerateTests",
+        "-UpdateProjectStructure",
+        "-GitRemoteSearch",
+        "-CreateBuildManifest"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📝 Build Documentation (Quick)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+        "-ModulePath",
+        "${workspaceFolder}/PowerShellModules",
+        "-GitRemoteSearch"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🔍 Build Documentation with Git Search",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🔍 Building documentation with git remote detection...' -ForegroundColor Cyan; . '${workspaceFolder}/Build-ModuleDocumentation.ps1' -GitRemoteSearch -CreateBuildManifest -Verbose; if (Test-Path 'Build-Steps/Manifest-Build-Progress.md.temp') { Write-Host '📋 Build manifest created - check Build-Steps folder' -ForegroundColor Green }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🧪 Build Documentation + Tests + Tasks",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '🚀 Full documentation build with tests and VS Code tasks...' -ForegroundColor Cyan; . '${workspaceFolder}/Build-ModuleDocumentation.ps1' -GenerateTests -UpdateProjectStructure -CreateBuildManifest -GitRemoteSearch -Verbose"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "📊 Documentation Quality Check",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '📊 Checking documentation quality...' -ForegroundColor Cyan; if (Test-Path './docs') { $docFiles = Get-ChildItem './docs' -Recurse -Filter '*.md'; Write-Host \"📚 Found $($docFiles.Count) documentation files\" -ForegroundColor Green; $docFiles | ForEach-Object { Write-Host \"  ✅ $($_.Name)\" -ForegroundColor Gray } } else { Write-Host '❌ No docs folder found' -ForegroundColor Red }; if (Test-Path './Tests') { $testFiles = Get-ChildItem './Tests' -Filter '*.Tests.ps1'; Write-Host \"🧪 Found $($testFiles.Count) test files\" -ForegroundColor Green } else { Write-Host '⚠️ No Tests folder found' -ForegroundColor Yellow }"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🔄 Resume Documentation Build",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "if (Test-Path 'Build-Steps/Manifest-Build-Progress.md.temp') { Write-Host '📋 Found existing build manifest' -ForegroundColor Cyan; Get-Content 'Build-Steps/Manifest-Build-Progress.md.temp'; Write-Host ''; Write-Host '🔄 Resuming build...' -ForegroundColor Yellow; . '${workspaceFolder}/Build-ModuleDocumentation.ps1' -GitRemoteSearch -CreateBuildManifest } else { Write-Host '❌ No build manifest found. Starting fresh build...' -ForegroundColor Red; . '${workspaceFolder}/Build-ModuleDocumentation.ps1' -GitRemoteSearch -CreateBuildManifest }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "💾 Commit All Repositories",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Write-Host '💾 Committing changes across all repositories...' -ForegroundColor Cyan; $repos = @('${workspaceFolder}', '${workspaceFolder}/PowerShellModules/*'); foreach ($repo in $repos) { if (Test-Path \"$repo/.git\") { Push-Location $repo; try { $status = git status --porcelain; if ($status) { Write-Host \"📝 Changes found in: $repo\" -ForegroundColor Yellow; git add .; git commit -m \"Auto-commit: $(Get-Date -Format 'yyyy-MM-dd HH:mm') - Enhanced documentation and build system\"; Write-Host \"✅ Committed: $repo\" -ForegroundColor Green } else { Write-Host \"✅ No changes in: $repo\" -ForegroundColor Gray } } catch { Write-Host \"❌ Error in: $repo - $($_.Exception.Message)\" -ForegroundColor Red } finally { Pop-Location } } }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🔧 Validate Profile Syntax",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$profiles = Get-ChildItem '${workspaceFolder}' -Filter 'Microsoft.PowerShell_profile*.ps1'; Write-Host \"🔧 Validating $($profiles.Count) profile files...\" -ForegroundColor Cyan; foreach ($profile in $profiles) { try { $null = [System.Management.Automation.Language.Parser]::ParseFile($profile.FullName, [ref]$null, [ref]$null); Write-Host \"  ✅ $($profile.Name) - Syntax valid\" -ForegroundColor Green } catch { Write-Host \"  ❌ $($profile.Name) - Syntax error: $($_.Exception.Message)\" -ForegroundColor Red } }"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "🧹 Quick Cleanup (15 files)",
+            "type": "shell",
+            "command": "Import-Module .\\PowerShellModules\\UnifiedMCPProfile -Force; Start-ContinuousCleanup -MaxFilesPerRun 15 -AutoCommit",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false,
+                "close": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        },
+        {
+            "label": "📝 Process Commits (Modified files)",
+            "type": "shell",
+            "command": "Import-Module .\\PowerShellModules\\UnifiedMCPProfile -Force; Invoke-IncrementalCommit -CommitCategory Modified -MaxFilesPerCommit 8",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false,
+                "close": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        },
+        {
+            "label": "📦 Process Git Stashes",
+            "type": "shell",
+            "command": "Import-Module .\\PowerShellModules\\UnifiedMCPProfile -Force; Invoke-IncrementalCommit -CommitCategory Stash -InteractiveMode",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false,
+                "close": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        },
+        {
+            "label": "⏰ Start Continuous Maintenance (30min intervals)",
+            "type": "shell",
+            "command": "Import-Module .\\PowerShellModules\\UnifiedMCPProfile -Force; Start-ContinuousMaintenanceScheduler -CleanupIntervalMinutes 30 -CommitIntervalMinutes 15 -LogFile 'Build-Steps\\Maintenance-$(Get-Date -Format \"yyyyMMdd-HHmm\").log'",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false,
+                "close": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "runOptions": {
+                "instanceLimit": 1
+            },
+            "isBackground": true
+        },
+        {
+            "label": "🚀 Quick Start: Cleanup + Commit",
+            "type": "shell",
+            "command": "Import-Module .\\PowerShellModules\\UnifiedMCPProfile -Force; Write-Host '🧹 Running quick cleanup...' -ForegroundColor Cyan; Start-ContinuousCleanup -MaxFilesPerRun 10 -AutoCommit; Write-Host '📝 Processing commits...' -ForegroundColor Green; Invoke-IncrementalCommit -CommitCategory Modified -MaxFilesPerCommit 6",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": true,
+                "close": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        },
+        {
+            "label": "🔍 Preview Cleanup (WhatIf mode)",
+            "type": "shell",
+            "command": "Import-Module .\\PowerShellModules\\UnifiedMCPProfile -Force; Start-ContinuousCleanup -MaxFilesPerRun 20 -WhatIf",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": true,
+                "close": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "🔍 Preview Commits (WhatIf mode)",
+            "type": "shell",
+            "command": "Import-Module .\\PowerShellModules\\UnifiedMCPProfile -Force; Invoke-IncrementalCommit -CommitCategory All -WhatIf",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": true,
+                "close": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "📊 Repository Status Check",
+            "type": "shell",
+            "command": "Write-Host '📊 Repository Status Report' -ForegroundColor Cyan; Write-Host '════════════════════════════' -ForegroundColor DarkCyan; git status --porcelain | Measure-Object | ForEach-Object { Write-Host \"Changed files: $($_.Count)\" -ForegroundColor Yellow }; git stash list | Measure-Object | ForEach-Object { Write-Host \"Stashes: $($_.Count)\" -ForegroundColor Blue }; Get-ChildItem -File | Where-Object { $_.Name -like '*SUMMARY*' -or $_.Name -like '*COMPLETE*' } | Measure-Object | ForEach-Object { Write-Host \"Documentation files: $($_.Count)\" -ForegroundColor Magenta }; Get-ChildItem -File | Where-Object { $_.Name -like '*UltraPerformance*' } | Measure-Object | ForEach-Object { Write-Host \"Performance reports: $($_.Count)\" -ForegroundColor Green }",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": true,
+                "close": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "⏹️ Stop All Background Tasks",
+            "type": "shell",
+            "command": "$global:MaintenanceRunning = $false; Write-Host '⏹️ Stopping background maintenance tasks...' -ForegroundColor Yellow; Start-Sleep -Seconds 2; Write-Host '✅ Background tasks stopped' -ForegroundColor Green",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false,
+                "close": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "🔧 Emergency Full Cleanup",
+            "type": "shell",
+            "command": "Import-Module .\\PowerShellModules\\UnifiedMCPProfile -Force; Write-Host '⚠️ Emergency Full Cleanup Mode' -ForegroundColor Red; Write-Host 'This will process ALL categories with auto-commit' -ForegroundColor Yellow; $confirm = Read-Host 'Continue? (yes/no)'; if ($confirm -eq 'yes') { Start-ContinuousCleanup -TargetCategories @('All') -MaxFilesPerRun 50 -AutoCommit } else { Write-Host 'Cancelled' -ForegroundColor Gray }",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": true,
+                "close": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        }
+    ]
+}
