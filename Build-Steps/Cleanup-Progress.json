@@ -1,6 +1,7 @@
 {
   "CompletedCategories": [
-    "Profiles"
+    "Profiles",
+    "Performance"
   ],
   "ProcessedFiles": [
     "Microsoft.PowerShell_profile_Dracula_Enhanced.ps1",
@@ -29,8 +30,35 @@
     "ULTRA-PERFORMANCE-OPTIMIZATION-COMPLETE.md",
     "ULTRA-PERFORMANCE-V3-V4-IMPLEMENTATION-COMPLETE.md",
     "MONOREPO-PERFORMANCE-MILESTONE.md",
-    "ENHANCED-UNIFIED-PROFILE-IMPLEMENTATION.md"
+    "ENHANCED-UNIFIED-PROFILE-IMPLEMENTATION.md",
+    "UltraPerformance-Comparison-20250806-172622.html",
+    "UltraPerformance-Comparison-20250806-174820.html",
+    "UltraPerformance-Comparison-20250806-175048.html",
+    "UltraPerformance-Comparison-20250806-180555.html",
+    "UltraPerformance-Comparison-20250806-181923.html",
+    "UltraPerformance-Comparison-20250806-182021.html",
+    "UltraPerformance-Comparison-20250806-182249.html",
+    "UltraPerformance-Comparison-20250806-182429.html",
+    "UltraPerformance-Comparison-20250806-183635.html",
+    "UltraPerformance-Comparison-20250806-183750.html",
+    "UltraPerformance-Comparison-20250806-183933.html",
+    "Test-AsyncLazyLoading.ps1",
+    "Test-DraculaPerformance.ps1",
+    "Test-DraculaProfileMetrics.ps1",
+    "Test-EnhancedDraculaProfile.ps1",
+    "test-mcp-profile.ps1",
+    "Test-ModernOhMyPosh.ps1",
+    "Test-OhMyPoshIntegration.ps1",
+    "Test-RealisticPerformanceThresholds.ps1",
+    "Test-Syntax.ps1",
+    "Test-Timing.ps1",
+    "Test-UltraPerformanceComparison.ps1",
+    "Test-UnifiedProfileFeatures.ps1",
+    "Debug-ProfileSyntax.ps1",
+    "Demo-EnhancedDraculaFeatures.ps1",
+    "Demo-GoogleHardwareKey.ps1",
+    "Compare-DraculaProfilePerformance.ps1"
   ],
-  "TotalFilesProcessed": 24,
-  "LastRun": "2025-08-07T00:22:19.6783901+02:00"
+  "TotalFilesProcessed": 51,
+  "LastRun": "2025-08-07T00:25:33.9190771+02:00"
 }
