@@ -1,0 +1,663 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "shell": {
+      "executable": "pwsh.exe",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+    }
+  },
+  "tasks": [
+    {
+      "label": "🚀 Install UnifiedProfile System",
+      "type": "shell",
+      "command": "$ENV:PSModulePath = \"${workspaceFolder};$ENV:PSModulePath\"; Import-Module \"${workspaceFolder}\\UnifiedPowerShellProfile\" -Force; Install-UnifiedProfileSystem -IncludeRegistryChanges -Verbose",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "isBackground": false
+    },
+    {
+      "label": "🎯 Switch Profile Mode",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module UnifiedPowerShellProfile -Force; Switch-ProfileMode"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🔧 Install PowerShell 7+ System-Wide",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Install-PowerShell7SystemWide.ps1",
+        "-Verbose"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": [],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "detail": "Install PowerShell 7+ and configure Dracula profile system-wide"
+    },
+    {
+      "label": "🎨 Install Profile Only (System-Wide)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Install-PowerShell7SystemWide.ps1",
+        "-ProfileOnly",
+        "-Verbose"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": [],
+      "detail": "Install Dracula profile system-wide (skip PowerShell 7 installation)"
+    },
+    {
+      "label": "🧛‍♂️ Test Dracula Profile",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/Tests/Test-DraculaProfile.ps1"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": "^❌\\s+(.+)$",
+              "message": 1
+            }
+          ],
+          "background": {
+            "activeOnStart": false,
+            "beginsPattern": "🧛‍♂️ DRACULA POWERSHELL PROFILE TESTING 🧛‍♂️",
+            "endsPattern": "(All tests passed!)|(Some tests failed)"
+          }
+        }
+      ]
+    },
+    {
+      "label": "🧪 Test Dracula Profile (Verbose)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/Tests/Test-DraculaProfile.ps1", "-Verbose"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "📊 Test Dracula Profile (Generate Report)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/Tests/Test-DraculaProfile.ps1", "-GenerateReport"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "🚀 Launch Dracula Profile (Normal)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/Tests/Start-DraculaLauncher.ps1", "-Mode", "Normal", "-NoExit"],
+      "group": "build",
+      "presentation": {
+        "echo": false,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared"
+      },
+      "isBackground": false
+    },
+    {
+      "label": "🧹 Launch Dracula Profile (Clean)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/Tests/Start-DraculaLauncher.ps1", "-Mode", "Clean", "-NoExit"],
+      "group": "build",
+      "presentation": {
+        "echo": false,
+        "reveal": "never"
+      }
+    },
+    {
+      "label": "🐛 Launch Dracula Profile (Debug)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/Tests/Start-DraculaLauncher.ps1", "-Mode", "Debug", "-NoExit"],
+      "group": "build",
+      "presentation": {
+        "echo": false,
+        "reveal": "never"
+      }
+    },
+    {
+      "label": "⚡ Launch Dracula Profile (Performance)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/Tests/Start-DraculaLauncher.ps1", "-Mode", "Performance", "-NoExit"],
+      "group": "build",
+      "presentation": {
+        "echo": false,
+        "reveal": "never"
+      }
+    },
+    {
+      "label": "🎯 Launch Dracula Profile (Minimal)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/Tests/Start-DraculaLauncher.ps1", "-Mode", "Minimal", "-NoExit"],
+      "group": "build"
+    },
+    {
+      "label": "🎮 Interactive Dracula Launcher",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-ExecutionPolicy", "Bypass", "-NoExit", "-File", "${workspaceFolder}/Tests/Start-DraculaLauncher.ps1"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "📊 Benchmark Dracula Profile",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-ExecutionPolicy", "Bypass", "-Command", "& '${workspaceFolder}/Tests/Start-DraculaLauncher.ps1'; Invoke-Benchmark"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "🔧 Validate Profile Syntax",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$null = [System.Management.Automation.Language.Parser]::ParseFile('${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1', [ref]$null, [ref]$null); Write-Host '✅ Profile syntax is valid!' -ForegroundColor Green"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": "^.*ParseException.*line\\s+(\\d+).*column\\s+(\\d+).*$",
+              "file": 1,
+              "line": 2,
+              "column": 3,
+              "message": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "🧹 Clean Test Results",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Get-ChildItem -Path '${workspaceFolder}/Tests' -Filter 'TestReport_*.html' | Remove-Item -Force; Write-Host '🧹 Test reports cleaned' -ForegroundColor Green"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent"
+      }
+    },
+    {
+      "label": "📋 Profile Information",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$profile = '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1'; $info = Get-Item $profile; Write-Host '📋 Profile Information:' -ForegroundColor Cyan; Write-Host \"   📁 Path: $($info.FullName)\" -ForegroundColor Yellow; Write-Host \"   📏 Size: $([math]::Round($info.Length/1KB, 2)) KB\" -ForegroundColor Yellow; Write-Host \"   📅 Modified: $($info.LastWriteTime)\" -ForegroundColor Yellow; $lines = (Get-Content $profile).Count; Write-Host \"   📝 Lines: $lines\" -ForegroundColor Yellow"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "🔍 Check Dependencies",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$modules = @('PSReadLine', 'Terminal-Icons', 'z', 'Az.Tools.Predictor', 'CompletionPredictor'); Write-Host '🔍 Checking Dependencies:' -ForegroundColor Cyan; foreach ($m in $modules) { $available = Get-Module -ListAvailable -Name $m; if ($available) { Write-Host \"   ✅ $m - v$($available[0].Version)\" -ForegroundColor Green } else { Write-Host \"   ❌ $m - Not installed\" -ForegroundColor Red } }"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "🦇 Install Missing Dependencies",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$modules = @('PSReadLine', 'Terminal-Icons', 'z', 'Az.Tools.Predictor', 'CompletionPredictor'); Write-Host '🦇 Installing Dependencies:' -ForegroundColor Magenta; foreach ($m in $modules) { if (-not (Get-Module -ListAvailable -Name $m)) { Write-Host \"   📦 Installing $m...\" -ForegroundColor Yellow; Install-Module $m -Force -Scope CurrentUser } else { Write-Host \"   ✅ $m already installed\" -ForegroundColor Green } }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🧹 Setup Unified Profile System",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Start-UnifiedProfile.ps1", "-Quick"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "⚙️ Configure Unified Profile (Interactive)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/PowerShellModules/UnifiedPowerShellProfile/Setup-UnifiedProfile.ps1",
+        "-SetupVSCode", "-InstallDependencies", "-CreateDocumentation", "-GenerateTests"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "detail": "Complete setup with VS Code configuration, dependencies, documentation, and tests"
+    },
+    {
+      "label": "📦 Build Distribution Package",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Build-Distribution.ps1",
+        "-All"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "detail": "Build complete distribution package with documentation, tests, and validation"
+    },
+    {
+      "label": "🧪 Test Module Distribution",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command",
+        "$TestPath = '${workspaceFolder}/Distribution/UnifiedPowerShellProfile'; if (Test-Path $TestPath) { Import-Module $TestPath -Force; Get-Command -Module UnifiedPowerShellProfile | Measure-Object | ForEach-Object { Write-Host \"✅ Module exports $($_.Count) functions\" -ForegroundColor Green }; Test-ModuleManifest (Join-Path $TestPath 'UnifiedPowerShellProfile.psd1') | Out-Null; Write-Host '✅ Module manifest is valid' -ForegroundColor Green } else { Write-Host '❌ Distribution package not found. Run Build Distribution Package first.' -ForegroundColor Red }"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "detail": "Test the distribution package integrity and module exports"
+    },
+    {
+      "label": "📚 Generate Module Documentation",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Build-ModuleDocumentation.ps1",
+        "-All"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "detail": "Generate comprehensive documentation for the UnifiedPowerShellProfile module"
+    },
+    {
+      "label": "🔐 Setup Google Hardware Key (All Methods)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Install-GoogleHardwareKey -USBDriveLetter 'F:' -Method 'All' -CreateBackup"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔑 Setup Google Hardware Key (FIDO2 Only)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Install-GoogleHardwareKey -USBDriveLetter 'F:' -Method 'FIDO2'"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🧪 Test Google Hardware Key",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Test-GoogleHardwareKey -USBDriveLetter 'F:' -Method 'All' -Detailed"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🚀 Launch Google Authentication",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Start-GoogleAuthentication -USBDriveLetter 'F:'"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "📋 Google Hardware Key Info",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Get-GoogleHardwareKeyInfo -USBDriveLetter 'F:' -ShowCredentials"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "💾 Backup Google Hardware Key",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Backup-GoogleHardwareKey -USBDriveLetter 'F:' -IncludeCertificates"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "📜 Create Google Security Certificate",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; New-GoogleSecurityCertificate -USBDriveLetter 'F:' -ValidYears 2"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🔓 Import Google Credentials",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; $cred = Import-GoogleCredentials -USBDriveLetter 'F:' -ShowDetails; if ($cred) { Write-Host 'Credentials successfully loaded for:' $cred.UserName -ForegroundColor Green } else { Write-Host 'Failed to load credentials' -ForegroundColor Red }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🗑️ Remove Google Hardware Key",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Import-Module '${workspaceFolder}/PowerShellModules/Google-Hardware-key/GoogleHardwareKey.psd1' -Force; Remove-GoogleHardwareKey -USBDriveLetter 'F:' -CreateBackup -RemoveCertificates"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🧪 Run Google Hardware Key Tests (Pester)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Set-Location '${workspaceFolder}/PowerShellModules/Google-Hardware-key'; if (Get-Module Pester -ListAvailable) { Invoke-Pester ./Tests/GoogleHardwareKey.Tests.ps1 -Output Detailed } else { Write-Host 'Pester module not found. Installing...' -ForegroundColor Yellow; Install-Module Pester -Force -Scope CurrentUser; Invoke-Pester ./Tests/GoogleHardwareKey.Tests.ps1 -Output Detailed }"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "📚 Open Google Hardware Key Documentation",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "Start-Process 'notepad.exe' -ArgumentList '${workspaceFolder}/PowerShellModules/Google-Hardware-key/README.md'"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "🎯 Open USB Hardware Key (F:)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", "if (Test-Path 'F:') { Start-Process 'explorer.exe' -ArgumentList 'F:'; Write-Host 'Opened USB drive F:' -ForegroundColor Green } else { Write-Host 'USB drive F: not found. Please insert your hardware key.' -ForegroundColor Red }"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "profileMode",
+      "description": "Select profile mode",
+      "type": "pickString",
+      "options": [
+        {
+          "label": "🧛‍♂️ Dracula - Enhanced theme with productivity features",
+          "value": "Dracula"
+        },
+        {
+          "label": "🚀 MCP - Model Context Protocol with AI integration", 
+          "value": "MCP"
+        },
+        {
+          "label": "⚡ LazyAdmin - System administration utilities",
+          "value": "LazyAdmin"
+        },
+        {
+          "label": "🎯 Minimal - Lightweight setup",
+          "value": "Minimal"
+        },
+        {
+          "label": "🛠️ Custom - User-defined configuration",
+          "value": "Custom"
+        }
+      ],
+      "default": "Dracula"
+    },
+    {
+      "id": "targetHost",
+      "type": "promptString",
+      "description": "Enter target hostname or IP address"
+    },
+    {
+      "id": "networkRange",
+      "type": "promptString", 
+      "description": "Enter network range (e.g., 192.168.1.0/24)",
+      "default": "192.168.1.0/24"
+    }
+  ]
+}
