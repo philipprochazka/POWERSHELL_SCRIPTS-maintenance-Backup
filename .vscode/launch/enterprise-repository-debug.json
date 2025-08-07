@@ -1,0 +1,72 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🚀 Debug Enterprise Repository Builder",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/Build-EnterpriseModuleRepository.ps1",
+            "args": [
+                "-DryRun"
+            ],
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "⚡ Debug Quick Enterprise Setup",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/Build-EnterpriseModuleRepository.ps1",
+            "args": [
+                "-Quick",
+                "-DryRun"
+            ],
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "🔐 Debug Certificate Creation",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/Build-EnterpriseModuleRepository.ps1",
+            "args": [
+                "-CreateCertificate",
+                "-DryRun"
+            ],
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "🧪 Debug Pester Tests",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/Tests/Unit/Build-EnterpriseModuleRepository.Tests.ps1",
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "🔍 Debug Script Analysis",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/Run-ScriptAnalyzer.ps1",
+            "args": [
+                "Build-EnterpriseModuleRepository.ps1"
+            ],
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "🛠️ Attach to PowerShell Process",
+            "type": "PowerShell",
+            "request": "attach",
+            "customPipeName": "MyCustomPipeName",
+            "runspaceId": 1,
+            "processId": "${command:PickPSHostProcess}"
+        }
+    ]
+}

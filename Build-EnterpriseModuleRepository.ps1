@@ -54,183 +54,14 @@ function Write-Step {
 }
 
 function Confirm-Continue {
-    param([string]$Message = "Continue?")
+    param([string]$Message = "Continue?", [switch]$Quick)
     
-    if ($Quick) { return $true }
+    if ($Quick) {
+        return $true 
+    }
     
     $response = Read-Host "$Message (y/N)"
     return $response -eq 'y' -or $response -eq 'Y'
-}
-
-function Build-EnterpriseModuleRepository {
-    [CmdletBinding()]
-    param(
-        [switch]$Quick,
-        [switch]$CreateCertificate,
-        [switch]$SkipSigning,
-        [switch]$DryRun
-    )
-    
-    $startTime = Get-Date
-    $workspaceRoot = "c:\backup\Powershell"
-    $modulesPath = Join-Path $workspaceRoot "PowerShellModules"
-    
-    Write-Header "🚀 Enterprise PowerShell Module Repository Builder"
-    
-    Write-Host "📊 Configuration:" -ForegroundColor Cyan
-    Write-Host "  🏠 Workspace: $workspaceRoot" -ForegroundColor Gray
-    Write-Host "  📦 Modules: $modulesPath" -ForegroundColor Gray
-    Write-Host "  ⚡ Quick mode: $Quick" -ForegroundColor Gray
-    Write-Host "  🔐 Create certificate: $CreateCertificate" -ForegroundColor Gray
-    Write-Host "  🔏 Skip signing: $SkipSigning" -ForegroundColor Gray
-    Write-Host "  🧪 Dry run: $DryRun" -ForegroundColor Gray
-    
-    if (-not (Test-Path $modulesPath)) {
-        Write-Error "❌ PowerShellModules directory not found: $modulesPath"
-        return
-    }
-    
-    $moduleCount = (Get-ChildItem -Path $modulesPath -Directory).Count
-    Write-Host "  📈 Total modules: $moduleCount" -ForegroundColor Gray
-    
-    if (-not $Quick -and -not (Confirm-Continue "Proceed with enterprise module repository setup?")) {
-        Write-Host "❌ Setup cancelled by user" -ForegroundColor Red
-        return
-    }
-    
-    # Step 1: Vendor Organization
-    Write-Step "Organizing modules by vendor" 1 4
-    
-    $reorganizeArgs = @{
-        ModulesPath = $modulesPath
-        CreateSymlinks = $true
-        DryRun = $DryRun
-    }
-    
-    try {
-        Push-Location $workspaceRoot
-        & ".\Reorganize-ModulesByVendor.ps1" @reorganizeArgs
-        
-        if (-not $DryRun) {
-            Write-Host "  ✅ Vendor organization completed" -ForegroundColor Green
-        }
-    } catch {
-        Write-Error "❌ Vendor organization failed: $($_.Exception.Message)"
-        return
-    } finally {
-        Pop-Location
-    }
-    
-    # Step 2: Git Operations
-    Write-Step "Committing changes to repository" 2 4
-    
-    try {
-        Push-Location $workspaceRoot
-        
-        # Check if we have a git repository
-        if (Test-Path ".git") {
-            $gitStatus = git status --porcelain
-            
-            if ($gitStatus -and -not $DryRun) {
-                git add .
-                $commitMessage = "feat: Enterprise module organization by vendor`n`n- Reorganized $moduleCount modules by vendor/maintainer`n- Created vendor-based directory structure`n- Added compatibility symlinks`n- Prepared for PSGallery source registration`n`nGenerated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
-                git commit -m $commitMessage
-                Write-Host "  ✅ Changes committed to git" -ForegroundColor Green
-                
-                # Try to push if we have a remote
-                $remotes = git remote
-                if ($remotes) {
-                    try {
-                        git push
-                        Write-Host "  ✅ Changes pushed to remote" -ForegroundColor Green
-                    } catch {
-                        Write-Warning "⚠️ Could not push to remote: $($_.Exception.Message)"
-                    }
-                }
-            } else {
-                Write-Host "  ✅ No changes to commit" -ForegroundColor Gray
-            }
-        } else {
-            Write-Warning "⚠️ Not a git repository - skipping version control"
-        }
-    } catch {
-        Write-Warning "⚠️ Git operations failed: $($_.Exception.Message)"
-    } finally {
-        Pop-Location
-    }
-    
-    # Step 3: PSGallery Source Preparation
-    Write-Step "Preparing PSGallery source" 3 4
-    
-    $psGalleryArgs = @{
-        VendorPath = $modulesPath
-        RepositoryName = "PhilipRochazkaModules"
-        CreateCertificate = $CreateCertificate
-        DryRun = $DryRun
-    }
-    
-    if ($SkipSigning) {
-        $psGalleryArgs.Remove('CreateCertificate')
-    }
-    
-    try {
-        Push-Location $workspaceRoot
-        & ".\Initialize-PSGallerySource.ps1" @psGalleryArgs
-        
-        if (-not $DryRun) {
-            Write-Host "  ✅ PSGallery source preparation completed" -ForegroundColor Green
-        }
-    } catch {
-        Write-Warning "⚠️ PSGallery source preparation failed: $($_.Exception.Message)"
-    } finally {
-        Pop-Location
-    }
-    
-    # Step 4: Documentation and VS Code Tasks
-    Write-Step "Creating documentation and VS Code tasks" 4 4
-    
-    try {
-        Build-VSCodeTasks -WorkspaceRoot $workspaceRoot
-        Build-ComprehensiveDocumentation -WorkspaceRoot $workspaceRoot -ModulesPath $modulesPath
-        
-        if (-not $DryRun) {
-            Write-Host "  ✅ Documentation and tasks created" -ForegroundColor Green
-        }
-    } catch {
-        Write-Warning "⚠️ Documentation creation failed: $($_.Exception.Message)"
-    }
-    
-    # Summary
-    $duration = (Get-Date) - $startTime
-    
-    Write-Header "🎯 Enterprise Module Repository Setup Complete"
-    
-    Write-Host "⏱️  Duration: $($duration.ToString('mm\:ss'))" -ForegroundColor Gray
-    Write-Host "📦 Modules organized: $moduleCount" -ForegroundColor Gray
-    
-    if ($DryRun) {
-        Write-Host "🧪 DRY RUN COMPLETED - No changes were made" -ForegroundColor Yellow
-        Write-Host "   Run without -DryRun to perform actual setup" -ForegroundColor Gray
-    } else {
-        Write-Host "🏆 ENTERPRISE SETUP COMPLETED SUCCESSFULLY!" -ForegroundColor Green
-    }
-    
-    Write-Host "`n📋 Next Steps:" -ForegroundColor Cyan
-    Write-Host "  1. Review vendor organization in PowerShellModules/" -ForegroundColor Gray
-    Write-Host "  2. Configure PSGallery server (NuGet.Server/ProGet)" -ForegroundColor Gray
-    Write-Host "  3. Set up CI/CD pipeline for module publishing" -ForegroundColor Gray
-    Write-Host "  4. Review and test digital signatures" -ForegroundColor Gray
-    Write-Host "  5. Update module import paths in scripts" -ForegroundColor Gray
-    
-    Write-Host "`n📚 Documentation Created:" -ForegroundColor Cyan
-    Write-Host "  📄 README-VendorOrganization.md" -ForegroundColor Gray
-    Write-Host "  📄 PSGallery-Setup.md" -ForegroundColor Gray
-    Write-Host "  📄 Enterprise-Module-Setup.md" -ForegroundColor Gray
-    
-    Write-Host "`n🛠️  VS Code Tasks Available:" -ForegroundColor Cyan
-    Write-Host "  🧪 Test vendor organization" -ForegroundColor Gray
-    Write-Host "  🔐 Manage digital signatures" -ForegroundColor Gray
-    Write-Host "  📦 Publish modules to PSGallery" -ForegroundColor Gray
 }
 
 function Build-VSCodeTasks {
@@ -245,41 +76,41 @@ function Build-VSCodeTasks {
     
     $tasks = @{
         version = "2.0.0"
-        tasks = @(
+        tasks   = @(
             @{
-                label = "🏷️ Test Vendor Organization"
-                type = "shell"
+                label   = "🏷️ Test Vendor Organization"
+                type    = "shell"
                 command = "pwsh"
-                args = @("-ExecutionPolicy", "Bypass", "-Command", "Get-ChildItem '${workspaceFolder}/PowerShellModules' -Directory | Group-Object {Split-Path $_.FullName -Parent | Split-Path -Leaf} | Sort-Object Name | ForEach-Object { Write-Host `"📁 $($_.Name): $($_.Count) modules`" -ForegroundColor Yellow; $_.Group | ForEach-Object { Write-Host `"   📦 $($_.Name)`" -ForegroundColor Gray } }")
-                group = "test"
+                args    = @("-ExecutionPolicy", "Bypass", "-Command", "Get-ChildItem '${workspaceFolder}/PowerShellModules' -Directory | Group-Object {Split-Path $_.FullName -Parent | Split-Path -Leaf} | Sort-Object Name | ForEach-Object { Write-Host `"📁 $($_.Name): $($_.Count) modules`" -ForegroundColor Yellow; $_.Group | ForEach-Object { Write-Host `"   📦 $($_.Name)`" -ForegroundColor Gray } }")
+                group   = "test"
             },
             @{
-                label = "🔐 Create Code Signing Certificate"
-                type = "shell"
+                label   = "🔐 Create Code Signing Certificate"
+                type    = "shell"
                 command = "pwsh"
-                args = @("-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/Initialize-PSGallerySource.ps1", "-CreateCertificate", "-DryRun")
-                group = "build"
+                args    = @("-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/Initialize-PSGallerySource.ps1", "-CreateCertificate", "-DryRun")
+                group   = "build"
             },
             @{
-                label = "📦 Publish Custom Modules"
-                type = "shell"
+                label   = "📦 Publish Custom Modules"
+                type    = "shell"
                 command = "pwsh"
-                args = @("-ExecutionPolicy", "Bypass", "-Command", "Get-ChildItem '${workspaceFolder}/PowerShellModules/PhilipRochazka' -Directory | ForEach-Object { Write-Host `"📦 Publishing: $($_.Name)`" -ForegroundColor Cyan; Write-Host `"   Path: $($_.FullName)`" -ForegroundColor Gray }")
-                group = "build"
+                args    = @("-ExecutionPolicy", "Bypass", "-Command", "Get-ChildItem '${workspaceFolder}/PowerShellModules/PhilipRochazka' -Directory | ForEach-Object { Write-Host `"📦 Publishing: $($_.Name)`" -ForegroundColor Cyan; Write-Host `"   Path: $($_.FullName)`" -ForegroundColor Gray }")
+                group   = "build"
             },
             @{
-                label = "🧹 Reset to Original Structure"
-                type = "shell"
+                label   = "🧹 Reset to Original Structure"
+                type    = "shell"
                 command = "pwsh"
-                args = @("-ExecutionPolicy", "Bypass", "-Command", "Write-Host '🧹 Resetting module organization...' -ForegroundColor Yellow; Write-Host '⚠️ This would restore original flat structure' -ForegroundColor Red; Write-Host '💡 Use with caution - implement actual reset logic' -ForegroundColor Cyan")
-                group = "build"
+                args    = @("-ExecutionPolicy", "Bypass", "-Command", "Write-Host '🧹 Resetting module organization...' -ForegroundColor Yellow; Write-Host '⚠️ This would restore original flat structure' -ForegroundColor Red; Write-Host '💡 Use with caution - implement actual reset logic' -ForegroundColor Cyan")
+                group   = "build"
             },
             @{
-                label = "📊 Module Statistics"
-                type = "shell"
+                label   = "📊 Module Statistics"
+                type    = "shell"
                 command = "pwsh"
-                args = @("-ExecutionPolicy", "Bypass", "-Command", "$modules = Get-ChildItem '${workspaceFolder}/PowerShellModules' -Directory -Recurse; $vendors = $modules | Group-Object {if($_.FullName -like '*PowerShellModules\\*\\*'){Split-Path (Split-Path $_.FullName -Parent) -Leaf}else{'Root'}}; Write-Host '📊 Module Statistics:' -ForegroundColor Cyan; Write-Host ''; $vendors | Sort-Object Name | ForEach-Object { Write-Host `"🏷️  $($_.Name): $($_.Count) modules`" -ForegroundColor Yellow }; Write-Host ''; Write-Host `"📈 Total: $($modules.Count) modules`" -ForegroundColor Green")
-                group = "test"
+                args    = @("-ExecutionPolicy", "Bypass", "-Command", "$modules = Get-ChildItem '${workspaceFolder}/PowerShellModules' -Directory -Recurse; $vendors = $modules | Group-Object {if($_.FullName -like '*PowerShellModules\\*\\*'){Split-Path (Split-Path $_.FullName -Parent) -Leaf}else{'Root'}}; Write-Host '📊 Module Statistics:' -ForegroundColor Cyan; Write-Host ''; $vendors | Sort-Object Name | ForEach-Object { Write-Host `"🏷️  $($_.Name): $($_.Count) modules`" -ForegroundColor Yellow }; Write-Host ''; Write-Host `"📈 Total: $($modules.Count) modules`" -ForegroundColor Green")
+                group   = "test"
             }
         )
     }
@@ -467,6 +298,177 @@ Get-AuthenticodeSignature "./PowerShellModules/PhilipRochazka/*//*.ps*"
         Set-Content -Path $docPath -Value $content -Encoding UTF8
         Write-Host "  📚 Created enterprise documentation: Enterprise-Module-Setup.md" -ForegroundColor Green
     }
+}
+
+function Build-EnterpriseModuleRepository {
+    [CmdletBinding()]
+    param(
+        [switch]$Quick,
+        [switch]$CreateCertificate,
+        [switch]$SkipSigning,
+        [switch]$DryRun
+    )
+    
+    $startTime = Get-Date
+    $workspaceRoot = "c:\backup\Powershell"
+    $modulesPath = Join-Path $workspaceRoot "PowerShellModules"
+    
+    Write-Header "🚀 Enterprise PowerShell Module Repository Builder"
+    
+    Write-Host "📊 Configuration:" -ForegroundColor Cyan
+    Write-Host "  🏠 Workspace: $workspaceRoot" -ForegroundColor Gray
+    Write-Host "  📦 Modules: $modulesPath" -ForegroundColor Gray
+    Write-Host "  ⚡ Quick mode: $Quick" -ForegroundColor Gray
+    Write-Host "  🔐 Create certificate: $CreateCertificate" -ForegroundColor Gray
+    Write-Host "  🔏 Skip signing: $SkipSigning" -ForegroundColor Gray
+    Write-Host "  🧪 Dry run: $DryRun" -ForegroundColor Gray
+    
+    if (-not (Test-Path $modulesPath)) {
+        Write-Error "❌ PowerShellModules directory not found: $modulesPath"
+        return
+    }
+    
+    $moduleCount = (Get-ChildItem -Path $modulesPath -Directory).Count
+    Write-Host "  📈 Total modules: $moduleCount" -ForegroundColor Gray
+    
+    if (-not $Quick -and -not (Confirm-Continue -Message "Proceed with enterprise module repository setup?" -Quick:$Quick)) {
+        Write-Host "❌ Setup cancelled by user" -ForegroundColor Red
+        return
+    }
+    
+    # Step 1: Vendor Organization
+    Write-Step "Organizing modules by vendor" 1 4
+    
+    $reorganizeArgs = @{
+        ModulesPath    = $modulesPath
+        CreateSymlinks = $true
+        DryRun         = $DryRun
+    }
+    
+    try {
+        Push-Location $workspaceRoot
+        & ".\Reorganize-ModulesByVendor.ps1" @reorganizeArgs
+        
+        if (-not $DryRun) {
+            Write-Host "  ✅ Vendor organization completed" -ForegroundColor Green
+        }
+    } catch {
+        Write-Error "❌ Vendor organization failed: $($_.Exception.Message)"
+        return
+    } finally {
+        Pop-Location
+    }
+    
+    # Step 2: Git Operations
+    Write-Step "Committing changes to repository" 2 4
+    
+    try {
+        Push-Location $workspaceRoot
+        
+        # Check if we have a git repository
+        if (Test-Path ".git") {
+            $gitStatus = git status --porcelain
+            
+            if ($gitStatus -and -not $DryRun) {
+                git add .
+                $commitMessage = "feat: Enterprise module organization by vendor`n`n- Reorganized $moduleCount modules by vendor/maintainer`n- Created vendor-based directory structure`n- Added compatibility symlinks`n- Prepared for PSGallery source registration`n`nGenerated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+                git commit -m $commitMessage
+                Write-Host "  ✅ Changes committed to git" -ForegroundColor Green
+                
+                # Try to push if we have a remote
+                $remotes = git remote
+                if ($remotes) {
+                    try {
+                        git push
+                        Write-Host "  ✅ Changes pushed to remote" -ForegroundColor Green
+                    } catch {
+                        Write-Warning "⚠️ Could not push to remote: $($_.Exception.Message)"
+                    }
+                }
+            } else {
+                Write-Host "  ✅ No changes to commit" -ForegroundColor Gray
+            }
+        } else {
+            Write-Warning "⚠️ Not a git repository - skipping version control"
+        }
+    } catch {
+        Write-Warning "⚠️ Git operations failed: $($_.Exception.Message)"
+    } finally {
+        Pop-Location
+    }
+    
+    # Step 3: PSGallery Source Preparation
+    Write-Step "Preparing PSGallery source" 3 4
+    
+    $psGalleryArgs = @{
+        VendorPath        = $modulesPath
+        RepositoryName    = "PhilipRochazkaModules"
+        CreateCertificate = $CreateCertificate
+        DryRun            = $DryRun
+    }
+    
+    if ($SkipSigning) {
+        $psGalleryArgs.Remove('CreateCertificate')
+    }
+    
+    try {
+        Push-Location $workspaceRoot
+        & ".\Initialize-PSGallerySource.ps1" @psGalleryArgs
+        
+        if (-not $DryRun) {
+            Write-Host "  ✅ PSGallery source preparation completed" -ForegroundColor Green
+        }
+    } catch {
+        Write-Warning "⚠️ PSGallery source preparation failed: $($_.Exception.Message)"
+    } finally {
+        Pop-Location
+    }
+    
+    # Step 4: Documentation and VS Code Tasks
+    Write-Step "Creating documentation and VS Code tasks" 4 4
+    
+    try {
+        Build-VSCodeTasks -WorkspaceRoot $workspaceRoot
+        Build-ComprehensiveDocumentation -WorkspaceRoot $workspaceRoot -ModulesPath $modulesPath
+        
+        if (-not $DryRun) {
+            Write-Host "  ✅ Documentation and tasks created" -ForegroundColor Green
+        }
+    } catch {
+        Write-Warning "⚠️ Documentation creation failed: $($_.Exception.Message)"
+    }
+    
+    # Summary
+    $duration = (Get-Date) - $startTime
+    
+    Write-Header "🎯 Enterprise Module Repository Setup Complete"
+    
+    Write-Host "⏱️  Duration: $($duration.ToString('mm\:ss'))" -ForegroundColor Gray
+    Write-Host "📦 Modules organized: $moduleCount" -ForegroundColor Gray
+    
+    if ($DryRun) {
+        Write-Host "🧪 DRY RUN COMPLETED - No changes were made" -ForegroundColor Yellow
+        Write-Host "   Run without -DryRun to perform actual setup" -ForegroundColor Gray
+    } else {
+        Write-Host "🏆 ENTERPRISE SETUP COMPLETED SUCCESSFULLY!" -ForegroundColor Green
+    }
+    
+    Write-Host "`n📋 Next Steps:" -ForegroundColor Cyan
+    Write-Host "  1. Review vendor organization in PowerShellModules/" -ForegroundColor Gray
+    Write-Host "  2. Configure PSGallery server (NuGet.Server/ProGet)" -ForegroundColor Gray
+    Write-Host "  3. Set up CI/CD pipeline for module publishing" -ForegroundColor Gray
+    Write-Host "  4. Review and test digital signatures" -ForegroundColor Gray
+    Write-Host "  5. Update module import paths in scripts" -ForegroundColor Gray
+    
+    Write-Host "`n📚 Documentation Created:" -ForegroundColor Cyan
+    Write-Host "  📄 README-VendorOrganization.md" -ForegroundColor Gray
+    Write-Host "  📄 PSGallery-Setup.md" -ForegroundColor Gray
+    Write-Host "  📄 Enterprise-Module-Setup.md" -ForegroundColor Gray
+    
+    Write-Host "`n🛠️  VS Code Tasks Available:" -ForegroundColor Cyan
+    Write-Host "  🧪 Test vendor organization" -ForegroundColor Gray
+    Write-Host "  🔐 Manage digital signatures" -ForegroundColor Gray
+    Write-Host "  📦 Publish modules to PSGallery" -ForegroundColor Gray
 }
 
 # Main execution

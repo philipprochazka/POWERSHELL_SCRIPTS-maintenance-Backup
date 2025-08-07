@@ -1,0 +1,157 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "🧪 Test Build-EnterpriseModuleRepository",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "Import-Module Pester -Force; Invoke-Pester '${workspaceFolder}/Tests/Unit/Build-EnterpriseModuleRepository.Tests.ps1' -Output Detailed"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🚀 Run Enterprise Repository Setup (Dry Run)",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}/Build-EnterpriseModuleRepository.ps1",
+                "-DryRun"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "⚡ Quick Enterprise Setup",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}/Build-EnterpriseModuleRepository.ps1",
+                "-Quick"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🔐 Enterprise Setup with Certificate Creation",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}/Build-EnterpriseModuleRepository.ps1",
+                "-CreateCertificate"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🔍 Analyze Enterprise Repository Script",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "Invoke-ScriptAnalyzer -Path '${workspaceFolder}/Build-EnterpriseModuleRepository.ps1' -Settings '${workspaceFolder}/PSScriptAnalyzerSettings.psd1' -ReportSummary"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "📚 Open Enterprise Repository Documentation",
+            "type": "shell",
+            "command": "code",
+            "args": [
+                "${workspaceFolder}/docs/functions/Build-EnterpriseModuleRepository.md"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🔄 Generate Enterprise Repository Coverage Report",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; $Coverage = Invoke-Pester '${workspaceFolder}/Tests/Unit/Build-EnterpriseModuleRepository.Tests.ps1' -CodeCoverage '${workspaceFolder}/Build-EnterpriseModuleRepository.ps1' -Output Detailed -PassThru; $Coverage | Export-Clixml '${workspaceFolder}/Tests/Reports/enterprise-repository-coverage.xml'; Write-Host \"📊 Code Coverage: $($Coverage.CodeCoverage.CoveragePercent)%\" -ForegroundColor Green"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🛠️ Debug Enterprise Repository Builder",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "$VerbosePreference = 'Continue'; $DebugPreference = 'Continue'; & '${workspaceFolder}/Build-EnterpriseModuleRepository.ps1' -DryRun -Verbose"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

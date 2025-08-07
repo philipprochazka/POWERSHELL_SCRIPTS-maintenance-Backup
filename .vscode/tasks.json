@@ -13,7 +13,7 @@
     {
       "label": "📋 Show All Task Categories",
       "type": "shell",
-      "command": "Write-Host '🎯 PowerShell Development Tasks:' -ForegroundColor Cyan; Write-Host ''; Write-Host '🧹 CLEANUP:' -ForegroundColor Yellow; Write-Host '  • Preview Cleanup (WhatIf)' -ForegroundColor White; Write-Host '  • Quick Cleanup (Auto-Commit)' -ForegroundColor White; Write-Host '  • Category-Specific Cleanup' -ForegroundColor White; Write-Host ''; Write-Host '🧪 TESTING:' -ForegroundColor Green; Write-Host '  • Unit Tests' -ForegroundColor White; Write-Host '  • Integration Tests' -ForegroundColor White; Write-Host '  • Performance Tests' -ForegroundColor White; Write-Host '  • Full Coverage Report' -ForegroundColor White; Write-Host ''; Write-Host '🔍 ANALYSIS:' -ForegroundColor Magenta; Write-Host '  • Script Analyzer (All Files)' -ForegroundColor White; Write-Host '  • Current File Analysis' -ForegroundColor White; Write-Host '  • Naming Convention Check' -ForegroundColor White; Write-Host '  • Branch Consistency Check' -ForegroundColor White; Write-Host ''; Write-Host '📚 DOCUMENTATION:' -ForegroundColor Blue; Write-Host '  • Generate Function Docs' -ForegroundColor White; Write-Host '  • Build Project Structure' -ForegroundColor White; Write-Host '  • Complete Documentation' -ForegroundColor White; Write-Host ''; Write-Host '🛠️ BUILD & DEPLOY:' -ForegroundColor Red; Write-Host '  • Module Manifest Build' -ForegroundColor White; Write-Host '  • Syntax Validation' -ForegroundColor White; Write-Host '  • Gallery Deployment Prep' -ForegroundColor White; Write-Host ''; Write-Host '🌐 REMOTE MCP:' -ForegroundColor Cyan; Write-Host '  • Test Remote MCP Connections' -ForegroundColor White; Write-Host '  • Initialize Remote MCP Environment' -ForegroundColor White; Write-Host '  • MCP Security Audit' -ForegroundColor White; Write-Host '  • Performance Metrics Collection' -ForegroundColor White; Write-Host '  • Health Monitoring' -ForegroundColor White; Write-Host ''; Write-Host '📖 Documentation: .vscode/MCP-Remote-Integration-Ruleset.md' -ForegroundColor Gray",
+      "command": "Write-Host '🎯 PowerShell Development Tasks:' -ForegroundColor Cyan; Write-Host ''; Write-Host '🧹 CLEANUP:' -ForegroundColor Yellow; Write-Host '  • Preview Cleanup (WhatIf)' -ForegroundColor White; Write-Host '  • Quick Cleanup (Auto-Commit)' -ForegroundColor White; Write-Host '  • Category-Specific Cleanup' -ForegroundColor White; Write-Host ''; Write-Host '🧪 TESTING:' -ForegroundColor Green; Write-Host '  • Unit Tests' -ForegroundColor White; Write-Host '  • Integration Tests' -ForegroundColor White; Write-Host '  • Performance Tests' -ForegroundColor White; Write-Host '  • Full Coverage Report' -ForegroundColor White; Write-Host ''; Write-Host '🔍 ANALYSIS:' -ForegroundColor Magenta; Write-Host '  • Script Analyzer (All Files)' -ForegroundColor White; Write-Host '  • Current File Analysis' -ForegroundColor White; Write-Host '  • Naming Convention Check' -ForegroundColor White; Write-Host '  • Branch Consistency Check' -ForegroundColor White; Write-Host ''; Write-Host '📚 DOCUMENTATION:' -ForegroundColor Blue; Write-Host '  • Generate Function Docs' -ForegroundColor White; Write-Host '  • Build Project Structure' -ForegroundColor White; Write-Host '  • Complete Documentation' -ForegroundColor White; Write-Host ''; Write-Host '🛠️ BUILD & DEPLOY:' -ForegroundColor Red; Write-Host '  • Module Manifest Build' -ForegroundColor White; Write-Host '  • Syntax Validation' -ForegroundColor White; Write-Host '  • Gallery Deployment Prep' -ForegroundColor White; Write-Host ''; Write-Host '🔄 REORGANIZATION:' -ForegroundColor Magenta; Write-Host '  • Preview UnifiedPowerShell Reorganization' -ForegroundColor White; Write-Host '  • Execute UnifiedPowerShell Reorganization' -ForegroundColor White; Write-Host ''; Write-Host '🌐 REMOTE MCP:' -ForegroundColor Cyan; Write-Host '  • Test Remote MCP Connections' -ForegroundColor White; Write-Host '  • Initialize Remote MCP Environment' -ForegroundColor White; Write-Host '  • MCP Security Audit' -ForegroundColor White; Write-Host '  • Performance Metrics Collection' -ForegroundColor White; Write-Host '  • Health Monitoring' -ForegroundColor White; Write-Host ''; Write-Host '📖 Documentation: .vscode/MCP-Remote-Integration-Ruleset.md' -ForegroundColor Gray",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -393,6 +393,36 @@
       "label": "🚀 Deploy Preparation (Dry Run)",
       "type": "shell",
       "command": "Write-Host '🚀 PowerShell Gallery deployment preparation...' -ForegroundColor Cyan; Write-Host '📋 Module validation checklist:' -ForegroundColor Yellow; Write-Host '  ✅ Manifest validation' -ForegroundColor Green; Write-Host '  ✅ Function exports' -ForegroundColor Green; Write-Host '  ✅ Documentation complete' -ForegroundColor Green; Write-Host '  ✅ Tests passing' -ForegroundColor Green; Write-Host '🎯 Ready for gallery deployment!' -ForegroundColor Green",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔄 Preview UnifiedPowerShell Reorganization",
+      "type": "shell",
+      "command": "& '${workspaceFolder}/Build-UnifiedPowerShellReorganization.ps1' -WhatIf",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔧 Execute UnifiedPowerShell Reorganization",
+      "type": "shell",
+      "command": "& '${workspaceFolder}/Build-UnifiedPowerShellReorganization.ps1' -AutoCommit",
       "group": "build",
       "presentation": {
         "echo": true,
