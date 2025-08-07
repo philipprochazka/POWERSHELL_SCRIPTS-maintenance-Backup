@@ -13,7 +13,7 @@
     {
       "label": "📋 Show All Task Categories",
       "type": "shell",
-      "command": "Write-Host '🎯 PowerShell Development Tasks:' -ForegroundColor Cyan; Write-Host ''; Write-Host '🧹 CLEANUP:' -ForegroundColor Yellow; Write-Host '  • Preview Cleanup (WhatIf)' -ForegroundColor White; Write-Host '  • Quick Cleanup (Auto-Commit)' -ForegroundColor White; Write-Host '  • Category-Specific Cleanup' -ForegroundColor White; Write-Host ''; Write-Host '🧪 TESTING:' -ForegroundColor Green; Write-Host '  • Unit Tests' -ForegroundColor White; Write-Host '  • Integration Tests' -ForegroundColor White; Write-Host '  • Performance Tests' -ForegroundColor White; Write-Host '  • Full Coverage Report' -ForegroundColor White; Write-Host ''; Write-Host '🔍 ANALYSIS:' -ForegroundColor Magenta; Write-Host '  • Script Analyzer (All Files)' -ForegroundColor White; Write-Host '  • Current File Analysis' -ForegroundColor White; Write-Host '  • Naming Convention Check' -ForegroundColor White; Write-Host ''; Write-Host '📚 DOCUMENTATION:' -ForegroundColor Blue; Write-Host '  • Generate Function Docs' -ForegroundColor White; Write-Host '  • Build Project Structure' -ForegroundColor White; Write-Host '  • Complete Documentation' -ForegroundColor White; Write-Host ''; Write-Host '🛠️ BUILD & DEPLOY:' -ForegroundColor Red; Write-Host '  • Module Manifest Build' -ForegroundColor White; Write-Host '  • Syntax Validation' -ForegroundColor White; Write-Host '  • Gallery Deployment Prep' -ForegroundColor White",
+      "command": "Write-Host '🎯 PowerShell Development Tasks:' -ForegroundColor Cyan; Write-Host ''; Write-Host '🧹 CLEANUP:' -ForegroundColor Yellow; Write-Host '  • Preview Cleanup (WhatIf)' -ForegroundColor White; Write-Host '  • Quick Cleanup (Auto-Commit)' -ForegroundColor White; Write-Host '  • Category-Specific Cleanup' -ForegroundColor White; Write-Host ''; Write-Host '🧪 TESTING:' -ForegroundColor Green; Write-Host '  • Unit Tests' -ForegroundColor White; Write-Host '  • Integration Tests' -ForegroundColor White; Write-Host '  • Performance Tests' -ForegroundColor White; Write-Host '  • Full Coverage Report' -ForegroundColor White; Write-Host ''; Write-Host '🔍 ANALYSIS:' -ForegroundColor Magenta; Write-Host '  • Script Analyzer (All Files)' -ForegroundColor White; Write-Host '  • Current File Analysis' -ForegroundColor White; Write-Host '  • Naming Convention Check' -ForegroundColor White; Write-Host ''; Write-Host '📚 DOCUMENTATION:' -ForegroundColor Blue; Write-Host '  • Generate Function Docs' -ForegroundColor White; Write-Host '  • Build Project Structure' -ForegroundColor White; Write-Host '  • Complete Documentation' -ForegroundColor White; Write-Host ''; Write-Host '🛠️ BUILD & DEPLOY:' -ForegroundColor Red; Write-Host '  • Module Manifest Build' -ForegroundColor White; Write-Host '  • Syntax Validation' -ForegroundColor White; Write-Host '  • Gallery Deployment Prep' -ForegroundColor White; Write-Host ''; Write-Host '🌐 REMOTE MCP:' -ForegroundColor Cyan; Write-Host '  • Test Remote MCP Connections' -ForegroundColor White; Write-Host '  • Initialize Remote MCP Environment' -ForegroundColor White; Write-Host '  • MCP Security Audit' -ForegroundColor White; Write-Host '  • Performance Metrics Collection' -ForegroundColor White; Write-Host '  • Health Monitoring' -ForegroundColor White; Write-Host ''; Write-Host '📖 Documentation: .vscode/MCP-Remote-Integration-Ruleset.md' -ForegroundColor Gray",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -388,6 +388,101 @@
         "clear": true
       },
       "problemMatcher": []
+    },
+
+    // ===================================================================
+    // 🌐 REMOTE MCP INTEGRATION - Server Management & Testing
+    // ===================================================================
+    {
+      "label": "🌐 Test Remote MCP Connections",
+      "type": "shell",
+      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; if (Get-Command Test-AllRemoteMCPServers -ErrorAction SilentlyContinue) { Test-AllRemoteMCPServers -Environment ${input:environment} -GenerateReport -Verbose } else { Write-Host '⚠️ Remote MCP functions not available. Please implement Test-AllRemoteMCPServers function.' -ForegroundColor Yellow }",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔧 Initialize Remote MCP Environment",
+      "type": "shell",
+      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; if (Get-Command Initialize-RemoteMCPEnvironment -ErrorAction SilentlyContinue) { Initialize-RemoteMCPEnvironment -Environment ${input:environment} -Verbose } else { Write-Host '⚠️ Creating remote MCP configuration template...' -ForegroundColor Yellow; New-Item -Path '${workspaceFolder}/.mcp/remote-mcp-config.json' -ItemType File -Force -Value (Get-Content '${workspaceFolder}/.vscode/MCP-Remote-Integration-Ruleset.md' | Select-String -Pattern '\"environments\"' -A 50 | Out-String) }",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔍 MCP Security Audit",
+      "type": "shell",
+      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; if (Get-Command Invoke-MCPSecurityAudit -ErrorAction SilentlyContinue) { Invoke-MCPSecurityAudit -Environment ${input:environment} -Verbose } else { Write-Host '🔒 Security audit checklist:' -ForegroundColor Cyan; Write-Host '  ✅ Check HTTPS enforcement' -ForegroundColor Green; Write-Host '  ✅ Validate token security' -ForegroundColor Green; Write-Host '  ✅ Review access controls' -ForegroundColor Green; Write-Host '  ✅ Audit authentication methods' -ForegroundColor Green; Write-Host '📄 Manual security review required' -ForegroundColor Yellow }",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📊 Collect MCP Performance Metrics",
+      "type": "shell",
+      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; if (Get-Command Collect-MCPPerformanceMetrics -ErrorAction SilentlyContinue) { Collect-MCPPerformanceMetrics -SampleDurationMinutes 5 -Verbose } else { Write-Host '📈 Performance metrics collection:' -ForegroundColor Cyan; Write-Host '  🔄 Response time monitoring' -ForegroundColor White; Write-Host '  📊 Success rate calculation' -ForegroundColor White; Write-Host '  ❌ Error rate tracking' -ForegroundColor White; Write-Host '  📄 Metrics report generation' -ForegroundColor White; Write-Host '⚠️ Implement Collect-MCPPerformanceMetrics function for full metrics' -ForegroundColor Yellow }",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔄 Start MCP Health Monitoring",
+      "type": "shell",
+      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; if (Get-Command Start-MCPHealthMonitoring -ErrorAction SilentlyContinue) { Start-MCPHealthMonitoring -IntervalMinutes 2 -Environment ${input:environment} } else { Write-Host '💓 MCP Health Monitoring:' -ForegroundColor Cyan; Write-Host '  🔍 Continuous server health checks' -ForegroundColor White; Write-Host '  ⚠️ Automatic issue detection' -ForegroundColor White; Write-Host '  📧 Alert notifications' -ForegroundColor White; Write-Host '  📊 Health status dashboard' -ForegroundColor White; Write-Host '⚠️ Implement Start-MCPHealthMonitoring function for monitoring' -ForegroundColor Yellow }",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "📋 Open MCP Remote Integration Ruleset",
+      "type": "shell",
+      "command": "Write-Host '📖 Opening Remote MCP Integration Ruleset...' -ForegroundColor Cyan; code '${workspaceFolder}/.vscode/MCP-Remote-Integration-Ruleset.md'",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
     }
   ],
   "inputs": [
@@ -396,6 +491,26 @@
       "description": "Function name for documentation generation",
       "default": "New-Function",
       "type": "promptString"
+    },
+    {
+      "id": "environment",
+      "description": "Target environment for MCP operations",
+      "default": "development",
+      "type": "pickString",
+      "options": [
+        {
+          "label": "Development",
+          "value": "development"
+        },
+        {
+          "label": "Staging", 
+          "value": "staging"
+        },
+        {
+          "label": "Production",
+          "value": "production"
+        }
+      ]
     }
   ]
 }

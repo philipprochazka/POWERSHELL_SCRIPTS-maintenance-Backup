@@ -278,6 +278,83 @@
         "-Command", 
         "$env:PROFILE_DEBUG='true'; . '${workspaceFolder}/Install-UnifiedProfile.ps1'"
       ]
+    },
+
+    // ===================================================================
+    // 🌐 REMOTE MCP INTEGRATION - Debug & Testing
+    // ===================================================================
+    {
+      "name": "🔬 Debug Remote MCP Connection",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", 
+        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; if (Get-Command Test-AllRemoteMCPServers -ErrorAction SilentlyContinue) { Test-AllRemoteMCPServers -Environment development -GenerateReport -Verbose } else { Write-Host '⚠️ Implementing Remote MCP test framework...' -ForegroundColor Yellow; Write-Host '📖 See: ${workspaceFolder}/.vscode/MCP-Remote-Integration-Ruleset.md' -ForegroundColor Cyan }"
+      ]
+    },
+    {
+      "name": "🧪 MCP Health Monitoring Session",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", 
+        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Write-Host '💓 Starting MCP Health Monitoring...' -ForegroundColor Cyan; Write-Host 'Press Ctrl+C to stop monitoring' -ForegroundColor Yellow; if (Get-Command Start-MCPHealthMonitoring -ErrorAction SilentlyContinue) { Start-MCPHealthMonitoring -IntervalMinutes 2 } else { Write-Host '📋 Manual health check commands:' -ForegroundColor Blue; Write-Host '  Test-AllRemoteMCPServers -Environment development' -ForegroundColor White; Write-Host '  Show-MCPStatus -Detailed' -ForegroundColor White }"
+      ]
+    },
+    {
+      "name": "🔒 MCP Security Audit",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", 
+        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Write-Host '🔒 MCP Security Audit Starting...' -ForegroundColor Yellow; if (Get-Command Invoke-MCPSecurityAudit -ErrorAction SilentlyContinue) { Invoke-MCPSecurityAudit -Environment development -Verbose } else { Write-Host '📋 Security Checklist:' -ForegroundColor Cyan; Write-Host '  ✅ HTTPS enforcement' -ForegroundColor Green; Write-Host '  ✅ Token security' -ForegroundColor Green; Write-Host '  ✅ Access controls' -ForegroundColor Green; Write-Host '  ✅ Certificate validation' -ForegroundColor Green; Write-Host '📄 Manual audit required - see ruleset' -ForegroundColor Yellow }"
+      ]
+    },
+    {
+      "name": "📊 MCP Performance Analysis",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", 
+        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Write-Host '📊 MCP Performance Analysis...' -ForegroundColor Magenta; if (Get-Command Collect-MCPPerformanceMetrics -ErrorAction SilentlyContinue) { Collect-MCPPerformanceMetrics -SampleDurationMinutes 5 -Verbose } else { Write-Host '📈 Performance metrics to collect:' -ForegroundColor Blue; Write-Host '  🔄 Response times' -ForegroundColor White; Write-Host '  📊 Success rates' -ForegroundColor White; Write-Host '  ❌ Error rates' -ForegroundColor White; Write-Host '  📄 Detailed reports' -ForegroundColor White }"
+      ]
+    },
+    {
+      "name": "🔧 Initialize Remote MCP Environment",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", 
+        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Write-Host '🔧 Initializing Remote MCP Environment...' -ForegroundColor Green; if (Get-Command Initialize-RemoteMCPEnvironment -ErrorAction SilentlyContinue) { Initialize-RemoteMCPEnvironment -Environment development -Force -Verbose } else { Write-Host '📋 Setup steps:' -ForegroundColor Cyan; Write-Host '  1. Create remote-mcp-config.json' -ForegroundColor White; Write-Host '  2. Set environment variables' -ForegroundColor White; Write-Host '  3. Configure authentication' -ForegroundColor White; Write-Host '  4. Test connections' -ForegroundColor White; Write-Host '📖 See MCP Remote Integration Ruleset for details' -ForegroundColor Yellow }"
+      ]
+    },
+    {
+      "name": "🚀 Interactive MCP Development",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-NoExit",
+        "-Command", 
+        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Write-Host '🚀 Interactive MCP Development Session' -ForegroundColor Cyan; Write-Host '📖 Available commands:' -ForegroundColor Blue; Write-Host '  Show-MCPStatus      # Check MCP environment' -ForegroundColor White; Write-Host '  Initialize-MCPEnvironment # Setup local MCP' -ForegroundColor White; Write-Host '  Get-MCPConfiguration # View current config' -ForegroundColor White; Write-Host '📝 Remote MCP Ruleset: .vscode/MCP-Remote-Integration-Ruleset.md' -ForegroundColor Gray; Write-Host ''"
+      ]
     }
   ]
 }

@@ -1,0 +1,57 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "mcp": {
+        "ai-code-assistant-dev": {
+            "type": "remote",
+            "url": "https://dev-mcp.example.com/api/v1",
+            "enabled": true,
+            "headers": {
+                "Authorization": "Bearer ${MCP_TOKEN_AI_CODE_ASSISTANT}",
+                "X-Workspace-ID": "${MCP_WORKSPACE_ID}",
+                "Content-Type": "application/json"
+            }
+        },
+        "powershell-analyzer-dev": {
+            "type": "remote",
+            "url": "https://dev-analyzer.example.com/api/v1",
+            "enabled": true,
+            "headers": {
+                "Authorization": "Bearer ${MCP_TOKEN_POWERSHELL_ANALYZER}",
+                "X-Workspace-ID": "${MCP_WORKSPACE_ID}",
+                "Content-Type": "application/json"
+            }
+        },
+        "infrastructure-tools-dev": {
+            "type": "remote",
+            "url": "https://dev-infra.example.com/api/v1",
+            "enabled": false,
+            "headers": {
+                "Authorization": "Bearer ${MCP_TOKEN_INFRASTRUCTURE}",
+                "X-Workspace-ID": "${MCP_WORKSPACE_ID}",
+                "Content-Type": "application/json"
+            }
+        },
+        "local-filesystem": {
+            "type": "local",
+            "command": [
+                "pwsh",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "Scripts/MCP/filesystem-server.ps1"
+            ],
+            "enabled": true
+        },
+        "local-git": {
+            "type": "local",
+            "command": [
+                "pwsh",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "Scripts/MCP/git-server.ps1"
+            ],
+            "enabled": true
+        }
+    }
+}
