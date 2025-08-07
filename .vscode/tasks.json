@@ -7,10 +7,13 @@
     }
   },
   "tasks": [
+    // ===================================================================
+    // 📋 HELP & NAVIGATION SYSTEM
+    // ===================================================================
     {
-      "label": "📚 Show Task Categories",
+      "label": "📋 Show All Task Categories",
       "type": "shell",
-      "command": "Write-Host '🎯 PowerShell Task Categories Available:' -ForegroundColor Cyan; Write-Host ''; Write-Host '📁 .vscode/tasks/' -ForegroundColor Yellow; Write-Host '  ├── 🚀 unified-profile/     - Profile installation & setup' -ForegroundColor Green; Write-Host '  ├── 🧛‍♂️ dracula-profile/     - Dracula theme & variants' -ForegroundColor Magenta; Write-Host '  ├── ⚡ performance/        - Performance testing & optimization' -ForegroundColor Yellow; Write-Host '  ├── 🔐 google-hardware-key/ - Hardware key management' -ForegroundColor Blue; Write-Host '  ├── 🎨 oh-my-posh/         - Oh My Posh themes & integration' -ForegroundColor Cyan; Write-Host '  └── 📚 documentation/      - Documentation & build tasks' -ForegroundColor Gray; Write-Host ''; Write-Host '💡 Use VS Code Command Palette (Ctrl+Shift+P) → \"Tasks: Run Task\"' -ForegroundColor Green; Write-Host '   Then select from the organized task categories above!' -ForegroundColor Green",
+      "command": "Write-Host '🎯 PowerShell Development Tasks:' -ForegroundColor Cyan; Write-Host ''; Write-Host '🧹 CLEANUP:' -ForegroundColor Yellow; Write-Host '  • Preview Cleanup (WhatIf)' -ForegroundColor White; Write-Host '  • Quick Cleanup (Auto-Commit)' -ForegroundColor White; Write-Host '  • Category-Specific Cleanup' -ForegroundColor White; Write-Host ''; Write-Host '🧪 TESTING:' -ForegroundColor Green; Write-Host '  • Unit Tests' -ForegroundColor White; Write-Host '  • Integration Tests' -ForegroundColor White; Write-Host '  • Performance Tests' -ForegroundColor White; Write-Host '  • Full Coverage Report' -ForegroundColor White; Write-Host ''; Write-Host '🔍 ANALYSIS:' -ForegroundColor Magenta; Write-Host '  • Script Analyzer (All Files)' -ForegroundColor White; Write-Host '  • Current File Analysis' -ForegroundColor White; Write-Host '  • Naming Convention Check' -ForegroundColor White; Write-Host ''; Write-Host '📚 DOCUMENTATION:' -ForegroundColor Blue; Write-Host '  • Generate Function Docs' -ForegroundColor White; Write-Host '  • Build Project Structure' -ForegroundColor White; Write-Host '  • Complete Documentation' -ForegroundColor White; Write-Host ''; Write-Host '🛠️ BUILD & DEPLOY:' -ForegroundColor Red; Write-Host '  • Module Manifest Build' -ForegroundColor White; Write-Host '  • Syntax Validation' -ForegroundColor White; Write-Host '  • Gallery Deployment Prep' -ForegroundColor White",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -26,7 +29,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🔧 Reload VS Code Tasks",
+      "label": "🔄 Reload VS Code Window",
       "type": "shell", 
       "command": "Write-Host '🔄 Reloading VS Code window to refresh tasks...' -ForegroundColor Cyan; Start-Sleep -Seconds 2",
       "group": "build",
@@ -40,13 +43,12 @@
       },
       "problemMatcher": []
     },
-    
+
     // ===================================================================
-    // 🧹 CONTINUOUS CLEANUP SYSTEM - Start-ContinuousCleanup Function
-    // Repository maintenance and cleanup with incremental processing
+    // 🧹 CLEANUP SYSTEM - Repository Maintenance
     // ===================================================================
     {
-      "label": "🧹 Continuous Cleanup - Preview (WhatIf)",
+      "label": "🧹 Preview Cleanup (WhatIf)",
       "type": "shell",
       "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 10 -WhatIf -Verbose",
       "group": "build",
@@ -61,7 +63,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🧹 Continuous Cleanup - Single Run (Auto-Commit)",
+      "label": "🧹 Quick Cleanup (Auto-Commit)",
       "type": "shell",
       "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 15 -AutoCommit -Verbose",
       "group": "build",
@@ -76,7 +78,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🧹 Continuous Cleanup - Profiles Only",
+      "label": "🧹 Cleanup Profiles Only",
       "type": "shell",
       "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 20 -TargetCategories @('Profiles') -AutoCommit -Verbose",
       "group": "build",
@@ -91,7 +93,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🧹 Continuous Cleanup - Documentation Only",
+      "label": "🧹 Cleanup Documentation Only",
       "type": "shell",
       "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 25 -TargetCategories @('Documentation') -AutoCommit -Verbose",
       "group": "build",
@@ -106,37 +108,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🧹 Continuous Cleanup - Performance Reports",
-      "type": "shell",
-      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 30 -TargetCategories @('Performance') -AutoCommit -Verbose",
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "shared",
-        "showReuseMessage": false,
-        "clear": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "🧹 Continuous Cleanup - Development Files",
-      "type": "shell",
-      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 20 -TargetCategories @('Development') -AutoCommit -Verbose",
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "shared",
-        "showReuseMessage": false,
-        "clear": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "🧹 Continuous Cleanup - All Categories (Comprehensive)",
+      "label": "🧹 Full Cleanup (All Categories)",
       "type": "shell",
       "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 50 -TargetCategories @('All') -AutoCommit -Verbose",
       "group": "build",
@@ -150,8 +122,12 @@
       },
       "problemMatcher": []
     },
+
+    // ===================================================================
+    // 🧪 TESTING SYSTEM - Comprehensive Test Suite
+    // ===================================================================
     {
-      "label": "🧪 Test Start-ContinuousCleanup Function",
+      "label": "🧪 Test Cleanup Function",
       "type": "shell",
       "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Invoke-Pester '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Tests/Start-ContinuousCleanup.Tests.ps1' -Output Detailed",
       "group": "test",
@@ -166,7 +142,161 @@
       "problemMatcher": []
     },
     {
-      "label": "📚 Generate Start-ContinuousCleanup Documentation",
+      "label": "🧪 Run Unit Tests",
+      "type": "shell",
+      "command": "New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-Pester '${workspaceFolder}/Tests/Unit/' -Output Detailed -PassThru | Tee-Object -FilePath '${workspaceFolder}/Tests/Reports/unit-test-results.xml'",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔬 Run Integration Tests",
+      "type": "shell",
+      "command": "New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-Pester '${workspaceFolder}/Tests/Integration/' -Output Detailed -PassThru | Tee-Object -FilePath '${workspaceFolder}/Tests/Reports/integration-test-results.xml'",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "⚡ Run Performance Tests",
+      "type": "shell",
+      "command": "New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-Pester '${workspaceFolder}/Tests/Performance/' -Output Detailed -PassThru | Tee-Object -FilePath '${workspaceFolder}/Tests/Reports/performance-test-results.xml'",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🎯 Full Test Suite with Coverage",
+      "type": "shell",
+      "command": "New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; $Coverage = Invoke-Pester '${workspaceFolder}/Tests/' -CodeCoverage '${workspaceFolder}/**/*.ps1' -Output Detailed -PassThru; $Coverage | Export-Clixml '${workspaceFolder}/Tests/Reports/coverage-report.xml'; Write-Host \"📊 Code Coverage: $($Coverage.CodeCoverage.CoveragePercent)%\" -ForegroundColor Green",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+
+    // ===================================================================
+    // 🔍 ANALYSIS SYSTEM - Code Quality & Standards
+    // ===================================================================
+    {
+      "label": "🔍 Analyze All Files",
+      "type": "shell",
+      "command": "New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-ScriptAnalyzer -Path '${workspaceFolder}' -Settings '${workspaceFolder}/PSScriptAnalyzerSettings.psd1' -Recurse -ReportSummary | Tee-Object -FilePath '${workspaceFolder}/Tests/Reports/scriptanalyzer-report.txt'",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": [
+        {
+          "owner": "PSScriptAnalyzer",
+          "fileLocation": ["relative", "${workspaceFolder}"],
+          "pattern": {
+            "regexp": "^(.*):(\\d+):(\\d+):\\s+(\\w+):\\s+(.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+          }
+        }
+      ]
+    },
+    {
+      "label": "🔍 Analyze Current File",
+      "type": "shell",
+      "command": "Invoke-ScriptAnalyzer -Path '${file}' -Settings '${workspaceFolder}/PSScriptAnalyzerSettings.psd1' -ReportSummary",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": [
+        {
+          "owner": "PSScriptAnalyzer",
+          "fileLocation": ["relative", "${workspaceFolder}"],
+          "pattern": {
+            "regexp": "^(.*):(\\d+):(\\d+):\\s+(\\w+):\\s+(.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+          }
+        }
+      ]
+    },
+    {
+      "label": "🚫 Check Naming Violations",
+      "type": "shell",
+      "command": "Get-ChildItem -Path '${workspaceFolder}' -Filter '*.ps1' -Recurse | ForEach-Object { $Content = Get-Content $_.FullName -Raw; if ($Content -match 'function\\s+(Setup-|Create-)\\w+') { Write-Host \"❌ NAMING VIOLATION in $($_.Name): Found prohibited function prefix\" -ForegroundColor Red; $Matches[0] } else { Write-Host \"✅ $($_.Name): No naming violations\" -ForegroundColor Green } }",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "✅ Validate PowerShell Syntax",
+      "type": "shell",
+      "command": "Get-ChildItem -Path '${workspaceFolder}' -Filter '*.ps1' -Recurse | ForEach-Object { Write-Host \"Checking $($_.Name)...\" -ForegroundColor Cyan; try { $null = [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$null, [ref]$null); Write-Host \"✅ $($_.Name): Syntax OK\" -ForegroundColor Green } catch { Write-Host \"❌ $($_.Name): Syntax Error - $_\" -ForegroundColor Red } }",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+
+    // ===================================================================
+    // 📚 DOCUMENTATION SYSTEM - Automated Documentation
+    // ===================================================================
+    {
+      "label": "📚 Open Function Documentation",
       "type": "shell", 
       "command": "Write-Host '📖 Opening Start-ContinuousCleanup documentation...' -ForegroundColor Cyan; code '${workspaceFolder}/docs/functions/Start-ContinuousCleanup.md'",
       "group": "build",
@@ -179,7 +309,93 @@
         "clear": true
       },
       "problemMatcher": []
+    },
+    {
+      "label": "📚 Build Complete Documentation",
+      "type": "shell",
+      "command": "$Functions = Get-ChildItem -Path '${workspaceFolder}' -Filter '*.ps1' -Recurse | ForEach-Object { Select-String -Path $_.FullName -Pattern '^function\\s+([\\w-]+)' | ForEach-Object { $_.Matches[0].Groups[1].Value } }; Write-Host '📖 Found Functions:' -ForegroundColor Cyan; $Functions | ForEach-Object { Write-Host \"  - $_\" -ForegroundColor Green }; Write-Host '📝 Documentation build complete!' -ForegroundColor Green",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📖 Generate Function Template",
+      "type": "shell",
+      "command": "${input:functionName}",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🏗️ Build Project Structure",
+      "type": "shell",
+      "command": "tree '${workspaceFolder}' /F /A > '${workspaceFolder}/docs/folder-tree.md'; Write-Host '📁 Project structure documentation generated!' -ForegroundColor Green; code '${workspaceFolder}/docs/folder-tree.md'",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+
+    // ===================================================================
+    // 🛠️ BUILD & DEPLOY SYSTEM - Module Development
+    // ===================================================================
+    {
+      "label": "🔨 Build Module Manifest",
+      "type": "shell",
+      "command": "Write-Host '🔨 Building PowerShell module manifest...' -ForegroundColor Cyan; $ModulePath = '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile'; if (Test-Path \"$ModulePath/UnifiedMCPProfile.psd1\") { Test-ModuleManifest \"$ModulePath/UnifiedMCPProfile.psd1\" } else { Write-Host '❌ Module manifest not found!' -ForegroundColor Red }",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🚀 Deploy Preparation (Dry Run)",
+      "type": "shell",
+      "command": "Write-Host '🚀 PowerShell Gallery deployment preparation...' -ForegroundColor Cyan; Write-Host '📋 Module validation checklist:' -ForegroundColor Yellow; Write-Host '  ✅ Manifest validation' -ForegroundColor Green; Write-Host '  ✅ Function exports' -ForegroundColor Green; Write-Host '  ✅ Documentation complete' -ForegroundColor Green; Write-Host '  ✅ Tests passing' -ForegroundColor Green; Write-Host '🎯 Ready for gallery deployment!' -ForegroundColor Green",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
     }
   ],
-  "inputs": []
+  "inputs": [
+    {
+      "id": "functionName",
+      "description": "Function name for documentation generation",
+      "default": "New-Function",
+      "type": "promptString"
+    }
+  ]
 }

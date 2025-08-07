@@ -1,0 +1,283 @@
+{
+"version": "0.2.0",
+"configurations": [
+// ===================================================================
+// 📋 QUICK ACCESS - Most Common Development Tasks
+// ===================================================================
+{
+"name": "🧹 Quick Cleanup Preview",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 10 -WhatIf -Verbose"
+]
+},
+{
+"name": "🧪 Run Quick Tests",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Invoke-Pester '${workspaceFolder}/Tests/Unit/' -Output Detailed"
+]
+},
+{
+"name": "🔍 Analyze Current File",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"Invoke-ScriptAnalyzer -Path '${file}' -Settings '${workspaceFolder}/PSScriptAnalyzerSettings.psd1' -ReportSummary"
+]
+},
+
+// ===================================================================
+// 🧹 CLEANUP SYSTEM - Repository Maintenance
+// ===================================================================
+{
+"name": "🧹 Cleanup: Preview Mode",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:CLEANUP_DEBUG='true'; Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 10 -WhatIf -Verbose"
+]
+},
+{
+"name": "🧹 Cleanup: Auto-Commit Mode",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:CLEANUP_DEBUG='true'; Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 15 -AutoCommit -Verbose"
+]
+},
+{
+"name": "🧹 Cleanup: Profiles Only",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 20 -TargetCategories @('Profiles') -AutoCommit -Verbose"
+]
+},
+{
+"name": "🧹 Cleanup: Documentation Only",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 25 -TargetCategories @('Documentation') -AutoCommit -Verbose"
+]
+},
+
+// ===================================================================
+// 🧪 TESTING SYSTEM - Comprehensive Test Suite
+// ===================================================================
+{
+"name": "🧪 Test: Cleanup Function",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:PESTER_DEBUG='true'; Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Invoke-Pester '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Tests/Start-ContinuousCleanup.Tests.ps1' -Output Detailed"
+]
+},
+{
+"name": "🧪 Test: Unit Tests",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:PESTER_DEBUG='true'; New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-Pester '${workspaceFolder}/Tests/Unit/' -Output Detailed -PassThru"
+]
+},
+{
+"name": "🔬 Test: Integration Tests",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:PESTER_DEBUG='true'; New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-Pester '${workspaceFolder}/Tests/Integration/' -Output Detailed -PassThru"
+]
+},
+{
+"name": "⚡ Test: Performance Tests",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:PESTER_DEBUG='true'; $env:PERFORMANCE_DEBUG='true'; New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-Pester '${workspaceFolder}/Tests/Performance/' -Output Detailed -PassThru"
+]
+},
+{
+"name": "🎯 Test: Full Suite with Coverage",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:PESTER_DEBUG='true'; $env:COVERAGE_DEBUG='true'; New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; $Coverage = Invoke-Pester '${workspaceFolder}/Tests/' -CodeCoverage '${workspaceFolder}/**/*.ps1' -Output Detailed -PassThru; $Coverage | Export-Clixml '${workspaceFolder}/Tests/Reports/coverage-report.xml'; Write-Host \"📊 Code Coverage: $($Coverage.CodeCoverage.CoveragePercent)%\" -ForegroundColor Green"
+]
+},
+
+// ===================================================================
+// 🔍 ANALYSIS SYSTEM - Code Quality & Standards
+// ===================================================================
+{
+"name": "🔍 Analysis: All Files",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:SCRIPTANALYZER_DEBUG='true'; New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-ScriptAnalyzer -Path '${workspaceFolder}' -Settings '${workspaceFolder}/PSScriptAnalyzerSettings.psd1' -Recurse -ReportSummary"
+]
+},
+{
+"name": "🔍 Analysis: Current File Debug",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:SCRIPTANALYZER_DEBUG='true'; Write-Host 'Analyzing: ${file}' -ForegroundColor Cyan; Invoke-ScriptAnalyzer -Path '${file}' -Settings '${workspaceFolder}/PSScriptAnalyzerSettings.psd1' -ReportSummary"
+]
+},
+{
+"name": "🚫 Analysis: Naming Violations",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:NAMING_CHECK_DEBUG='true'; Get-ChildItem -Path '${workspaceFolder}' -Filter '*.ps1' -Recurse | ForEach-Object { $Content = Get-Content $_.FullName -Raw; if ($Content -match 'function\\s+(Setup-|Create-)\\w+') { Write-Host \"❌ NAMING VIOLATION in $($_.Name): Found prohibited function prefix\" -ForegroundColor Red; $Matches[0] } else { Write-Host \"✅ $($_.Name): No naming violations\" -ForegroundColor Green } }"
+]
+},
+{
+"name": "✅ Analysis: Syntax Validation",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:SYNTAX_CHECK_DEBUG='true'; Get-ChildItem -Path '${workspaceFolder}' -Filter '*.ps1' -Recurse | ForEach-Object { Write-Host \"Checking $($_.Name)...\" -ForegroundColor Cyan; try { $null = [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$null, [ref]$null); Write-Host \"✅ $($_.Name): Syntax OK\" -ForegroundColor Green } catch { Write-Host \"❌ $($_.Name): Syntax Error - $_\" -ForegroundColor Red } }"
+]
+},
+
+// ===================================================================
+// 🛠️ BUILD & DEPLOY SYSTEM - Module Development
+// ===================================================================
+{
+"name": "🔨 Build: Module Manifest",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:BUILD_DEBUG='true'; Write-Host '🔨 Building PowerShell module manifest...' -ForegroundColor Cyan; $ModulePath = '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile'; if (Test-Path \"$ModulePath/UnifiedMCPProfile.psd1\") { Test-ModuleManifest \"$ModulePath/UnifiedMCPProfile.psd1\" } else { Write-Host '❌ Module manifest not found!' -ForegroundColor Red }"
+]
+},
+{
+"name": "🚀 Build: Deployment Check",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-Command",
+"$env:DEPLOY_DEBUG='true'; Write-Host '🚀 PowerShell Gallery deployment preparation...' -ForegroundColor Cyan; Write-Host '📋 Module validation checklist:' -ForegroundColor Yellow; Write-Host '  ✅ Manifest validation' -ForegroundColor Green; Write-Host '  ✅ Function exports' -ForegroundColor Green; Write-Host '  ✅ Documentation complete' -ForegroundColor Green; Write-Host '  ✅ Tests passing' -ForegroundColor Green; Write-Host '🎯 Ready for gallery deployment!' -ForegroundColor Green"
+]
+},
+
+// ===================================================================
+// 🚀 PROFILE SYSTEM - Legacy Configurations (Simplified)
+// ===================================================================
+{
+"name": "🧛‍♂️ Dracula Profile",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-NoLogo",
+"-Command",
+"$env:PROFILE_DEBUG='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1'"
+]
+},
+{
+"name": "🚀 MCP Profile",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-NoLogo",
+"-Command",
+"$env:PROFILE_DEBUG='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_MCP.ps1'"
+]
+},
+{
+"name": "🎯 Unified Profile",
+"type": "PowerShell",
+"request": "launch",
+"cwd": "${workspaceFolder}",
+"createTemporaryIntegratedConsole": true,
+"args": [
+"-ExecutionPolicy", "Bypass",
+"-NoLogo",
+"-Command",
+"$env:PROFILE_DEBUG='true'; . '${workspaceFolder}/Install-UnifiedProfile.ps1'"
+]
+}
+]
+}

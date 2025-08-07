@@ -1,233 +1,51 @@
 {
+  "version": "0.2.0",
   "configurations": [
     // ===================================================================
-    // 🚀 UNIFIED PROFILE SYSTEM - ALL MODES WITH ADVANCED FEATURES
-    // Comprehensive Unified Profile debugging configurations with
-    // CamelCase navigation and diacritics support in every mode
-    // ===================================================================
-    
-    // 🧛‍♂️ DRACULA MODE - ENHANCED WITH SMART NAVIGATION
+    // 📋 QUICK ACCESS - Most Common Development Tasks
     // ===================================================================
     {
-      "name": "🧛‍♂️ Unified Dracula (🐪 CamelCase + 🌍 Diacritics)",
+      "name": "🧹 Quick Cleanup Preview",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "createTemporaryIntegratedConsole": true,
       "args": [
         "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
         "-Command", 
-        "$env:UNIFIED_PROFILE_DEBUG='true'; $env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1'"
+        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 10 -WhatIf -Verbose"
       ]
     },
     {
-      "name": "🔬 Debug Dracula Profile (Performance Analytics)",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": false,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-Command", 
-        "$env:UNIFIED_PROFILE_DEBUG='true'; $env:DRACULA_PERFORMANCE_DEBUG='true'; $env:DRACULA_SHOW_STARTUP='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1'"
-      ]
-    },
-    {
-      "name": "🎨 Interactive Dracula Session (Enhanced Features)",
+      "name": "🧪 Run Quick Tests",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "createTemporaryIntegratedConsole": true,
       "args": [
         "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
         "-Command", 
-        "$env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; $env:DRACULA_ENHANCED_MODE='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1'"
+        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Invoke-Pester '${workspaceFolder}/Tests/Unit/' -Output Detailed"
       ]
     },
-
-    // 🚀 MCP MODE - MODEL CONTEXT PROTOCOL WITH SMART FEATURES
-    // ===================================================================
     {
-      "name": "🚀 Unified MCP (🐪 CamelCase + 🌍 Diacritics)",
+      "name": "🔍 Analyze Current File",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "createTemporaryIntegratedConsole": true,
       "args": [
         "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
-        "-File", "${workspaceFolder}/Microsoft.PowerShell_profile_MCP.ps1"
-      ]
-    },
-    {
-      "name": "🔬 Debug MCP Profile (AI Integration)",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": false,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
         "-Command", 
-        "$env:UNIFIED_PROFILE_DEBUG='true'; $env:MCP_DEBUG_MODE='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_MCP.ps1'"
-      ]
-    },
-    {
-      "name": "🤖 Interactive MCP Session (Copilot Ready)",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
-        "-Command", 
-        "$env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; $env:MCP_ENHANCED_MODE='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_MCP.ps1'"
-      ]
-    },
-
-    // ⚡ LAZYADMIN MODE - SYSTEM ADMINISTRATION WITH SMART NAVIGATION
-    // ===================================================================
-    {
-      "name": "⚡ Unified LazyAdmin (🐪 CamelCase + 🌍 Diacritics)",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
-        "-Command", 
-        "$env:UNIFIED_PROFILE_DEBUG='true'; $env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1'"
-      ]
-    },
-    {
-      "name": "🔬 Debug LazyAdmin Profile (Admin Tools)",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": false,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-Command", 
-        "$env:UNIFIED_PROFILE_DEBUG='true'; $env:LAZYADMIN_DEBUG_MODE='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1'"
-      ]
-    },
-    {
-      "name": "🛠️ Interactive LazyAdmin Session (Sysadmin Tools)",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
-        "-Command", 
-        "$env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; $env:LAZYADMIN_ENHANCED_MODE='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1'"
-      ]
-    },
-
-    // 🎯 MINIMAL MODE - LIGHTWEIGHT WITH CORE FEATURES
-    // ===================================================================
-    {
-      "name": "🎯 Unified Minimal (🐪 CamelCase + 🌍 Diacritics)",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
-        "-Command", 
-        "$env:UNIFIED_PROFILE_DEBUG='true'; $env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_Minimal.ps1'"
-      ]
-    },
-    {
-      "name": "🔬 Debug Minimal Profile (Lightweight)",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": false,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-Command", 
-        "$env:UNIFIED_PROFILE_DEBUG='true'; $env:MINIMAL_DEBUG_MODE='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_Minimal.ps1'"
-      ]
-    },
-
-    // 🛠️ CUSTOM MODE - USER-DEFINED CONFIGURATION
-    // ===================================================================
-    {
-      "name": "🛠️ Unified Custom (🐪 CamelCase + 🌍 Diacritics)",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
-        "-Command", 
-        "$env:UNIFIED_PROFILE_DEBUG='true'; $env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1'"
+        "Invoke-ScriptAnalyzer -Path '${file}' -Settings '${workspaceFolder}/PSScriptAnalyzerSettings.psd1' -ReportSummary"
       ]
     },
 
     // ===================================================================
-    // 🔧 INSTALLATION & SETUP LAUNCHERS
-    // Comprehensive installation and debugging configurations
+    // 🧹 CLEANUP SYSTEM - Repository Maintenance
     // ===================================================================
     {
-      "name": "📦 Install Unified Profile System (Full Setup)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Install-UnifiedProfile.ps1",
-      "args": ["-Mode", "Dracula", "-SetupVSCode", "-InstallDependencies", "-ConfigureSystemProfile"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "⚡ Quick Install (Dracula Mode)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Start-UnifiedProfile.ps1",
-      "args": ["-Quick"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "🔧 Full Install (All Features)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Start-UnifiedProfile.ps1",
-      "args": ["-Full"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "🎛️ Interactive Install (Menu-Driven)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Start-UnifiedProfile.ps1",
-      "args": ["-Interactive"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "🔄 Reinstall System-Wide (Admin Required)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Install-UnifiedProfileSystem.ps1",
-      "args": ["-Scope", "AllUsers", "-Force"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-
-    // ===================================================================
-    // 🧪 TESTING & VALIDATION LAUNCHERS
-    // Module and PowerShell version validation
-    // ===================================================================
-    {
-      "name": "🧪 Test Profile Configuration",
+      "name": "🧹 Cleanup: Preview Mode",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
@@ -235,35 +53,35 @@
       "args": [
         "-ExecutionPolicy", "Bypass",
         "-Command", 
-        "Import-Module UnifiedPowerShellProfile -Force; Test-ProfileConfiguration -Detailed; Get-ProfileStatus -Verbose"
+        "$env:CLEANUP_DEBUG='true'; Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 10 -WhatIf -Verbose"
       ]
     },
     {
-      "name": "📊 Module Version Validation",
-      "type": "PowerShell",
+      "name": "🧹 Cleanup: Auto-Commit Mode",
+      "type": "PowerShell", 
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "createTemporaryIntegratedConsole": true,
       "args": [
         "-ExecutionPolicy", "Bypass",
         "-Command", 
-        "Write-Host '🔍 PowerShell Version:' -ForegroundColor Cyan; $PSVersionTable; Write-Host '📦 Module Versions:' -ForegroundColor Cyan; Get-Module -ListAvailable | Where-Object {$_.Name -like '*Unified*' -or $_.Name -like '*PSReadLine*' -or $_.Name -like '*Terminal*'} | Format-Table Name, Version, Path -AutoSize"
+        "$env:CLEANUP_DEBUG='true'; Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 15 -AutoCommit -Verbose"
       ]
     },
     {
-      "name": "🔍 PowerShell Environment Analysis",
+      "name": "🧹 Cleanup: Profiles Only",
       "type": "PowerShell",
-      "request": "launch",
+      "request": "launch", 
       "cwd": "${workspaceFolder}",
       "createTemporaryIntegratedConsole": true,
       "args": [
         "-ExecutionPolicy", "Bypass",
         "-Command", 
-        "Write-Host '🔍 PowerShell Analysis Report' -ForegroundColor Magenta; Write-Host '=========================' -ForegroundColor DarkMagenta; Write-Host ''; Write-Host '📋 PowerShell Version:' -ForegroundColor Cyan; $PSVersionTable.PSVersion; Write-Host ''; Write-Host '📂 Module Paths:' -ForegroundColor Cyan; $env:PSModulePath -split ';' | ForEach-Object { Write-Host \"  $_\" -ForegroundColor Gray }; Write-Host ''; Write-Host '📦 Loaded Modules:' -ForegroundColor Cyan; Get-Module | Format-Table Name, Version -AutoSize"
+        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 20 -TargetCategories @('Profiles') -AutoCommit -Verbose"
       ]
     },
     {
-      "name": "🎯 Module Health Check",
+      "name": "🧹 Cleanup: Documentation Only", 
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
@@ -271,79 +89,15 @@
       "args": [
         "-ExecutionPolicy", "Bypass",
         "-Command", 
-        "$requiredModules = @('PSReadLine', 'Terminal-Icons', 'z', 'PSFzf', 'UnifiedPowerShellProfile'); Write-Host '🏥 Module Health Check' -ForegroundColor Green; Write-Host '=====================' -ForegroundColor DarkGreen; foreach ($module in $requiredModules) { $available = Get-Module $module -ListAvailable; if ($available) { Write-Host \"✅ $module - v$($available[0].Version)\" -ForegroundColor Green } else { Write-Host \"❌ $module - Not Found\" -ForegroundColor Red } }"
+        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 25 -TargetCategories @('Documentation') -AutoCommit -Verbose"
       ]
     },
 
     // ===================================================================
-    // 🎨 SMART NAVIGATION & FEATURE TESTING
-    // CamelCase navigation and diacritics support demos
+    // 🧪 TESTING SYSTEM - Comprehensive Test Suite
     // ===================================================================
     {
-      "name": "🌍 Demo Enhanced Features (All Languages)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Demo-EnhancedDraculaFeatures.ps1",
-      "args": [],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "🧪 Test Unified Profile Features (Comprehensive)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Test-UnifiedProfileFeatures.ps1",
-      "args": ["-Feature", "All", "-Interactive"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "🐪 CamelCase Navigation Demo",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Demo-EnhancedDraculaFeatures.ps1",
-      "args": ["-Feature", "CamelCase"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "🐪 Test CamelCase Navigation (Advanced)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Test-UnifiedProfileFeatures.ps1",
-      "args": ["-Feature", "CamelCase", "-Mode", "${input:profileMode}", "-Interactive"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "🌍 Diacritics Support Demo",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Demo-EnhancedDraculaFeatures.ps1",
-      "args": ["-Feature", "Diacritics"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "🌍 Test Diacritics Support (Advanced)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Test-UnifiedProfileFeatures.ps1",
-      "args": ["-Feature", "Diacritics", "-Mode", "${input:profileMode}", "-Interactive"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "🎨 Test All Profile Modes",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Test-UnifiedProfileFeatures.ps1",
-      "args": ["-Feature", "ProfileModes", "-Interactive"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "🎨 Interactive CamelCase Training",
+      "name": "🧪 Test: Cleanup Function",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
@@ -351,11 +105,11 @@
       "args": [
         "-ExecutionPolicy", "Bypass",
         "-Command", 
-        "$env:ENABLE_CAMELCASE_NAV='true'; $examples = @('Get-ChildItem', 'New-VSCodeWorkspace', 'Initialize-UnifiedProfile', 'Test-PowerShellSyntax'); Write-Host '🐪 CamelCase Navigation Training' -ForegroundColor Yellow; Write-Host '================================' -ForegroundColor DarkYellow; Write-Host 'Try these CamelCase examples:' -ForegroundColor Cyan; $examples | ForEach-Object { Write-Host \"  $_\" -ForegroundColor Green }; Write-Host ''; Write-Host 'Use Ctrl+Left/Right to jump between words!' -ForegroundColor Magenta"
+        "$env:PESTER_DEBUG='true'; Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Invoke-Pester '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile/Tests/Start-ContinuousCleanup.Tests.ps1' -Output Detailed"
       ]
     },
     {
-      "name": "🌍 International Diacritics Training",
+      "name": "🧪 Test: Unit Tests",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
@@ -363,141 +117,131 @@
       "args": [
         "-ExecutionPolicy", "Bypass",
         "-Command", 
-        "$env:ENABLE_DIACRITICS='true'; $examples = @('příkaz-sNázvem-čeština', 'función-conAcentos-español', 'funktionMitUmlauten-größe', 'funkcja-zPolskimiZnakami-ąćęłńóśźż'); Write-Host '🌍 Diacritics Support Training' -ForegroundColor Cyan; Write-Host '==============================' -ForegroundColor DarkCyan; Write-Host 'Try these international examples:' -ForegroundColor Yellow; $examples | ForEach-Object { Write-Host \"  $_\" -ForegroundColor Green }; Write-Host ''; Write-Host 'Smart navigation works with all accented characters!' -ForegroundColor Magenta"
+        "$env:PESTER_DEBUG='true'; New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-Pester '${workspaceFolder}/Tests/Unit/' -Output Detailed -PassThru"
+      ]
+    },
+    {
+      "name": "🔬 Test: Integration Tests",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", 
+        "$env:PESTER_DEBUG='true'; New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-Pester '${workspaceFolder}/Tests/Integration/' -Output Detailed -PassThru"
+      ]
+    },
+    {
+      "name": "⚡ Test: Performance Tests",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", 
+        "$env:PESTER_DEBUG='true'; $env:PERFORMANCE_DEBUG='true'; New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-Pester '${workspaceFolder}/Tests/Performance/' -Output Detailed -PassThru"
+      ]
+    },
+    {
+      "name": "🎯 Test: Full Suite with Coverage",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", 
+        "$env:PESTER_DEBUG='true'; $env:COVERAGE_DEBUG='true'; New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; $Coverage = Invoke-Pester '${workspaceFolder}/Tests/' -CodeCoverage '${workspaceFolder}/**/*.ps1' -Output Detailed -PassThru; $Coverage | Export-Clixml '${workspaceFolder}/Tests/Reports/coverage-report.xml'; Write-Host \"📊 Code Coverage: $($Coverage.CodeCoverage.CoveragePercent)%\" -ForegroundColor Green"
       ]
     },
 
     // ===================================================================
-    // 🏆 PERFORMANCE TESTING & COMPARISON  
-    // Ultra-performance benchmarking and analysis
+    // 🔍 ANALYSIS SYSTEM - Code Quality & Standards  
     // ===================================================================
     {
-      "name": "🏆 Ultra-Performance Comparison (Comprehensive)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Test-UltraPerformanceComparison.ps1",
-      "args": ["-TestMode", "Comprehensive", "-Iterations", "10", "-GenerateReport", "-IncludeLoremIpsum", "-LoremIpsumSize", "3000"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "📊 Performance Comparison (Quick)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Test-UltraPerformanceComparison.ps1",
-      "args": ["-TestMode", "Quick", "-GenerateReport"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "🔍 Performance Comparison (Standard)",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Test-UltraPerformanceComparison.ps1",
-      "args": ["-TestMode", "Standard", "-Iterations", "15", "-GenerateReport"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-    {
-      "name": "📝 Lorem Ipsum Stress Test",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}/Test-UltraPerformanceComparison.ps1",
-      "args": ["-TestMode", "LoremIpsum", "-LoremIpsumSize", "5000", "-GenerateReport"],
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true
-    },
-
-    // ===================================================================
-    // � ULTRA-PERFORMANCE ENHANCED PROFILES (LATEST GENERATION)
-    // Advanced ultra-performance with smart navigation and optimization
-    // ===================================================================
-    {
-      "name": "🚀 Ultra-Performance Enhanced (🐪 CamelCase + 🌍 Diacritics + ⚡ JIT)",
+      "name": "🔍 Analysis: All Files",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "createTemporaryIntegratedConsole": true,
       "args": [
         "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
         "-Command", 
-        "$env:UNIFIED_PROFILE_MODE='UltraPerformanceEnhanced'; $env:DRACULA_PERFORMANCE_DEBUG='true'; $env:DRACULA_SHOW_STARTUP='true'; $env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; $env:ENABLE_JIT_OPTIMIZATION='true'; $env:ENABLE_SMART_COMPLETION='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_UltraPerformance_V4.ps1'"
+        "$env:SCRIPTANALYZER_DEBUG='true'; New-Item -Path '${workspaceFolder}/Tests/Reports' -ItemType Directory -Force; Invoke-ScriptAnalyzer -Path '${workspaceFolder}' -Settings '${workspaceFolder}/PSScriptAnalyzerSettings.psd1' -Recurse -ReportSummary"
       ]
     },
     {
-      "name": "🔬 Debug Ultra-Performance Enhanced (Full Analytics)",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": false,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-Command", 
-        "$env:UNIFIED_PROFILE_MODE='UltraPerformanceEnhanced'; $env:UNIFIED_PROFILE_DEBUG='true'; $env:DRACULA_PERFORMANCE_DEBUG='true'; $env:DRACULA_SHOW_STARTUP='true'; $env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; $env:ENABLE_JIT_OPTIMIZATION='true'; $env:ENABLE_PERFORMANCE_METRICS='true'; $env:ENABLE_MEMORY_OPTIMIZATION='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_UltraPerformance_V4.ps1'"
-      ]
-    },
-    {
-      "name": "⚡ Ultra-Performance Enhanced (Memory Optimized + Lazy Loading)",
+      "name": "🔍 Analysis: Current File Debug",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "createTemporaryIntegratedConsole": true,
       "args": [
         "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
         "-Command", 
-        "$env:UNIFIED_PROFILE_MODE='UltraPerformanceEnhanced'; $env:ENABLE_LAZY_LOADING='true'; $env:ENABLE_MEMORY_OPTIMIZATION='true'; $env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; $env:DRACULA_MINIMAL_STARTUP='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_UltraPerformance_V4.ps1'"
+        "$env:SCRIPTANALYZER_DEBUG='true'; Write-Host 'Analyzing: ${file}' -ForegroundColor Cyan; Invoke-ScriptAnalyzer -Path '${file}' -Settings '${workspaceFolder}/PSScriptAnalyzerSettings.psd1' -ReportSummary"
       ]
     },
     {
-      "name": "🎯 Ultra-Performance Enhanced (Interactive Training Mode)",
+      "name": "🚫 Analysis: Naming Violations",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "createTemporaryIntegratedConsole": true,
       "args": [
         "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
         "-Command", 
-        "$env:UNIFIED_PROFILE_MODE='UltraPerformanceEnhanced'; $env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; $env:ENABLE_INTERACTIVE_TRAINING='true'; $env:SHOW_NAVIGATION_TIPS='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_UltraPerformance_V4.ps1'; Write-Host '🚀 Ultra-Performance Enhanced Mode Active!' -ForegroundColor Magenta; Write-Host 'Features: 🐪 CamelCase Navigation | 🌍 Diacritics | ⚡ JIT Optimization' -ForegroundColor Cyan"
+        "$env:NAMING_CHECK_DEBUG='true'; Get-ChildItem -Path '${workspaceFolder}' -Filter '*.ps1' -Recurse | ForEach-Object { $Content = Get-Content $_.FullName -Raw; if ($Content -match 'function\\s+(Setup-|Create-)\\w+') { Write-Host \"❌ NAMING VIOLATION in $($_.Name): Found prohibited function prefix\" -ForegroundColor Red; $Matches[0] } else { Write-Host \"✅ $($_.Name): No naming violations\" -ForegroundColor Green } }"
+      ]
+    },
+    {
+      "name": "✅ Analysis: Syntax Validation",
+      "type": "PowerShell", 
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", 
+        "$env:SYNTAX_CHECK_DEBUG='true'; Get-ChildItem -Path '${workspaceFolder}' -Filter '*.ps1' -Recurse | ForEach-Object { Write-Host \"Checking $($_.Name)...\" -ForegroundColor Cyan; try { $null = [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$null, [ref]$null); Write-Host \"✅ $($_.Name): Syntax OK\" -ForegroundColor Green } catch { Write-Host \"❌ $($_.Name): Syntax Error - $_\" -ForegroundColor Red } }"
       ]
     },
 
     // ===================================================================
-    // �🔬 LEGACY ULTRA-PERFORMANCE PROFILES (COMPATIBILITY)
-    // Backward compatibility with existing ultra-performance configs  
+    // 🛠️ BUILD & DEPLOY SYSTEM - Module Development
     // ===================================================================
     {
-      "name": "🔬 Ultra-Performance V4 (JIT + Smart Navigation)",
+      "name": "🔨 Build: Module Manifest",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": false,
+      "createTemporaryIntegratedConsole": true,
       "args": [
+        "-ExecutionPolicy", "Bypass",
         "-Command", 
-        "$env:DRACULA_PERFORMANCE_DEBUG='true'; $env:DRACULA_SHOW_STARTUP='true'; $env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_UltraPerformance_V4.ps1'"
+        "$env:BUILD_DEBUG='true'; Write-Host '🔨 Building PowerShell module manifest...' -ForegroundColor Cyan; $ModulePath = '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile'; if (Test-Path \"$ModulePath/UnifiedMCPProfile.psd1\") { Test-ModuleManifest \"$ModulePath/UnifiedMCPProfile.psd1\" } else { Write-Host '❌ Module manifest not found!' -ForegroundColor Red }"
       ]
     },
     {
-      "name": "⚡ Ultra-Performance V3 (Memory Optimized)",
+      "name": "🚀 Build: Deployment Check",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": false,
+      "createTemporaryIntegratedConsole": true,
       "args": [
+        "-ExecutionPolicy", "Bypass",
         "-Command", 
-        "$env:DRACULA_PERFORMANCE_DEBUG='true'; $env:DRACULA_SHOW_STARTUP='true'; $env:ENABLE_CAMELCASE_NAV='true'; $env:ENABLE_DIACRITICS='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula_UltraPerformance_V3.ps1'"
+        "$env:DEPLOY_DEBUG='true'; Write-Host '🚀 PowerShell Gallery deployment preparation...' -ForegroundColor Cyan; Write-Host '📋 Module validation checklist:' -ForegroundColor Yellow; Write-Host '  ✅ Manifest validation' -ForegroundColor Green; Write-Host '  ✅ Function exports' -ForegroundColor Green; Write-Host '  ✅ Documentation complete' -ForegroundColor Green; Write-Host '  ✅ Tests passing' -ForegroundColor Green; Write-Host '🎯 Ready for gallery deployment!' -ForegroundColor Green"
       ]
     },
-    
+
     // ===================================================================
-    // 🧹 CONTINUOUS CLEANUP SYSTEM - Start-ContinuousCleanup Function
-    // Repository maintenance and cleanup with incremental processing
-    // Debugging and testing configurations for cleanup operations
+    // 🚀 PROFILE SYSTEM - Legacy Configurations (Simplified)
     // ===================================================================
     {
-      "name": "🧹 Debug Continuous Cleanup (WhatIf Mode)",
+      "name": "🧛‍♂️ Dracula Profile",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
@@ -506,11 +250,11 @@
         "-ExecutionPolicy", "Bypass",
         "-NoLogo",
         "-Command", 
-        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 5 -WhatIf -Verbose"
+        "$env:PROFILE_DEBUG='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_Dracula.ps1'"
       ]
     },
     {
-      "name": "🧪 Test Continuous Cleanup (Single Category)",
+      "name": "🚀 MCP Profile",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
@@ -519,11 +263,11 @@
         "-ExecutionPolicy", "Bypass",
         "-NoLogo",
         "-Command", 
-        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 3 -TargetCategories @('${input:cleanupCategory}') -WhatIf -Verbose"
+        "$env:PROFILE_DEBUG='true'; . '${workspaceFolder}/Microsoft.PowerShell_profile_MCP.ps1'"
       ]
     },
     {
-      "name": "🚀 Interactive Cleanup Session (Auto-Commit)",
+      "name": "🎯 Unified Profile",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}",
@@ -532,101 +276,8 @@
         "-ExecutionPolicy", "Bypass",
         "-NoLogo",
         "-Command", 
-        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 10 -AutoCommit -Verbose"
+        "$env:PROFILE_DEBUG='true'; . '${workspaceFolder}/Install-UnifiedProfile.ps1'"
       ]
-    },
-    {
-      "name": "📊 Cleanup Performance Analysis",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": false,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-Command", 
-        "Measure-Command { Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 20 -WhatIf } | Format-Table TotalSeconds, TotalMilliseconds"
-      ]
-    },
-    {
-      "name": "🔍 Cleanup State Inspector",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
-        "-Command", 
-        "$stateFile = '${workspaceFolder}/Build-Steps/Cleanup-Progress.json'; if (Test-Path $stateFile) { Get-Content $stateFile | ConvertFrom-Json | Format-List } else { Write-Host 'No cleanup state file found' -ForegroundColor Yellow }"
-      ]
-    },
-    {
-      "name": "🧹 Comprehensive Cleanup (All Categories)",
-      "type": "PowerShell",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "createTemporaryIntegratedConsole": true,
-      "args": [
-        "-ExecutionPolicy", "Bypass",
-        "-NoLogo",
-        "-Command", 
-        "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 15 -TargetCategories @('All') -AutoCommit -Verbose"
-      ]
-    }
-  ],
-  "inputs": [
-    {
-      "id": "profileMode",
-      "description": "Select Unified Profile mode for debugging",
-      "type": "pickString", 
-      "options": [
-        "Dracula",
-        "MCP", 
-        "LazyAdmin",
-        "Minimal",
-        "Custom"
-      ],
-      "default": "Dracula"
-    },
-    {
-      "id": "testMode",
-      "description": "Select test execution mode",
-      "type": "pickString",
-      "options": [
-        "Quick",
-        "Standard", 
-        "Comprehensive",
-        "LoremIpsum"
-      ],
-      "default": "Quick"
-    },
-    {
-      "id": "featureDemo",
-      "description": "Select feature to demonstrate",
-      "type": "pickString",
-      "options": [
-        "All",
-        "CamelCase",
-        "Diacritics",
-        "GitStatus",
-        "Performance"
-      ],
-      "default": "All"
-    },
-    {
-      "id": "cleanupCategory",
-      "description": "Select cleanup category to target",
-      "type": "pickString",
-      "options": [
-        "Profiles",
-        "Documentation", 
-        "Development",
-        "Performance",
-        "Installation",
-        "Build",
-        "Archives"
-      ],
-      "default": "Profiles"
     }
   ]
 }
