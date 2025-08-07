@@ -162,16 +162,26 @@ function Install-RequiredModules {
 function Install-UnifiedModule {
     Write-SetupLog "🔧 Setting up Unified PowerShell Profile module..." -Level Info
     
-    # Ensure module is in a discoverable location
-    $userModulesPath = Join-Path ([Environment]::GetFolderPath('MyDocuments')) "PowerShell\Modules"
-    $targetModulePath = Join-Path $userModulesPath "UnifiedPowerShellProfile"
+    # Use repository-local modules directory instead of user modules
+    $localModulesPath = Join-Path $PSScriptRoot "PowerShellModules"
+    $targetModulePath = Join-Path $localModulesPath "UnifiedPowerShellProfile"
     
-    # Create user modules directory if it doesn't exist
-    if (-not (Test-Path $userModulesPath)) {
-        New-Item -Path $userModulesPath -ItemType Directory -Force | Out-Null
+    Write-SetupLog "📂 Using repository-local modules: $localModulesPath" -Level Info
+    
+    # Create repository modules directory if it doesn't exist
+    if (-not (Test-Path $localModulesPath)) {
+        New-Item -Path $localModulesPath -ItemType Directory -Force | Out-Null
+        Write-SetupLog "📁 Created repository modules directory" -Level Success
     }
     
-    # Copy module to user modules location
+    # Add repository modules to PSModulePath if not already present
+    $currentModulePath = $env:PSModulePath -split [IO.Path]::PathSeparator
+    if ($localModulesPath -notin $currentModulePath) {
+        $env:PSModulePath = "$localModulesPath$([IO.Path]::PathSeparator)$env:PSModulePath"
+        Write-SetupLog "📦 Added repository modules to PSModulePath" -Level Success
+    }
+    
+    # Copy module to repository-local modules location
     if (Test-Path $script:ModulePath) {
         if (Test-Path $targetModulePath) {
             if ($Force) {
@@ -186,10 +196,10 @@ function Install-UnifiedModule {
         Copy-Item $script:ModulePath $targetModulePath -Recurse -Force
         Write-SetupLog "✅ Module installed to: $targetModulePath" -Level Success
         
-        # Test module import
+        # Test module import using repository-local path
         try {
-            Import-Module UnifiedPowerShellProfile -Force
-            Write-SetupLog "✅ Module imports successfully" -Level Success
+            Import-Module $targetModulePath -Force
+            Write-SetupLog "✅ Module imports successfully from repository-local path" -Level Success
         }
         catch {
             Write-SetupLog "❌ Module import failed: $($_.Exception.Message)" -Level Error

@@ -74,10 +74,18 @@ function Write-SetupLog {
     }
     
     $prefix = switch ($Level) {
-        'Info' { '[INFO]' }
-        'Success' { '[SUCCESS]' }
-        'Warning' { '[WARNING]' }
-        'Error' { '[ERROR]' }
+        'Info' {
+            '[INFO]' 
+        }
+        'Success' {
+            '[SUCCESS]' 
+        }
+        'Warning' {
+            '[WARNING]' 
+        }
+        'Error' {
+            '[ERROR]' 
+        }
     }
     
     Write-Host "$prefix " -NoNewline -ForegroundColor $colors[$Level]
@@ -112,8 +120,7 @@ function Test-Prerequisites {
         $results.Repositories[$repo.Key] = Test-Path $repo.Value
         if ($results.Repositories[$repo.Key]) {
             Write-SetupLog "✅ Repository found: $($repo.Key)" -Level Success
-        }
-        else {
+        } else {
             Write-SetupLog "❌ Repository missing: $($repo.Key) at $($repo.Value)" -Level Warning
         }
     }
@@ -122,8 +129,7 @@ function Test-Prerequisites {
     if (Get-Command code -ErrorAction SilentlyContinue) {
         $results.VSCode = $true
         Write-SetupLog "✅ VS Code found" -Level Success
-    }
-    else {
+    } else {
         Write-SetupLog "⚠️ VS Code not found in PATH" -Level Warning
     }
     
@@ -131,8 +137,7 @@ function Test-Prerequisites {
     if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
         $results.OhMyPosh = $true
         Write-SetupLog "✅ Oh My Posh found" -Level Success
-    }
-    else {
+    } else {
         Write-SetupLog "⚠️ Oh My Posh not found" -Level Warning
     }
     
@@ -148,12 +153,10 @@ function Install-RequiredModules {
                 Write-SetupLog "Installing $moduleName..." -Level Info
                 Install-Module $moduleName -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
                 Write-SetupLog "✅ $moduleName installed successfully" -Level Success
-            }
-            else {
+            } else {
                 Write-SetupLog "✅ $moduleName already installed" -Level Success
             }
-        }
-        catch {
+        } catch {
             Write-SetupLog "❌ Failed to install $moduleName`: $($_.Exception.Message)" -Level Error
         }
     }
@@ -162,22 +165,32 @@ function Install-RequiredModules {
 function Install-UnifiedModule {
     Write-SetupLog "🔧 Setting up Unified PowerShell Profile module..." -Level Info
     
-    # Ensure module is in a discoverable location
-    $userModulesPath = Join-Path ([Environment]::GetFolderPath('MyDocuments')) "PowerShell\Modules"
-    $targetModulePath = Join-Path $userModulesPath "UnifiedPowerShellProfile"
+    # Use repository-local modules directory instead of user modules
+    $repositoryRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
+    $localModulesPath = Join-Path $repositoryRoot "PowerShellModules"
+    $targetModulePath = Join-Path $localModulesPath "UnifiedPowerShellProfile"
     
-    # Create user modules directory if it doesn't exist
-    if (-not (Test-Path $userModulesPath)) {
-        New-Item -Path $userModulesPath -ItemType Directory -Force | Out-Null
+    Write-SetupLog "📂 Using repository-local modules: $localModulesPath" -Level Info
+    
+    # Create repository modules directory if it doesn't exist
+    if (-not (Test-Path $localModulesPath)) {
+        New-Item -Path $localModulesPath -ItemType Directory -Force | Out-Null
+        Write-SetupLog "📁 Created repository modules directory" -Level Success
     }
     
-    # Copy module to user modules location
+    # Add repository modules to PSModulePath if not already present
+    $currentModulePath = $env:PSModulePath -split [IO.Path]::PathSeparator
+    if ($localModulesPath -notin $currentModulePath) {
+        $env:PSModulePath = "$localModulesPath$([IO.Path]::PathSeparator)$env:PSModulePath"
+        Write-SetupLog "📦 Added repository modules to PSModulePath" -Level Success
+    }
+    
+    # Copy module to repository-local modules location
     if (Test-Path $script:ModulePath) {
         if (Test-Path $targetModulePath) {
             if ($Force) {
                 Remove-Item $targetModulePath -Recurse -Force
-            }
-            else {
+            } else {
                 Write-SetupLog "Module already exists at $targetModulePath. Use -Force to overwrite." -Level Warning
                 return
             }
@@ -186,16 +199,14 @@ function Install-UnifiedModule {
         Copy-Item $script:ModulePath $targetModulePath -Recurse -Force
         Write-SetupLog "✅ Module installed to: $targetModulePath" -Level Success
         
-        # Test module import
+        # Test module import using repository-local path
         try {
-            Import-Module UnifiedPowerShellProfile -Force
-            Write-SetupLog "✅ Module imports successfully" -Level Success
-        }
-        catch {
+            Import-Module $targetModulePath -Force
+            Write-SetupLog "✅ Module imports successfully from repository-local path" -Level Success
+        } catch {
             Write-SetupLog "❌ Module import failed: $($_.Exception.Message)" -Level Error
         }
-    }
-    else {
+    } else {
         Write-SetupLog "❌ Source module not found at: $script:ModulePath" -Level Error
     }
 }
@@ -212,8 +223,7 @@ function Install-VSCodeWorkspace {
         
         Write-SetupLog "✅ VS Code workspace configured" -Level Success
         
-    }
-    catch {
+    } catch {
         Write-SetupLog "❌ Failed to setup VS Code workspace: $($_.Exception.Message)" -Level Error
     }
 }
@@ -347,8 +357,7 @@ try {
     # Show completion message
     Show-CompletionMessage
     
-}
-catch {
+} catch {
     Write-SetupLog "❌ Setup failed: $($_.Exception.Message)" -Level Error
     Write-SetupLog "📋 Stack trace: $($_.ScriptStackTrace)" -Level Error
     exit 1
