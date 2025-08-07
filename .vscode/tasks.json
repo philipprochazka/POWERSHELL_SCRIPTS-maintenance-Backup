@@ -65,7 +65,7 @@
     {
       "label": "🧹 Quick Cleanup (Auto-Commit)",
       "type": "shell",
-      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 15 -AutoCommit -Verbose",
+      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 15 -AutoCommit -Force -Verbose",
       "group": "build",
       "presentation": {
         "echo": true,
@@ -80,7 +80,7 @@
     {
       "label": "🧹 Cleanup Profiles Only",
       "type": "shell",
-      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 20 -TargetCategories @('Profiles') -AutoCommit -Verbose",
+      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 20 -TargetCategories @('Profiles') -AutoCommit -Force -Verbose",
       "group": "build",
       "presentation": {
         "echo": true,
@@ -95,7 +95,7 @@
     {
       "label": "🧹 Cleanup Documentation Only",
       "type": "shell",
-      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 25 -TargetCategories @('Documentation') -AutoCommit -Verbose",
+      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 25 -TargetCategories @('Documentation') -AutoCommit -Force -Verbose",
       "group": "build",
       "presentation": {
         "echo": true,
@@ -110,7 +110,7 @@
     {
       "label": "🧹 Full Cleanup (All Categories)",
       "type": "shell",
-      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 50 -TargetCategories @('All') -AutoCommit -Verbose",
+      "command": "Import-Module '${workspaceFolder}/PowerShellModules/UnifiedMCPProfile' -Force; Start-ContinuousCleanup -MaxFilesPerRun 50 -TargetCategories @('All') -AutoCommit -Force -Verbose",
       "group": "build",
       "presentation": {
         "echo": true,
