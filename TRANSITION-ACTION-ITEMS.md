@@ -90,7 +90,7 @@ New Description: Unified PowerShell Modules & Scripts Repository — Central hub
 # Update git remote URL (after GitHub rename)
 cd "C:\backup\Powershell"
 git remote set-url origin https://github.com/philipprochazka/UnifiedPowerShell.git
-git pull origin main
+git pull origin master
 ```
 
 ### 2. Announcement and Communication

@@ -208,6 +208,18 @@
         "$env:SYNTAX_CHECK_DEBUG='true'; Get-ChildItem -Path '${workspaceFolder}' -Filter '*.ps1' -Recurse | ForEach-Object { Write-Host \"Checking $($_.Name)...\" -ForegroundColor Cyan; try { $null = [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$null, [ref]$null); Write-Host \"✅ $($_.Name): Syntax OK\" -ForegroundColor Green } catch { Write-Host \"❌ $($_.Name): Syntax Error - $_\" -ForegroundColor Red } }"
       ]
     },
+    {
+      "name": "🔀 Analysis: Branch Consistency",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "createTemporaryIntegratedConsole": true,
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-Command", 
+        "$env:BRANCH_CHECK_DEBUG='true'; Write-Host '🔍 Checking branch consistency across repository...' -ForegroundColor Cyan; Write-Host ''; $CurrentBranch = (git branch --show-current); $DefaultBranch = (git ls-remote --symref origin HEAD | Select-String 'ref: refs/heads/(.+)' | ForEach-Object { $_.Matches[0].Groups[1].Value }); Write-Host \"Current Branch: $CurrentBranch\" -ForegroundColor $(if($CurrentBranch -eq $DefaultBranch){'Green'}else{'Yellow'}); Write-Host \"Default Branch: $DefaultBranch\" -ForegroundColor Green; Write-Host ''; Write-Host 'Scanning for branch references in files...' -ForegroundColor Yellow; $IncorrectRefs = @(); Get-ChildItem -Path '${workspaceFolder}' -Include '*.md','*.yml','*.yaml','*.ps1' -Recurse | ForEach-Object { $Content = Get-Content $_.FullName -Raw; if ($Content -match 'origin\\s+main|git.*main|branch.*main' -and $_.FullName -notlike '*SSH*') { $IncorrectRefs += $_.FullName; Write-Host \"⚠️  Found 'main' reference in: $($_.Name)\" -ForegroundColor Yellow } }; if ($IncorrectRefs.Count -eq 0) { Write-Host '✅ All branch references are consistent!' -ForegroundColor Green } else { Write-Host ''; Write-Host \"❌ Found $($IncorrectRefs.Count) files with incorrect branch references\" -ForegroundColor Red; Write-Host 'Consider updating these files to use the correct default branch.' -ForegroundColor Yellow }"
+      ]
+    },
 
     // ===================================================================
     // 🛠️ BUILD & DEPLOY SYSTEM - Module Development
