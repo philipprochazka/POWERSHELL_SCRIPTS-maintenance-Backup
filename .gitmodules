@@ -1,0 +1,4 @@
+[submodule "PowerShellModules"]
+	path = PowerShellModules
+	url = https://github.com/philipprochazka/PowerShellModules.git
+	branch = main
